@@ -281,7 +281,7 @@ export default function DownloaderTool() {
                   onClick={() => handleDownload(audioOption.url, "audio")}
                   disabled={!!downloadingUrl}
                   variant="outline"
-                  className="w-full py-3 border-[#FE2C55] text-[#FE2C55] hover:bg-[#FE2C55]/10 hover:text-white rounded-xl transition-all duration-300 bg-transparent"
+                  className="w-full py-6 border-[#FE2C55] text-[#FE2C55] hover:bg-[#FE2C55]/10 hover:text-white rounded-xl transition-all duration-300 bg-transparent"
                 >
                   {downloadingUrl === audioOption.url ? (
                     <Loader2 className="w-4 h-4 mr-2 animate-spin" />
