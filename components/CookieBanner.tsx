@@ -30,7 +30,7 @@ export default function CookieBanner() {
 
   return (
     <div className="fixed bottom-0 left-0 right-0 z-50 p-4 md:p-6 animate-in slide-in-from-bottom">
-      <div className="max-w-6xl mx-auto bg-gray-900 border border-gray-700 rounded-lg shadow-2xl">
+      <div className="max-w-6xl mx-auto bg-gray-900 border border-gray-700 rounded-lg shadow-2xl relative">
         <div className="p-6 md:flex md:items-center md:justify-between">
           {/* Content */}
           <div className="flex-1 mb-4 md:mb-0 md:mr-6">
@@ -40,7 +40,7 @@ export default function CookieBanner() {
                 🍪 Cookies y Privacidad
               </h3>
             </div>
-            <p className="text-sm text-gray-300 leading-relaxed">
+            <p className="text-sm text-gray-300 leading-relaxed pr-6">
               Usamos cookies esenciales para mejorar tu experiencia. No
               rastreamos tu actividad ni vendemos tus datos.{" "}
               <Link
@@ -75,7 +75,7 @@ export default function CookieBanner() {
           {/* Close button */}
           <button
             onClick={rejectCookies}
-            className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors"
+            className="absolute top-3 right-3 md:top-4 md:right-4 p-1 text-gray-400 hover:text-white transition-colors rounded-full hover:bg-gray-800"
             aria-label="Cerrar"
           >
             <X className="w-5 h-5" />
