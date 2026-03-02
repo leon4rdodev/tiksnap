@@ -365,7 +365,7 @@ export default function HomePage() {
           <div className="space-y-8 mt-8">
             {/* ¿Por qué descargar? */}
             <div className="bg-gray-900 p-6 md:p-8 rounded-2xl border border-gray-700">
-              <div className="flex flex-col md:flex-row items-center md:items-start gap-6 text-center md:text-left">
+              <div className="flex flex-col md:flex-row items-start gap-6 text-left">
                 <div className="bg-[#FE2C55]/10 p-4 rounded-full flex-shrink-0">
                   <BookOpen className="w-8 h-8 text-[#FE2C55]" />
                 </div>
@@ -385,7 +385,7 @@ export default function HomePage() {
 
             {/* Formatos */}
             <div className="bg-gray-900 p-6 md:p-8 rounded-2xl border border-gray-700">
-              <div className="flex flex-col md:flex-row items-center md:items-start gap-6 text-center md:text-left">
+              <div className="flex flex-col md:flex-row items-start gap-6 text-left">
                 <div className="bg-[#FE2C55]/10 p-4 rounded-full flex-shrink-0">
                   <Headphones className="w-8 h-8 text-[#FE2C55]" />
                 </div>
@@ -405,7 +405,7 @@ export default function HomePage() {
 
             {/* Compatibilidad */}
             <div className="bg-gray-900 p-6 md:p-8 rounded-2xl border border-gray-700">
-              <div className="flex flex-col md:flex-row items-center md:items-start gap-6 text-center md:text-left">
+              <div className="flex flex-col md:flex-row items-start gap-6 text-left">
                 <div className="bg-[#FE2C55]/10 p-4 rounded-full flex-shrink-0">
                   <Smartphone className="w-8 h-8 text-[#FE2C55]" />
                 </div>
@@ -425,7 +425,7 @@ export default function HomePage() {
 
             {/* Uso responsable */}
             <div className="bg-gray-900 p-6 md:p-8 rounded-2xl border border-gray-700">
-              <div className="flex flex-col md:flex-row items-center md:items-start gap-6 text-center md:text-left">
+              <div className="flex flex-col md:flex-row items-start gap-6 text-left">
                 <div className="bg-[#FE2C55]/10 p-4 rounded-full flex-shrink-0">
                   <Globe className="w-8 h-8 text-[#FE2C55]" />
                 </div>
