@@ -88,7 +88,7 @@ export default function Header() {
   return (
     <>
       <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-black/70 shadow-lg border-b border-gray-800 transition-all duration-300 ease-out">
-        <nav className="py-4 px-6 md:px-12">
+        <nav className="py-4 px-4 md:px-12">
           <div className="flex justify-between items-center max-w-6xl mx-auto">
             {/* Logo */}
             <Link
@@ -145,7 +145,7 @@ export default function Header() {
             isMenuOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
           }`}
         >
-          <div className="px-6 pb-6 pt-2 space-y-4 max-w-6xl mx-auto border-gray-700/50">
+          <div className="px-4 pb-6 pt-2 space-y-4 max-w-6xl mx-auto border-gray-700/50">
             {/* Navigation Links */}
             {navLinks.map((link) => (
               <Link

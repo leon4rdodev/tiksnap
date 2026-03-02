@@ -157,7 +157,7 @@ export default function HomePage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
-      <div className="flex flex-col items-center justify-center min-h-screen px-6">
+      <div className="flex flex-col items-center justify-center min-h-screen px-4 md:px-6">
         {/* Hero Section - Ultra Compacto */}
         <section className="w-full max-w-2xl text-center mb-6 px-4">
           <h1 className="text-3xl md:text-4xl font-bold mb-2 leading-tight">
@@ -180,7 +180,7 @@ export default function HomePage() {
       </div>
 
       {/* Resto del contenido */}
-      <div className="flex flex-col items-center justify-center px-6 py-4">
+      <div className="flex flex-col items-center justify-center px-4 md:px-6 py-4">
         {/* 2. Sección "Cómo Funciona" */}
         <section
           className="max-w-3xl w-full text-center mt-0 px-4"
