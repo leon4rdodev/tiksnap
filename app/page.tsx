@@ -364,17 +364,19 @@ export default function HomePage() {
 
           <div className="space-y-8 mt-8">
             {/* ¿Por qué descargar? */}
-            <div className="bg-gray-900 p-6 rounded-lg border border-gray-700">
-              <div className="flex items-start gap-4">
-                <BookOpen className="w-8 h-8 text-[#FE2C55] flex-shrink-0 mt-1" />
+            <div className="bg-gray-900 p-6 md:p-8 rounded-2xl border border-gray-700">
+              <div className="flex flex-col md:flex-row items-center md:items-start gap-6 text-center md:text-left">
+                <div className="bg-[#FE2C55]/10 p-4 rounded-full flex-shrink-0">
+                  <BookOpen className="w-8 h-8 text-[#FE2C55]" />
+                </div>
                 <div>
-                  <h3 className="text-xl font-bold text-white mb-3">
+                  <h3 className="text-xl md:text-2xl font-bold text-white mb-3">
                     ¿Por Qué Descargar Videos de TikTok?
                   </h3>
-                  <p className="text-sm text-gray-400 leading-relaxed mb-3">
+                  <p className="text-sm md:text-base text-gray-400 leading-relaxed mb-4">
                     TikTok se ha convertido en una de las plataformas de contenido más influyentes del mundo, con más de mil millones de usuarios activos mensuales. Cada día se suben millones de videos creativos, educativos, divertidos e inspiradores. Sin embargo, la plataforma no siempre ofrece opciones nativas de descarga sin marca de agua, lo que crea la necesidad de herramientas especializadas como TikSnap.
                   </p>
-                  <p className="text-sm text-gray-400 leading-relaxed">
+                  <p className="text-sm md:text-base text-gray-400 leading-relaxed">
                     Los creadores de contenido necesitan descargar sus propios videos para reutilizarlos en otras plataformas como Instagram Reels, YouTube Shorts o para archivarlos en su portafolio. Los educadores guardan contenido didáctico para compartir en entornos sin conexión a internet. Y los usuarios cotidianos simplemente quieren conservar sus videos favoritos para verlos offline o compartirlos con amigos y familia a través de otras aplicaciones de mensajería.
                   </p>
                 </div>
@@ -382,17 +384,19 @@ export default function HomePage() {
             </div>
 
             {/* Formatos */}
-            <div className="bg-gray-900 p-6 rounded-lg border border-gray-700">
-              <div className="flex items-start gap-4">
-                <Headphones className="w-8 h-8 text-[#FE2C55] flex-shrink-0 mt-1" />
+            <div className="bg-gray-900 p-6 md:p-8 rounded-2xl border border-gray-700">
+              <div className="flex flex-col md:flex-row items-center md:items-start gap-6 text-center md:text-left">
+                <div className="bg-[#FE2C55]/10 p-4 rounded-full flex-shrink-0">
+                  <Headphones className="w-8 h-8 text-[#FE2C55]" />
+                </div>
                 <div>
-                  <h3 className="text-xl font-bold text-white mb-3">
+                  <h3 className="text-xl md:text-2xl font-bold text-white mb-3">
                     Formatos de Descarga: MP4 vs MP3
                   </h3>
-                  <p className="text-sm text-gray-400 leading-relaxed mb-3">
+                  <p className="text-sm md:text-base text-gray-400 leading-relaxed mb-4">
                     TikSnap ofrece dos formatos principales de descarga para cubrir diferentes necesidades. El formato <strong className="text-white">MP4 (Video)</strong> mantiene tanto la imagen como el audio del video original, descargándolo en la máxima calidad disponible (hasta 1080p Full HD). Es el formato ideal cuando necesitas el video completo para compartir, editar o archivar.
                   </p>
-                  <p className="text-sm text-gray-400 leading-relaxed">
+                  <p className="text-sm md:text-base text-gray-400 leading-relaxed">
                     El formato <strong className="text-white">MP3 (Audio)</strong> extrae únicamente la pista de audio del video. Es perfecto cuando te interesa una canción, un efecto de sonido o un fragmento de voz de un TikTok. El audio se descarga en alta calidad, listo para reproducir en cualquier reproductor de música o usar en tus propios proyectos creativos.
                   </p>
                 </div>
@@ -400,17 +404,19 @@ export default function HomePage() {
             </div>
 
             {/* Compatibilidad */}
-            <div className="bg-gray-900 p-6 rounded-lg border border-gray-700">
-              <div className="flex items-start gap-4">
-                <Smartphone className="w-8 h-8 text-[#FE2C55] flex-shrink-0 mt-1" />
+            <div className="bg-gray-900 p-6 md:p-8 rounded-2xl border border-gray-700">
+              <div className="flex flex-col md:flex-row items-center md:items-start gap-6 text-center md:text-left">
+                <div className="bg-[#FE2C55]/10 p-4 rounded-full flex-shrink-0">
+                  <Smartphone className="w-8 h-8 text-[#FE2C55]" />
+                </div>
                 <div>
-                  <h3 className="text-xl font-bold text-white mb-3">
+                  <h3 className="text-xl md:text-2xl font-bold text-white mb-3">
                     Compatibilidad con Dispositivos
                   </h3>
-                  <p className="text-sm text-gray-400 leading-relaxed mb-3">
+                  <p className="text-sm md:text-base text-gray-400 leading-relaxed mb-4">
                     TikSnap funciona directamente desde el navegador web, lo que significa que es compatible con prácticamente cualquier dispositivo moderno. En <strong className="text-white">ordenadores</strong> (Windows, macOS, Linux), simplemente abre tu navegador preferido — Chrome, Firefox, Safari, Edge o Brave — y visita tiksnap.es. En <strong className="text-white">dispositivos Android</strong> (Samsung, Xiaomi, Huawei, OnePlus y más), los videos se descargan directamente a la galería o carpeta de descargas.
                   </p>
-                  <p className="text-sm text-gray-400 leading-relaxed">
+                  <p className="text-sm md:text-base text-gray-400 leading-relaxed">
                     Para usuarios de <strong className="text-white">iPhone y iPad</strong>, recomendamos usar el navegador Safari para garantizar la mejor experiencia de descarga. Los archivos se guardan en la app Archivos de iOS, desde donde puedes moverlos fácilmente a tu galería de Fotos. No necesitas instalar ninguna aplicación adicional ni extensión de navegador en ningún dispositivo.
                   </p>
                 </div>
@@ -418,17 +424,19 @@ export default function HomePage() {
             </div>
 
             {/* Uso responsable */}
-            <div className="bg-gray-900 p-6 rounded-lg border border-gray-700">
-              <div className="flex items-start gap-4">
-                <Globe className="w-8 h-8 text-[#FE2C55] flex-shrink-0 mt-1" />
+            <div className="bg-gray-900 p-6 md:p-8 rounded-2xl border border-gray-700">
+              <div className="flex flex-col md:flex-row items-center md:items-start gap-6 text-center md:text-left">
+                <div className="bg-[#FE2C55]/10 p-4 rounded-full flex-shrink-0">
+                  <Globe className="w-8 h-8 text-[#FE2C55]" />
+                </div>
                 <div>
-                  <h3 className="text-xl font-bold text-white mb-3">
+                  <h3 className="text-xl md:text-2xl font-bold text-white mb-3">
                     Mejores Prácticas y Uso Responsable
                   </h3>
-                  <p className="text-sm text-gray-400 leading-relaxed mb-3">
+                  <p className="text-sm md:text-base text-gray-400 leading-relaxed mb-4">
                     En TikSnap creemos firmemente en el uso ético del contenido digital. Cuando descargues videos de TikTok, te recomendamos siempre dar crédito al creador original si compartes el contenido en otras plataformas. Incluir el nombre de usuario del creador (@usuario) en la descripción o comentarios es una forma sencilla y respetuosa de reconocer su trabajo.
                   </p>
-                  <p className="text-sm text-gray-400 leading-relaxed">
+                  <p className="text-sm md:text-base text-gray-400 leading-relaxed">
                     Si planeas usar contenido descargado con fines comerciales — como anuncios, campañas de marketing o contenido de marca — te sugerimos obtener permiso directo del creador original. Para uso educativo o personal (compilaciones privadas, material de estudio, uso offline), la descarga generalmente se considera un uso razonable, aunque siempre recomendamos respetar los términos de servicio de TikTok y las leyes de derechos de autor de tu jurisdicción.
                   </p>
                 </div>
