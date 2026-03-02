@@ -2,12 +2,14 @@
 
 import Link from "next/link";
 import { ArrowRight, Sparkles } from "lucide-react";
-import { posts } from "@/lib/blog-data";
+import { Post } from "@/lib/blog-data";
 import PostCard from "@/components/blog/PostCard";
 
-export default function FinalCTA() {
-  // Obtener los últimos 3 posts
-  const latestPosts = posts.slice(0, 3);
+interface FinalCTAProps {
+  latestPosts?: Post[];
+}
+
+export default function FinalCTA({ latestPosts = [] }: FinalCTAProps) {
 
   return (
     <div className="w-full max-w-6xl mx-auto px-4 space-y-16">

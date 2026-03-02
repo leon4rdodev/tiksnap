@@ -13,19 +13,7 @@ export default function PostCard({ post }: PostCardProps) {
   return (
     <Link href={`/blog/${post.slug}`}>
       <div className="bg-gray-900 rounded-2xl overflow-hidden border border-gray-700 h-full flex flex-col group transition-transform duration-300 hover:scale-105 hover:border-[#FE2C55]">
-        <div className="relative w-full h-48 bg-gradient-to-br from-[#FE2C55] to-[#25F4EE]">
-          <Image
-            src={post.image}
-            alt={`Imagen de portada para ${post.title}`}
-            fill
-            style={{ objectFit: "cover" }}
-            className="group-hover:opacity-90 transition-opacity"
-            onError={(e) => {
-              // Si la imagen falla, ocultamos el elemento de imagen
-              e.currentTarget.style.display = "none";
-            }}
-          />
-        </div>
+
         <div className="p-6 flex flex-col flex-1">
           <div className="flex-1">
             <div className="flex items-center space-x-2 text-sm text-gray-400 mb-2">

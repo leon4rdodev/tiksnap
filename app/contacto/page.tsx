@@ -1,6 +1,5 @@
 "use client";
 
-import type { Metadata } from "next";
 import { Mail, MapPin, Send, ChevronDown } from "lucide-react";
 import { useState } from "react";
 

@@ -34,15 +34,7 @@ export default function RelatedPosts({
             href={`/blog/${post.slug}`}
             className="group bg-gray-900 rounded-lg border border-gray-800 hover:border-[#FE2C55] transition-all overflow-hidden"
           >
-            {/* Image */}
-            <div className="relative h-48 bg-gray-800 overflow-hidden">
-              <Image
-                src={post.image}
-                alt={post.title}
-                fill
-                className="object-cover group-hover:scale-105 transition-transform duration-300"
-              />
-            </div>
+  
 
             {/* Content */}
             <div className="p-4">

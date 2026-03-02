@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import { posts } from "@/lib/blog-data";
-import PostCard from "@/components/blog/PostCard";
+import { getAllPosts } from "@/lib/blog-data";
+import BlogSearch from "@/components/blog/BlogSearch";
 
 export const metadata: Metadata = {
   title: "Blog - Consejos, Tutoriales y Noticias sobre TikTok",
@@ -9,6 +9,8 @@ export const metadata: Metadata = {
 };
 
 export default function BlogPage() {
+  const posts = getAllPosts();
+
   return (
     <div className="max-w-6xl mx-auto py-12 px-6">
       <div className="text-center mb-12">
@@ -19,11 +21,7 @@ export default function BlogPage() {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {posts.map((post) => (
-          <PostCard key={post.slug} post={post} />
-        ))}
-      </div>
+      <BlogSearch posts={posts} />
     </div>
   );
 }

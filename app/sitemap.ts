@@ -1,9 +1,10 @@
 import { MetadataRoute } from "next";
-import { posts } from "@/lib/blog-data";
+import { getAllPosts } from "@/lib/blog-data";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://www.tiksnap.es";
   const now = new Date();
+  const posts = getAllPosts();
 
   // Static pages
   const staticPages: MetadataRoute.Sitemap = [
@@ -24,6 +25,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: now,
       changeFrequency: "monthly",
       priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/acerca-de`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.6,
+    },
+    {
+      url: `${baseUrl}/contacto`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.6,
     },
     {
       url: `${baseUrl}/privacidad`,
