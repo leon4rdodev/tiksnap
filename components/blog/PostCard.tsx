@@ -16,8 +16,8 @@ export default function PostCard({ post }: PostCardProps) {
 
         <div className="p-6 flex flex-col flex-1">
           <div className="flex-1">
-            <div className="flex items-center space-x-2 text-sm text-gray-400 mb-2">
-              {post.tags.map((tag) => (
+            <div className="flex flex-wrap items-center gap-2 text-sm text-gray-400 mb-2">
+              {post.tags.slice(0, 3).map((tag) => (
                 <Tag key={tag} text={tag} />
               ))}
             </div>

@@ -123,8 +123,8 @@ export default function PostPage({ params }: PageProps) {
             <ArrowLeft className="w-4 h-4 mr-2" />
             Volver al Blog
           </Link>
-          <div className="flex items-center space-x-2 mb-4">
-            {post.tags.map((tag) => (
+          <div className="flex flex-wrap items-center gap-2 mb-4">
+            {post.tags.slice(0, 3).map((tag) => (
               <Tag key={tag} text={tag} />
             ))}
           </div>

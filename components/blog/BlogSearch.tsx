@@ -10,16 +10,8 @@ interface BlogSearchProps {
 
 export default function BlogSearch({ posts }: BlogSearchProps) {
   const [query, setQuery] = useState("");
-  const [selectedTag, setSelectedTag] = useState<string | null>(null);
 
-  // Extract unique tags from all posts
-  const allTags = useMemo(() => {
-    const tagSet = new Set<string>();
-    posts.forEach((post) => post.tags.forEach((tag) => tagSet.add(tag)));
-    return Array.from(tagSet).sort();
-  }, [posts]);
-
-  // Filter posts based on query and selected tag
+  // Filter posts based on query
   const filteredPosts = useMemo(() => {
     return posts.filter((post) => {
       const q = query.toLowerCase().trim();
@@ -29,11 +21,9 @@ export default function BlogSearch({ posts }: BlogSearchProps) {
         post.description.toLowerCase().includes(q) ||
         post.tags.some((tag) => tag.toLowerCase().includes(q));
 
-      const matchesTag = !selectedTag || post.tags.includes(selectedTag);
-
-      return matchesQuery && matchesTag;
+      return matchesQuery;
     });
-  }, [posts, query, selectedTag]);
+  }, [posts, query]);
 
   return (
     <div>
@@ -74,35 +64,8 @@ export default function BlogSearch({ posts }: BlogSearchProps) {
         </div>
       </div>
 
-      {/* Tag filters */}
-      <div className="flex flex-wrap justify-center gap-2 mb-10">
-        <button
-          onClick={() => setSelectedTag(null)}
-          className={`px-4 py-1.5 rounded-full text-sm font-medium transition-colors ${
-            !selectedTag
-              ? "bg-[#FE2C55] text-white"
-              : "bg-gray-800 text-gray-400 hover:bg-gray-700 hover:text-white border border-gray-700"
-          }`}
-        >
-          Todos
-        </button>
-        {allTags.map((tag) => (
-          <button
-            key={tag}
-            onClick={() => setSelectedTag(selectedTag === tag ? null : tag)}
-            className={`px-4 py-1.5 rounded-full text-sm font-medium transition-colors ${
-              selectedTag === tag
-                ? "bg-[#FE2C55] text-white"
-                : "bg-gray-800 text-gray-400 hover:bg-gray-700 hover:text-white border border-gray-700"
-            }`}
-          >
-            {tag}
-          </button>
-        ))}
-      </div>
-
       {/* Results count */}
-      {(query || selectedTag) && (
+      {query && (
         <p className="text-center text-gray-500 text-sm mb-6">
           {filteredPosts.length === 0
             ? "No se encontraron artículos"
@@ -125,10 +88,7 @@ export default function BlogSearch({ posts }: BlogSearchProps) {
           <p className="text-gray-500 text-lg">No se encontraron artículos</p>
           <p className="text-gray-600 text-sm mt-1">Intenta con otros términos de búsqueda</p>
           <button
-            onClick={() => {
-              setQuery("");
-              setSelectedTag(null);
-            }}
+            onClick={() => setQuery("")}
             className="mt-4 text-[#FE2C55] hover:underline text-sm font-medium"
           >
             Ver todos los artículos
