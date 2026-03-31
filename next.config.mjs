@@ -16,22 +16,6 @@ const nextConfig = {
         protocol: "https",
         hostname: "**.tiktokcdn-us.com",
       },
-      {
-        protocol: "https",
-        hostname: "**.tikwm.com",
-      },
-      {
-        protocol: "https",
-        hostname: "placehold.co",
-      },
-      {
-        protocol: "https",
-        hostname: "i.pravatar.cc",
-      },
-      {
-        protocol: "https",
-        hostname: "picsum.photos",
-      },
     ],
   },
   compress: true,
