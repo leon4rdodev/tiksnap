@@ -121,13 +121,15 @@ function buildVideoInfo(itemStruct: any): Omit<VideoInfo, "cookies"> | null {
 }
 
 function decodeHtml(html: string): string {
+  if (!html) return "";
   return html
     .replace(/&quot;/g, '"')
     .replace(/&amp;/g, '&')
     .replace(/&lt;/g, '<')
     .replace(/&gt;/g, '>')
     .replace(/&#39;/g, "'")
-    .replace(/\\u0022/g, '"');
+    .replace(/\\u0022/g, '"')
+    .replace(/\\u002F/g, '/');
 }
 
 function extractVideoData(html: string): Omit<VideoInfo, "cookies"> | null {
@@ -295,7 +297,6 @@ export async function POST(request: NextRequest) {
     }
 
     // 4. FALLBACK EMERGENCIAL: TikWM Public API (Sin API Key)
-    // Solo se activa si Vercel está completamente bloqueado por TikTok.
     if (!videoInfo) {
       console.log("[TikTok-Downloader] All direct methods failed. Using Emergency Fallback...");
       try {
@@ -305,14 +306,16 @@ export async function POST(request: NextRequest) {
           if (data.code === 0 && data.data) {
             const d = data.data;
             const downloadOptions: any[] = [];
+            const isPhoto = !!d.images;
             
-            if (d.play) downloadOptions.push({ label: "Video (HD)", url: d.play, type: "video" });
-            if (d.wmplay) downloadOptions.push({ label: "Video (Marca de agua)", url: d.wmplay, type: "video" });
+            // Si es foto, solo permitimos bajar video si es un slideshow explícito, sino lo ocultamos
+            if (!isPhoto && d.play) downloadOptions.push({ label: "Video (HD)", url: d.play, type: "video" });
+            if (!isPhoto && d.wmplay) downloadOptions.push({ label: "Video (Marca de agua)", url: d.wmplay, type: "video" });
             if (d.music) downloadOptions.push({ label: "Audio (MP3)", url: d.music, type: "audio" });
 
             videoInfo = {
               id: d.id,
-              type: d.images ? "photo" : "video",
+              type: isPhoto ? "photo" : "video",
               author: {
                 uniqueId: d.author?.unique_id || "",
                 nickname: d.author?.nickname || "",
@@ -354,29 +357,38 @@ export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
     const videoUrl = searchParams.get("url");
-    const filename = searchParams.get("filename") || "tiktok-video";
+    const filename = searchParams.get("filename") || "tiktok-content";
     const cookies = searchParams.get("cookies");
     const typeFromQuery = searchParams.get("type");
 
     if (!videoUrl) {
       return NextResponse.json(
-        { error: "URL del video es requerida" },
+        { error: "URL del contenido es requerida" },
         { status: 400 }
       );
     }
 
+    // Solo enviamos headers de TikTok si la URL pertenece a TikTok
+    const isTikTokUrl = videoUrl.includes("tiktok.com") || videoUrl.includes("tiktokv.com");
+    
+    const requestHeaders: Record<string, string> = {
+      "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+    };
+
+    if (isTikTokUrl) {
+      requestHeaders["Referer"] = "https://www.tiktok.com/";
+      if (cookies && cookies !== "null" && cookies.length > 5) {
+        requestHeaders["Cookie"] = cookies;
+      }
+    }
+
     const videoResponse = await fetch(videoUrl, {
-      headers: {
-        Referer: "https://www.tiktok.com/",
-        "User-Agent":
-          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
-        ...(cookies && { Cookie: cookies }),
-      },
+      headers: requestHeaders,
     });
 
     if (!videoResponse.ok || !videoResponse.body) {
       return NextResponse.json(
-        { error: "El servidor de TikTok denegó la descarga." },
+        { error: "El servidor denegó la descarga. Intenta con otro link." },
         { status: 403 }
       );
     }
@@ -392,10 +404,10 @@ export async function GET(request: NextRequest) {
       finalContentType = "image/jpeg";
       fileExtension = "jpg";
     } else {
-      const contentTypeFromTikTok =
+      const contentTypeFromRes =
         videoResponse.headers.get("content-type") || "video/mp4";
-      finalContentType = contentTypeFromTikTok;
-      fileExtension = contentTypeFromTikTok.includes("audio") ? "mp3" : "mp4";
+      finalContentType = contentTypeFromRes;
+      fileExtension = contentTypeFromRes.includes("audio") ? "mp3" : contentTypeFromRes.includes("image") ? "jpg" : "mp4";
     }
 
     headers.set("Content-Type", finalContentType);
@@ -403,6 +415,7 @@ export async function GET(request: NextRequest) {
       "Content-Disposition",
       `attachment; filename="${filename}.${fileExtension}"`
     );
+    
     if (videoResponse.headers.has("content-length")) {
       headers.set(
         "Content-Length",

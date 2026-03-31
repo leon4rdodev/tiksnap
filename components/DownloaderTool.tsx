@@ -370,7 +370,7 @@ export default function DownloaderTool() {
                 </Button>
               )}
 
-              {videoOption && (
+              {videoInfo.type === "video" && videoOption && (
                 <Button
                   onClick={() => handleDownload(videoOption.url, "video")}
                   disabled={!!downloadingUrl}
