@@ -37,6 +37,33 @@ interface VideoInfo {
   cookies: string | null;
 }
 
+const BROWSER_HEADERS = {
+  "User-Agent":
+    "Mozilla/5.0 (iPhone; CPU iPhone OS 17_5_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4.1 Mobile/15E148 Safari/604.1",
+  "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+  "Accept-Language": "es-ES,es;q=0.9,en;q=0.8",
+  "Accept-Encoding": "gzip, deflate, br",
+  "Sec-Fetch-Dest": "document",
+  "Sec-Fetch-Mode": "navigate",
+  "Sec-Fetch-Site": "none",
+  "Sec-Fetch-User": "?1",
+  "Cache-Control": "no-cache",
+  "Pragma": "no-cache",
+};
+
+const ALT_HEADERS = {
+  "User-Agent":
+    "Mozilla/5.0 (Linux; Android 14; SM-S918B) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.6422.165 Mobile Safari/537.36",
+  "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
+  "Accept-Language": "es-ES,es;q=0.9",
+  "Accept-Encoding": "gzip, deflate, br",
+  "Sec-Fetch-Dest": "document",
+  "Sec-Fetch-Mode": "navigate",
+  "Sec-Fetch-Site": "none",
+  "Sec-Fetch-User": "?1",
+  "Upgrade-Insecure-Requests": "1",
+};
+
 function extractVideoData(html: string): Omit<VideoInfo, "cookies"> | null {
   try {
     let itemStruct: any = null;
@@ -63,6 +90,21 @@ function extractVideoData(html: string): Omit<VideoInfo, "cookies"> | null {
              itemStruct = jsonData?.videoDetail?.itemInfo?.itemStruct || jsonData?.ItemModule?.[Object.keys(jsonData?.ItemModule || {})[0]];
            } catch(e) {}
         }
+      }
+    }
+
+    // Fallback: buscar SIGI_STATE
+    if (!itemStruct) {
+      const sigiMatch = html.match(/<script id="SIGI_STATE"[^>]*>({.+?})<\/script>/);
+      if (sigiMatch && sigiMatch[1]) {
+        try {
+          const sigiData = JSON.parse(sigiMatch[1]);
+          const itemModule = sigiData?.ItemModule;
+          if (itemModule) {
+            const firstKey = Object.keys(itemModule)[0];
+            if (firstKey) itemStruct = itemModule[firstKey];
+          }
+        } catch (e) {}
       }
     }
 
@@ -163,16 +205,11 @@ export async function POST(request: NextRequest) {
       try {
         const redirectRes = await fetch(finalUrl, {
           redirect: "follow",
-          headers: {
-            "User-Agent":
-              "Mozilla/5.0 (iPhone; CPU iPhone OS 17_5_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4.1 Mobile/15E148 Safari/604.1",
-          },
+          headers: BROWSER_HEADERS,
         });
-        // El fetch con redirect:"follow" nos da la URL final
         if (redirectRes.url && redirectRes.url !== finalUrl) {
           finalUrl = redirectRes.url;
         } else {
-          // Fallback: buscar la URL canónica en el HTML de redirección
           const redirectHtml = await redirectRes.text();
           const canonicalMatch = redirectHtml.match(/href="(https:\/\/www\.tiktok\.com\/[^"]+)"/);
           if (canonicalMatch && canonicalMatch[1]) {
@@ -184,12 +221,8 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    const pageResponse = await fetch(finalUrl, {
-      headers: {
-        "User-Agent":
-          "Mozilla/5.0 (iPhone; CPU iPhone OS 17_5_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4.1 Mobile/15E148 Safari/604.1",
-      },
-    });
+    // Primer intento con headers de iOS Safari
+    let pageResponse = await fetch(finalUrl, { headers: BROWSER_HEADERS });
 
     if (!pageResponse.ok) {
       return NextResponse.json(
@@ -198,12 +231,27 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const html = await pageResponse.text();
-    const videoInfo = extractVideoData(html);
+    let html = await pageResponse.text();
+    let videoInfo = extractVideoData(html);
+
+    // Si falla, reintentar con headers de Android Chrome
+    if (!videoInfo) {
+      console.log("Primer intento fallido, reintentando con User-Agent alternativo...");
+      try {
+        pageResponse = await fetch(finalUrl, { headers: ALT_HEADERS });
+        if (pageResponse.ok) {
+          html = await pageResponse.text();
+          videoInfo = extractVideoData(html);
+        }
+      } catch (e) {
+        console.error("Error en segundo intento:", e);
+      }
+    }
 
     if (!videoInfo) {
+      console.error("HTML length:", html.length, "| Contiene REHYDRATION:", html.includes("REHYDRATION"), "| Contiene api-data:", html.includes("api-data"), "| Contiene SIGI_STATE:", html.includes("SIGI_STATE"));
       return NextResponse.json(
-        { error: "No se pudo extraer la información del video de la página." },
+        { error: "No se pudo extraer la información del video. TikTok puede estar bloqueando solicitudes temporalmente. Intenta de nuevo en unos segundos." },
         { status: 500 }
       );
     }
