@@ -157,7 +157,34 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const pageResponse = await fetch(validation.data.url, {
+    // Resolver URLs acortadas (vt.tiktok.com) siguiendo redirecciones
+    let finalUrl = validation.data.url;
+    if (finalUrl.includes("vt.tiktok.com") || finalUrl.includes("/t/")) {
+      try {
+        const redirectRes = await fetch(finalUrl, {
+          redirect: "follow",
+          headers: {
+            "User-Agent":
+              "Mozilla/5.0 (iPhone; CPU iPhone OS 17_5_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4.1 Mobile/15E148 Safari/604.1",
+          },
+        });
+        // El fetch con redirect:"follow" nos da la URL final
+        if (redirectRes.url && redirectRes.url !== finalUrl) {
+          finalUrl = redirectRes.url;
+        } else {
+          // Fallback: buscar la URL canónica en el HTML de redirección
+          const redirectHtml = await redirectRes.text();
+          const canonicalMatch = redirectHtml.match(/href="(https:\/\/www\.tiktok\.com\/[^"]+)"/);
+          if (canonicalMatch && canonicalMatch[1]) {
+            finalUrl = canonicalMatch[1];
+          }
+        }
+      } catch (e) {
+        console.error("Error resolviendo URL acortada:", e);
+      }
+    }
+
+    const pageResponse = await fetch(finalUrl, {
       headers: {
         "User-Agent":
           "Mozilla/5.0 (iPhone; CPU iPhone OS 17_5_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4.1 Mobile/15E148 Safari/604.1",
