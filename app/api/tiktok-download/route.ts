@@ -4,18 +4,12 @@ import { z } from "zod";
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
 
-// --- Esquema de validación para la URL de TikTok (ACTUALIZADO Y MÁS FLEXIBLE) ---
 const TikTokUrlSchema = z.object({
   url: z
     .string()
     .url({ message: "Por favor, ingresa una URL válida." })
     .refine(
       (url) => {
-        // Esta expresión regular ahora acepta:
-        // - www.tiktok.com/@...
-        // - m.tiktok.com/@...
-        // - vm.tiktok.com/...
-        // - vt.tiktok.com/... (y otras variantes cortas)
         return /^https?:\/\/(www\.|m\.|[a-z]{2}\.)?tiktok\.com\/.+/.test(url);
       },
       {
@@ -24,9 +18,9 @@ const TikTokUrlSchema = z.object({
     ),
 });
 
-// --- Interfaz para la información del video ---
 interface VideoInfo {
   id: string;
+  type: "video" | "photo";
   author: {
     uniqueId: string;
     nickname: string;
@@ -37,59 +31,79 @@ interface VideoInfo {
   downloadOptions: {
     label: string;
     url: string;
-    type: "video" | "audio";
+    type: "video" | "audio" | "image";
   }[];
+  images?: string[];
   cookies: string | null;
 }
 
-// --- Función para extraer los datos del video del HTML ---
 function extractVideoData(html: string): Omit<VideoInfo, "cookies"> | null {
   try {
-    const scriptTagRegex =
-      /<script id="__UNIVERSAL_DATA_FOR_REHYDRATION__" type="application\/json">({.+?})<\/script>/;
-    const match = html.match(scriptTagRegex);
-    if (!match || !match[1]) {
-      throw new Error(
-        "No se encontró el script de datos. TikTok puede estar mostrando un CAPTCHA o ha cambiado su estructura."
-      );
+    let itemStruct: any = null;
+
+    const rehydrationMatch = html.match(/<script id="__UNIVERSAL_DATA_FOR_REHYDRATION__"[^>]*>({.+?})<\/script>/);
+    if (rehydrationMatch && rehydrationMatch[1]) {
+      try {
+        const jsonData = JSON.parse(rehydrationMatch[1]);
+        itemStruct = jsonData?.__DEFAULT_SCOPE__?.["webapp.video-detail"]?.itemInfo?.itemStruct;
+      } catch (e) {
+        // Ignorar
+      }
     }
 
-    const jsonData = JSON.parse(match[1]);
-    const itemStruct =
-      jsonData?.__DEFAULT_SCOPE__?.["webapp.video-detail"]?.itemInfo
-        ?.itemStruct;
+    if (!itemStruct) {
+      const apiDataIdx = html.indexOf('id="api-data"');
+      if (apiDataIdx > -1) {
+        const start = html.indexOf('>', apiDataIdx) + 1;
+        const end = html.indexOf('</script>', start);
+        if (start > 0 && end > start) {
+           try {
+             const content = html.substring(start, end).trim();
+             const jsonData = JSON.parse(content);
+             itemStruct = jsonData?.videoDetail?.itemInfo?.itemStruct || jsonData?.ItemModule?.[Object.keys(jsonData?.ItemModule || {})[0]];
+           } catch(e) {}
+        }
+      }
+    }
+
     if (!itemStruct) {
       throw new Error(
-        "No se encontró la estructura de datos del video en el JSON."
+        "No se encontró la estructura de datos del post. TikTok puede haber cambiado su estructura o requerir CAPTCHA."
       );
     }
 
     const downloadOptions: {
       label: string;
       url: string;
-      type: "video" | "audio";
+      type: "video" | "audio" | "image";
     }[] = [];
-    if (itemStruct.video.playAddr) {
-      downloadOptions.push({
-        label: "Video (HD - Sin marca de agua)",
-        url: itemStruct.video.playAddr.replace(/\\u002F/g, "/"),
-        type: "video" as const,
-      });
-    }
-    if (itemStruct.video.downloadAddr) {
-      if (
-        !downloadOptions.some(
-          (opt) => opt.url === itemStruct.video.downloadAddr
-        )
-      ) {
+
+    let postType: "video" | "photo" = "video";
+    let images: string[] = [];
+
+    if (itemStruct.imagePost && itemStruct.imagePost.images) {
+      postType = "photo";
+      images = itemStruct.imagePost.images.map((img: any) => img.imageURL.urlList[0]);
+    } else {
+      if (itemStruct.video?.playAddr) {
         downloadOptions.push({
-          label: "Video (SD - Sin marca de agua)",
-          url: itemStruct.video.downloadAddr.replace(/\\u002F/g, "/"),
+          label: "Video (HD - Sin marca de agua)",
+          url: itemStruct.video.playAddr.replace(/\\u002F/g, "/"),
           type: "video" as const,
         });
       }
+      if (itemStruct.video?.downloadAddr) {
+        if (!downloadOptions.some((opt) => opt.url === itemStruct.video.downloadAddr)) {
+          downloadOptions.push({
+            label: "Video (SD - Sin marca de agua)",
+            url: itemStruct.video.downloadAddr.replace(/\\u002F/g, "/"),
+            type: "video" as const,
+          });
+        }
+      }
     }
-    if (itemStruct.music.playUrl) {
+
+    if (itemStruct.music?.playUrl) {
       downloadOptions.push({
         label: "Audio (MP3)",
         url: itemStruct.music.playUrl.replace(/\\u002F/g, "/"),
@@ -97,16 +111,22 @@ function extractVideoData(html: string): Omit<VideoInfo, "cookies"> | null {
       });
     }
 
+    const cover = postType === "photo" 
+       ? (itemStruct.imagePost?.cover?.imageURL?.urlList?.[0] || images[0] || "") 
+       : (itemStruct.video?.cover || "");
+
     return {
       id: itemStruct.id,
+      type: postType,
       author: {
-        uniqueId: itemStruct.author.uniqueId,
-        nickname: itemStruct.author.nickname,
-        avatar: itemStruct.author.avatarThumb,
+        uniqueId: itemStruct.author?.uniqueId || "",
+        nickname: itemStruct.author?.nickname || "",
+        avatar: itemStruct.author?.avatarThumb || "",
       },
-      description: itemStruct.desc,
-      cover: itemStruct.video.cover,
+      description: itemStruct.desc || "",
+      cover: cover,
       downloadOptions,
+      images: images.length > 0 ? images : undefined,
     };
   } catch (error) {
     console.error("Error al extraer datos del HTML:", error);
@@ -114,7 +134,6 @@ function extractVideoData(html: string): Omit<VideoInfo, "cookies"> | null {
   }
 }
 
-// --- Función para formatear las cookies ---
 function formatCookiesForRequest(
   setCookieHeader: string | null
 ): string | null {
@@ -127,7 +146,6 @@ function formatCookiesForRequest(
   return cookies.join("; ");
 }
 
-// --- API Endpoint para OBTENER INFORMACIÓN DEL VIDEO ---
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
@@ -139,11 +157,10 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // El fetch maneja las redirecciones de enlaces cortos automáticamente
     const pageResponse = await fetch(validation.data.url, {
       headers: {
         "User-Agent":
-          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+          "Mozilla/5.0 (iPhone; CPU iPhone OS 17_5_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4.1 Mobile/15E148 Safari/604.1",
       },
     });
 
@@ -179,14 +196,13 @@ export async function POST(request: NextRequest) {
   }
 }
 
-// --- API Endpoint para PROXY DE DESCARGA ---
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
     const videoUrl = searchParams.get("url");
     const filename = searchParams.get("filename") || "tiktok-video";
     const cookies = searchParams.get("cookies");
-    const typeFromQuery = searchParams.get("type"); // Nuevo: Obtener el tipo solicitado (video o audio)
+    const typeFromQuery = searchParams.get("type");
 
     if (!videoUrl) {
       return NextResponse.json(
@@ -215,18 +231,18 @@ export async function GET(request: NextRequest) {
     let finalContentType: string;
     let fileExtension: string;
 
-    // *** LÓGICA CORREGIDA: Priorizar el tipo solicitado (type) ***
     if (typeFromQuery === "audio") {
-      finalContentType = "audio/mpeg"; // MIME Type estándar para MP3
+      finalContentType = "audio/mpeg";
       fileExtension = "mp3";
+    } else if (typeFromQuery === "image") {
+      finalContentType = "image/jpeg";
+      fileExtension = "jpg";
     } else {
-      // Si es video o el tipo no está especificado, usa la respuesta de TikTok
       const contentTypeFromTikTok =
         videoResponse.headers.get("content-type") || "video/mp4";
       finalContentType = contentTypeFromTikTok;
       fileExtension = contentTypeFromTikTok.includes("audio") ? "mp3" : "mp4";
     }
-    // *************************************************************
 
     headers.set("Content-Type", finalContentType);
     headers.set(
@@ -249,4 +265,3 @@ export async function GET(request: NextRequest) {
     );
   }
 }
-// --- END OF FILE tiktok-downloader-main/app/api/tiktok-download/route.ts ---

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -16,12 +16,15 @@ import {
   Sparkles,
   Music,
   Zap,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 
-// Interfaz simplificada solo para video y audio
+// Interfaz simplificada solo para video, audio e imagenes
 interface VideoInfo {
   id: string;
+  type: "video" | "photo";
   author: {
     uniqueId: string;
     nickname: string;
@@ -32,8 +35,9 @@ interface VideoInfo {
   downloadOptions: {
     label: string;
     url: string;
-    type: "video" | "audio";
+    type: "video" | "audio" | "image";
   }[];
+  images?: string[];
   cookies: string | null;
 }
 
@@ -43,6 +47,22 @@ export default function DownloaderTool() {
   const [error, setError] = useState<string | null>(null);
   const [videoInfo, setVideoInfo] = useState<VideoInfo | null>(null);
   const [downloadingUrl, setDownloadingUrl] = useState<string | null>(null);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [isImageLoading, setIsImageLoading] = useState(true);
+
+  useEffect(() => {
+    const onReset = () => {
+      setUrl("");
+      setVideoInfo(null);
+      setError(null);
+      setIsLoading(false);
+      setCurrentImageIndex(0);
+      setIsImageLoading(true);
+    };
+
+    window.addEventListener("reset-downloader", onReset);
+    return () => window.removeEventListener("reset-downloader", onReset);
+  }, []);
 
   const handlePaste = async () => {
     try {
@@ -73,6 +93,8 @@ export default function DownloaderTool() {
     setIsLoading(true);
     setError(null);
     setVideoInfo(null);
+    setCurrentImageIndex(0);
+    setIsImageLoading(true);
     try {
       const response = await fetch("/api/tiktok-download", {
         method: "POST",
@@ -95,14 +117,14 @@ export default function DownloaderTool() {
     }
   };
 
-  const handleDownload = (downloadUrl: string, type: "video" | "audio") => {
+  const handleDownload = (downloadUrl: string, type: "video" | "audio" | "image", filenamePrefix?: string) => {
     if (!videoInfo || !videoInfo.cookies) {
       setError("Error crítico: Faltan las cookies de sesión para la descarga.");
       return;
     }
     setDownloadingUrl(downloadUrl);
 
-    const filename = `TikSnap-${videoInfo.author.uniqueId}-${videoInfo.id}`;
+    const filename = filenamePrefix || `TikSnap-${videoInfo.author.uniqueId}-${videoInfo.id}`;
     const proxyUrl = `/api/tiktok-download?url=${encodeURIComponent(
       downloadUrl
     )}&filename=${encodeURIComponent(filename)}&cookies=${encodeURIComponent(
@@ -113,14 +135,14 @@ export default function DownloaderTool() {
     link.href = proxyUrl;
     link.setAttribute(
       "download",
-      `${filename}.${type === "audio" ? "mp3" : "mp4"}`
+      `${filename}.${type === "audio" ? "mp3" : type === "image" ? "jpg" : "mp4"}`
     );
 
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
 
-    setTimeout(() => setDownloadingUrl(null), 4000);
+    setTimeout(() => setDownloadingUrl(null), type === "image" ? 1000 : 4000);
   };
 
   const handleReset = () => {
@@ -128,6 +150,8 @@ export default function DownloaderTool() {
     setVideoInfo(null);
     setError(null);
     setIsLoading(false);
+    setCurrentImageIndex(0);
+    setIsImageLoading(true);
   };
 
   const videoOption = videoInfo?.downloadOptions.find(
@@ -143,8 +167,8 @@ export default function DownloaderTool() {
         <>
           <div className="space-y-6">
             <div className="text-center">
-              <p className="text-gray-400 text-sm">
-                Pega un enlace para descargar videos y audios sin marca de agua.
+              <p className="text-gray-400 text-sm text-balance">
+                Pega un enlace para descargar videos, fotos y audios <br className="hidden sm:block" /> sin marca de agua.
               </p>
             </div>
             <div className="relative">
@@ -158,7 +182,7 @@ export default function DownloaderTool() {
                   setError(null);
                 }}
                 onKeyDown={(e) => e.key === "Enter" && handleSearch()}
-                className="pl-12 pr-12 py-6 text-base bg-gray-900 border-gray-700 rounded-2xl focus:border-[#FE2C55] focus:ring-[#FE2C55] transition-all duration-300 placeholder:text-gray-500"
+                className="pl-12 pr-12 py-6 text-base bg-gray-900 border-2 border-gray-800 rounded-2xl focus-visible:border-[#FE2C55] focus-visible:ring-0 focus-visible:ring-offset-0 transition-colors duration-300 placeholder:text-gray-500 hover:border-gray-700"
                 disabled={isLoading}
               />
               <Button
@@ -192,7 +216,7 @@ export default function DownloaderTool() {
               </>
             ) : (
               <>
-                <Search className="w-5 h-5 mr-2" /> Buscar Video
+                <Search className="w-5 h-5 mr-2" /> Buscar
               </>
             )}
           </Button>
@@ -212,7 +236,7 @@ export default function DownloaderTool() {
               </div>
               <p className="font-semibold text-sm">Audio en MP3</p>
               <p className="text-xs text-gray-400">
-                Extrae el sonido de cualquier video.
+                Extrae el sonido original de la publicación.
               </p>
             </div>
             <div className="flex flex-col items-center space-y-2">
@@ -246,21 +270,104 @@ export default function DownloaderTool() {
                 </p>
               </div>
             </div>
-            <div className="relative aspect-video rounded-lg overflow-hidden">
-              <Image
-                src={videoInfo.cover}
-                alt={`Portada del video de ${videoInfo.author.nickname}`}
-                fill
-                sizes="(max-width: 768px) 100vw, 450px"
-                style={{ objectFit: "cover" }}
-                priority
-              />
-            </div>
+            {videoInfo.type === "video" && (
+              <div className="relative w-full sm:w-[80%] mx-auto aspect-[3/4] sm:aspect-[4/5] rounded-2xl overflow-hidden shadow-xl border border-gray-800">
+                <Image
+                  src={videoInfo.cover}
+                  alt={`Portada del video de ${videoInfo.author.nickname}`}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 400px"
+                  style={{ objectFit: "contain", backgroundColor: "#000" }}
+                  priority
+                />
+              </div>
+            )}
+            
             <p className="text-sm text-gray-300 line-clamp-2">
               {videoInfo.description}
             </p>
 
+            {videoInfo.type === "photo" && videoInfo.images && (
+              <div className="space-y-5">
+                <div className="flex items-center justify-between gap-3 w-full">
+                  
+                  {/* Botón Anterior (Izquierda) */}
+                  {videoInfo.images.length > 1 && (
+                    <button
+                      onClick={() => {
+                        setIsImageLoading(true);
+                        setCurrentImageIndex((prev) => (prev > 0 ? prev - 1 : videoInfo.images!.length - 1))
+                      }}
+                      className="flex-shrink-0 p-3 bg-gray-800 hover:bg-gray-700 text-white rounded-full transition-colors border border-gray-700 shadow-md disabled:opacity-50"
+                      aria-label="Imagen anterior"
+                    >
+                      <ChevronLeft className="w-6 h-6" />
+                    </button>
+                  )}
+
+                  {/* Contenedor de la Imagen */}
+                  <div className="relative flex-grow w-full max-w-sm mx-auto aspect-[3/4] sm:aspect-[4/5] rounded-2xl overflow-hidden shadow-xl border border-gray-800 bg-gray-900">
+                    {/* Skeleton/Loading State */}
+                    {isImageLoading && (
+                      <div className="absolute inset-0 z-10 flex items-center justify-center bg-gray-800 animate-pulse">
+                        <Loader2 className="w-10 h-10 text-gray-500 animate-spin" />
+                      </div>
+                    )}
+                    
+                    <Image
+                      key={currentImageIndex} // Force React to treat this as a new image to unmount the old one instantly
+                      src={videoInfo.images[currentImageIndex]}
+                      alt={`Imagen ${currentImageIndex + 1} de ${videoInfo.author.nickname}`}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 400px"
+                      style={{ objectFit: "contain", backgroundColor: "#000" }}
+                      onLoad={() => setIsImageLoading(false)}
+                      priority
+                      className={`transition-opacity duration-300 ${isImageLoading ? 'opacity-0' : 'opacity-100'}`}
+                    />
+                    
+                    {/* Contador */}
+                    {videoInfo.images.length > 1 && (
+                      <div className="absolute top-3 right-3 z-20 bg-black/70 backdrop-blur-sm text-white text-xs font-semibold px-3 py-1.5 rounded-full border border-white/10 shadow-lg">
+                        {currentImageIndex + 1} / {videoInfo.images.length}
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Botón Siguiente (Derecha) */}
+                  {videoInfo.images.length > 1 && (
+                    <button
+                      onClick={() => {
+                        setIsImageLoading(true);
+                        setCurrentImageIndex((prev) => (prev < videoInfo.images!.length - 1 ? prev + 1 : 0))
+                      }}
+                      className="flex-shrink-0 p-3 bg-gray-800 hover:bg-gray-700 text-white rounded-full transition-colors border border-gray-700 shadow-md disabled:opacity-50"
+                      aria-label="Siguiente imagen"
+                    >
+                      <ChevronRight className="w-6 h-6" />
+                    </button>
+                  )}
+                </div>
+              </div>
+            )}
             <div className="space-y-3 pt-4">
+              {videoInfo.type === "photo" && videoInfo.images && (
+                <Button
+                  onClick={() => handleDownload(videoInfo.images![currentImageIndex], "image", `TikSnap-${videoInfo.author.uniqueId}-img${currentImageIndex + 1}`)}
+                  disabled={downloadingUrl === videoInfo.images![currentImageIndex]}
+                  className="w-full py-6 text-base font-semibold bg-[#FE2C55] hover:bg-[#FF5C8A] disabled:bg-gray-700 disabled:text-gray-400 rounded-2xl transition-all duration-300 shadow-lg shadow-[#FE2C55]/20"
+                >
+                  {downloadingUrl === videoInfo.images![currentImageIndex] ? (
+                    <Loader2 className="w-5 h-5 mr-2 animate-spin" />
+                  ) : (
+                    <Download className="w-5 h-5 mr-2" />
+                  )}
+                  {videoInfo.images.length > 1 
+                    ? `Descargar Imagen (${currentImageIndex + 1}/${videoInfo.images.length})` 
+                    : "Descargar Imagen HD"}
+                </Button>
+              )}
+
               {videoOption && (
                 <Button
                   onClick={() => handleDownload(videoOption.url, "video")}
@@ -298,7 +405,7 @@ export default function DownloaderTool() {
               variant="ghost"
               className="w-full mt-4 py-4 text-base text-[#FE2C55] hover:bg-transparent hover:text-white transition-all duration-300"
             >
-              <ArrowLeft className="w-5 h-5 mr-2" /> Descargar otro video
+              <ArrowLeft className="w-5 h-5 mr-2" /> Nueva búsqueda
             </Button>
           </CardContent>
         </Card>

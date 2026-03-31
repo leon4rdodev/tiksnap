@@ -15,7 +15,7 @@ export default function Footer() {
               Tik<span className="text-[#FE2C55]">Snap</span>
             </h3>
             <p className="text-sm text-gray-400 mb-4">
-              La forma más rápida y segura de descargar videos de TikTok sin
+              La forma más rápida y segura de descargar videos y fotos de TikTok sin
               marca de agua. 100% gratis, sin límites.
             </p>
             <div className="flex items-center space-x-2 text-xs text-gray-300">

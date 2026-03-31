@@ -23,12 +23,14 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.tiksnap.es"),
   title: {
-    default: "TikSnap - Descargar Videos de TikTok Sin Marca de Agua (Gratis)",
+    default: "TikSnap - Descargar Videos e Imágenes de TikTok Sin Marca de Agua",
     template: "%s | TikSnap",
   },
   description:
-    "Descarga videos de TikTok sin marca de agua en HD. Herramienta gratuita, rápida y segura. Convierte TikTok a MP3. Funciona en móvil y PC.",
+    "Descarga videos, fotos y sliders de TikTok sin marca de agua en HD. Herramienta gratuita, rápida y segura. Convierte TikTok a MP3. Funciona en móvil y PC.",
   keywords: [
+    "descargar fotos de tiktok",
+    "descargar imagenes tiktok",
     "descargar videos de tiktok",
     "tiktok sin marca de agua",
     "bajar videos de tiktok",
@@ -58,13 +60,13 @@ export const metadata: Metadata = {
     type: "website",
     locale: "es_ES",
     url: "https://www.tiksnap.es",
-    title: "TikSnap - Descargar Videos de TikTok Sin Marca de Agua",
+    title: "TikSnap - Descargar Videos e Imágenes de TikTok Sin Marca de Agua",
     description:
-      "La mejor herramienta para descargar videos de TikTok sin marca de agua. Rápido, gratis y en alta calidad HD.",
+      "La mejor herramienta para descargar videos y fotografías de TikTok sin marca de agua. Rápido, gratis y en alta calidad HD.",
     siteName: "TikSnap",
     images: [
       {
-        url: "/og-image.jpg", // Make sure this exists or use a placeholder
+        url: "/og-image.png", // Make sure this exists or use a placeholder
         width: 1200,
         height: 630,
         alt: "TikSnap - Descargador de TikTok",
@@ -73,9 +75,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "TikSnap - Descargar Videos de TikTok Sin Marca de Agua",
+    title: "TikSnap - Descargar Videos e Imágenes de TikTok Sin Marca de Agua",
     description:
-      "Descarga videos de TikTok sin marca de agua en segundos. Calidad HD y conversión a MP3.",
+      "Descarga videos y fotos de TikTok sin marca de agua en segundos. Calidad HD y conversión a MP3.",
     images: ["/og-image.jpg"],
   },
   icons: {
@@ -103,7 +105,7 @@ export default function RootLayout({
     name: "TikSnap",
     url: "https://www.tiksnap.es",
     description:
-      "Descarga videos de TikTok sin marca de agua. Herramienta gratuita y rápida.",
+      "Descarga videos y fotos de TikTok sin marca de agua. Herramienta gratuita y rápida.",
     potentialAction: {
       "@type": "SearchAction",
       target: {
@@ -176,6 +178,20 @@ export default function RootLayout({
           </div>
           <CookieBanner />
         </div>
+        <Script id="pwa-install-sw" strategy="afterInteractive">
+          {`
+            if ('serviceWorker' in navigator) {
+              window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/sw.js').then(
+                  function(registration) {},
+                  function(err) {
+                    console.log('Service Worker registration failed: ', err);
+                  }
+                );
+              });
+            }
+          `}
+        </Script>
       </body>
     </html>
   );

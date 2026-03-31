@@ -68,7 +68,7 @@ export default function PostPage({ params }: PageProps) {
       name: "TikSnap",
       logo: {
         "@type": "ImageObject",
-        url: "https://www.tiksnap.es/favicon.png",
+        url: "https://www.tiksnap.es/icon.png",
       },
     },
     mainEntityOfPage: {

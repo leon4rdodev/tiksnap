@@ -15,6 +15,19 @@ import { useState, useEffect } from "react";
 export default function Header() {
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
+
+  useEffect(() => {
+    const handleBeforeInstallPrompt = (e: Event) => {
+      e.preventDefault();
+      setDeferredPrompt(e);
+    };
+
+    window.addEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
+    return () => {
+      window.removeEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
+    };
+  }, []);
 
   const isActive = (path: string) => pathname === path;
 
@@ -74,15 +87,29 @@ export default function Header() {
     },
   ];
 
-  // Función compartida para manejar el click del CTA
+  // Función compartida para manejar el click del CTA (scroll)
   const handleCTAClick = () => {
     if (pathname === "/") {
       const descargador = document.getElementById("descargador");
       if (descargador) {
         descargador.scrollIntoView({ behavior: "smooth", block: "center" });
+        window.dispatchEvent(new CustomEvent("reset-downloader"));
       }
     } else {
       window.location.href = "/";
+    }
+  };
+
+  // Manejar click de instalación de PWA o volver al CTA normal
+  const handleInstallClick = async () => {
+    if (deferredPrompt) {
+      deferredPrompt.prompt();
+      const { outcome } = await deferredPrompt.userChoice;
+      if (outcome === "accepted") {
+        setDeferredPrompt(null);
+      }
+    } else {
+      handleCTAClick();
     }
   };
 
@@ -103,6 +130,12 @@ export default function Header() {
             {/* Logo */}
             <Link
               href="/"
+              onClick={(e) => {
+                if (pathname === "/") {
+                  window.scrollTo({ top: 0, behavior: "smooth" });
+                  window.dispatchEvent(new CustomEvent("reset-downloader"));
+                }
+              }}
               className="text-2xl md:text-3xl font-bold tracking-tight hover:scale-105 transition-transform z-50"
             >
               Tik<span className="text-[#FE2C55]">Snap</span>
@@ -126,11 +159,11 @@ export default function Header() {
               ))}
               {/* CTA Button */}
               <button
-                onClick={handleCTAClick}
+                onClick={handleInstallClick}
                 className="bg-[#FE2C55] hover:bg-[#ff1744] text-white px-4 py-2 rounded-full font-semibold text-sm transition-all hover:scale-105 shadow-lg shadow-[#FE2C55]/30 flex items-center space-x-2 cursor-pointer"
               >
                 <Download className="w-4 h-4" />
-                <span>Descargar Ahora</span>
+                <span>Instalar App</span>
               </button>
             </div>
 
@@ -150,11 +183,11 @@ export default function Header() {
 
       {/* Mobile Menu Overlay */}
       <div
-        className={`md:hidden fixed inset-0 bg-black z-40 flex flex-col pt-24 pb-8 px-6 overflow-y-auto transition-all duration-500 ease-out transform ${
-          isMenuOpen ? "opacity-100 pointer-events-auto translate-y-0 scale-100" : "opacity-0 pointer-events-none -translate-y-4 scale-95"
+        className={`md:hidden fixed top-0 left-0 right-0 bg-black z-40 flex flex-col pt-24 px-6 overflow-hidden transition-all duration-500 ease-in-out ${
+          isMenuOpen ? "max-h-[100dvh] pb-8 opacity-100" : "max-h-0 pb-0 opacity-0 pointer-events-none"
         }`}
       >
-        <div className="flex-1 flex flex-col">
+        <div className="flex-1 flex flex-col min-h-[calc(100dvh-6rem)] justify-between pb-8">
           <ul className="flex flex-col space-y-0">
             {navLinks.map((link) => (
               <li key={link.href} className="border-b border-gray-800/60">
@@ -174,30 +207,14 @@ export default function Header() {
           <div className="mt-auto pt-10 flex flex-col items-center space-y-5">
              <button
                 onClick={() => {
-                  handleCTAClick();
+                  handleInstallClick();
                   handleLinkClick();
                 }}
                 className="w-full max-w-sm bg-[#FE2C55] hover:bg-[#ff1744] text-white px-6 py-4 rounded-full font-semibold text-lg transition-all shadow-lg shadow-[#FE2C55]/30 flex items-center justify-center space-x-2 cursor-pointer"
               >
                 <Download className="w-5 h-5" />
-                <span>Descargar Ahora</span>
+                <span>Instalar App</span>
               </button>
-              
-            <div className="flex flex-col items-center space-y-3">
-              <Link 
-                href="/contacto" 
-                onClick={handleLinkClick}
-                className="text-xs tracking-widest uppercase text-gray-500 hover:text-[#FE2C55] transition-colors"
-              >
-                Contacto →
-              </Link>
-              <a 
-                href="mailto:support@tiksnap.com" 
-                className="text-xs tracking-widest uppercase text-gray-500 hover:text-[#FE2C55] transition-colors"
-              >
-                support@tiksnap.com
-              </a>
-            </div>
           </div>
         </div>
       </div>

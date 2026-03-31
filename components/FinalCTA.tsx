@@ -30,13 +30,14 @@ export default function FinalCTA({ latestPosts = [] }: FinalCTAProps) {
             ¿Listo para Descargar?
           </h2>
           <p className="text-lg text-gray-300 mb-8 max-w-2xl mx-auto">
-            Comienza a descargar tus videos favoritos de TikTok sin marca de
+            Comienza a descargar tus videos y fotos favoritas de TikTok sin marca de
             agua en alta calidad. No necesitas registro ni instalación.
           </p>
 
           <button
             onClick={() => {
               window.scrollTo({ top: 0, behavior: "smooth" });
+              window.dispatchEvent(new CustomEvent("reset-downloader"));
             }}
             className="inline-flex items-center space-x-2 bg-[#FE2C55] hover:bg-[#FE2C55]/90 text-white font-bold px-8 py-4 rounded-full transition-all duration-300 hover:scale-105 shadow-lg shadow-[#FE2C55]/25 cursor-pointer"
           >
@@ -54,7 +55,7 @@ export default function FinalCTA({ latestPosts = [] }: FinalCTAProps) {
           </h2>
           <p className="text-gray-400 text-lg max-w-2xl mx-auto">
             Descubre consejos, trucos y guías para sacarle el máximo provecho a
-            tus videos
+            tus descargas y contenido
           </p>
         </div>
 

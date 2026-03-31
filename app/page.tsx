@@ -2,7 +2,6 @@ import DownloaderTool from "@/components/DownloaderTool";
 import DownloadCounter from "@/components/DownloadCounter";
 import FAQItem from "@/components/FAQItem";
 import FinalCTA from "@/components/FinalCTA";
-import Testimonials from "@/components/Testimonials";
 import { CheckCircle, Shield, BookOpen, Smartphone, Globe, Headphones } from "lucide-react";
 import Script from "next/script";
 import { getAllPosts } from "@/lib/blog-data";
@@ -24,14 +23,14 @@ export default function HomePage() {
       availability: "https://schema.org/InStock",
     },
     description:
-      "Descarga videos de TikTok sin marca de agua en alta calidad. Herramienta gratuita, rápida y segura para cualquier dispositivo.",
+      "Descarga videos y fotos de TikTok sin marca de agua en alta calidad. Herramienta gratuita, rápida y segura para descargar posts interactivos de cualquier dispositivo.",
     url: "https://www.tiksnap.es",
     publisher: {
       "@type": "Organization",
       name: "TikSnap",
       url: "https://www.tiksnap.es",
     },
-    screenshot: "https://www.tiksnap.es/og-image.jpg",
+    screenshot: "https://www.tiksnap.es/og-image.png",
     softwareHelp: {
       "@type": "CreativeWork",
       url: "https://www.tiksnap.es/como-usar",
@@ -42,9 +41,9 @@ export default function HomePage() {
   const howToSchema = {
     "@context": "https://schema.org",
     "@type": "HowTo",
-    name: "Cómo Descargar Videos de TikTok Sin Marca de Agua",
+    name: "Cómo Descargar Videos e Imágenes de TikTok Sin Marca de Agua",
     description:
-      "Guía paso a paso para descargar videos de TikTok sin marca de agua usando TikSnap",
+      "Guía paso a paso para descargar videos y carruseles de fotos de TikTok sin marca de agua usando TikSnap",
     step: [
       {
         "@type": "HowToStep",
@@ -62,7 +61,7 @@ export default function HomePage() {
         "@type": "HowToStep",
         position: 3,
         name: "Descarga tu Contenido",
-        text: "Elige el formato que prefieras (Video HD sin marca de agua o Audio MP3) y haz clic para iniciar la descarga instantánea.",
+        text: "Elige el formato que prefieras (Video HD, Audio MP3, o Imágenes individuales) y haz clic para iniciar la descarga instantánea.",
       },
     ],
     totalTime: "PT2M",
@@ -75,7 +74,7 @@ export default function HomePage() {
     mainEntity: [
       {
         "@type": "Question",
-        name: "¿Es legal descargar videos de TikTok con TikSnap?",
+        name: "¿Es legal descargar videos o imágenes de TikTok con TikSnap?",
         acceptedAnswer: {
           "@type": "Answer",
           text: "TikSnap permite descargar contenido público de TikTok. Es tu responsabilidad usar el contenido descargado de manera ética y respetar los derechos de autor. Recomendamos usar los videos para uso personal, crear compilaciones con crédito al autor original, o pedir permiso si planeas uso comercial.",
@@ -94,7 +93,7 @@ export default function HomePage() {
         name: "¿Guardan mis videos en sus servidores?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "No. TikSnap no almacena ningún video en nuestros servidores. El proceso de descarga es directo: desde los servidores de TikTok hacia tu dispositivo. Esto garantiza tu privacidad y velocidades de descarga más rápidas.",
+          text: "No. TikSnap no almacena ningún video o imagen en nuestros servidores. El proceso de descarga es directo: desde los servidores de TikTok hacia tu dispositivo. Esto garantiza tu privacidad y velocidades de descarga más rápidas.",
         },
       },
       {
@@ -161,11 +160,11 @@ export default function HomePage() {
         {/* Hero Section - Ultra Compacto */}
         <section className="w-full max-w-2xl text-center mb-6 px-4">
           <h1 className="text-3xl md:text-4xl font-bold mb-2 leading-tight">
-            Descargador de Videos <span className="text-[#FE2C55]">TikTok</span>
+            Descargador de Videos y Fotos <span className="text-[#FE2C55]">TikTok</span>
           </h1>
 
           <p className="text-sm md:text-base text-gray-400">
-            Descarga sin marca de agua • Gratis • HD • Rápido
+            Descarga sin marca de agua • Videos • Sliders de Fotos • MP3
           </p>
         </section>
 
@@ -342,9 +341,6 @@ export default function HomePage() {
             </div>
           </div>
         </section>
-
-        {/* Testimonials Section */}
-        <Testimonials />
 
         {/* Guía Completa - SEO Editorial Content */}
         <section
