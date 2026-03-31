@@ -3,6 +3,7 @@ import { getAllPosts, getPostBySlug } from "@/lib/blog-data";
 import type { Metadata, ResolvingMetadata } from "next";
 import Link from "next/link";
 import Tag from "@/components/blog/Tag";
+import BlogAvatar from "@/components/blog/BlogAvatar";
 import ShareButtons from "@/components/ShareButtons";
 import RelatedPosts from "@/components/RelatedPosts";
 import { ArrowLeft } from "lucide-react";
@@ -131,14 +132,11 @@ export default function PostPage({ params }: PageProps) {
             {post.title}
           </h1>
           <div className="flex items-center text-gray-400">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <BlogAvatar
               src={post.author.avatar}
-              alt={post.author.name}
-              width={40}
-              height={40}
+              name={post.author.name}
+              size={40}
               className="rounded-full mr-4 w-10 h-10 object-cover"
-              onError={(e) => { (e.target as HTMLImageElement).src = `https://ui-avatars.com/api/?name=${encodeURIComponent(post.author.name)}&background=FE2C55&color=fff&size=40`; }}
             />
             <div>
               <p className="font-semibold text-white">{post.author.name}</p>
