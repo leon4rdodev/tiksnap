@@ -61,33 +61,6 @@ const MOBILE_HEADERS = {
   "Sec-Fetch-User": "?1",
 };
 
-// Genera un msToken aleatorio para simular una sesión real
-function generateMsToken(length = 120) {
-  const chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_-";
-  let token = "";
-  for (let i = 0; i < length; i++) {
-    token += chars.charAt(Math.floor(Math.random() * chars.length));
-  }
-  return token;
-}
-
-// Genera una IP residencial aleatoria para el header X-Forwarded-For
-function generateRandomIP() {
-  return Array.from({ length: 4 }, () => Math.floor(Math.random() * 256)).join(".");
-}
-
-function getAntiBlockHeaders(isMobile = false) {
-  const headers = isMobile ? { ...MOBILE_HEADERS } : { ...DESKTOP_HEADERS };
-  const randomIP = generateRandomIP();
-  return {
-    ...headers,
-    "X-Forwarded-For": randomIP,
-    "X-Real-IP": randomIP,
-    "Client-IP": randomIP,
-    "Cookie": `msToken=${generateMsToken()};`,
-  };
-}
-
 function buildVideoInfo(itemStruct: any): Omit<VideoInfo, "cookies"> | null {
   try {
     const downloadOptions: VideoInfo["downloadOptions"] = [];
@@ -200,22 +173,6 @@ function extractVideoData(html: string): Omit<VideoInfo, "cookies"> | null {
     }
   }
 
-  // 4. Catch-all fallback (búsqueda de itemStruct en cualquier bloque JSON)
-  if (!itemStruct) {
-    const allJsonMatches = html.match(/{[^{}]*"itemStruct"[^{}]*}/g);
-    if (allJsonMatches) {
-      for (const match of allJsonMatches) {
-        try {
-          const candidate = JSON.parse(decodeHtml(match));
-          if (candidate.itemStruct) {
-            itemStruct = candidate.itemStruct;
-            break;
-          }
-        } catch {}
-      }
-    }
-  }
-
   if (!itemStruct) return null;
   return buildVideoInfo(itemStruct);
 }
@@ -270,13 +227,13 @@ export async function POST(request: NextRequest) {
     let videoInfo: Omit<VideoInfo, "cookies"> | null = null;
     let formattedCookies: string | null = null;
 
+    // 1. Intento API Interna (Desktop Headers)
     if (postId) {
       try {
         const apiUrl = `https://www.tiktok.com/api/item/detail/?itemId=${postId}`;
-        const head = getAntiBlockHeaders(false);
         const apiRes = await fetch(apiUrl, {
           headers: {
-            ...head,
+            ...DESKTOP_HEADERS,
             "Referer": "https://www.tiktok.com/",
           },
         });
@@ -289,7 +246,7 @@ export async function POST(request: NextRequest) {
             if (itemStruct) {
               videoInfo = buildVideoInfo(itemStruct);
               if (videoInfo) {
-                console.log(`[TikTok-Downloader] Success: Internal API (postId: ${postId})`);
+                console.log(`[TikTok-Downloader] Success: Internal API`);
                 const rawCookies = apiRes.headers.get("set-cookie");
                 formattedCookies = formatCookiesForRequest(rawCookies);
               }
@@ -301,15 +258,15 @@ export async function POST(request: NextRequest) {
       }
     }
 
+    // 2. Intento Scraping Desktop
     if (!videoInfo) {
       try {
-        const head = getAntiBlockHeaders(false);
-        const pageResponse = await fetch(finalUrl, { headers: head });
+        const pageResponse = await fetch(finalUrl, { headers: DESKTOP_HEADERS });
         if (pageResponse.ok) {
           const html = await pageResponse.text();
           videoInfo = extractVideoData(html);
           if (videoInfo) {
-            console.log(`[TikTok-Downloader] Success: Desktop Scraping (${finalUrl})`);
+            console.log(`[TikTok-Downloader] Success: Desktop Scraping`);
             const rawCookies = pageResponse.headers.get("set-cookie");
             formattedCookies = formatCookiesForRequest(rawCookies);
           }
@@ -319,15 +276,15 @@ export async function POST(request: NextRequest) {
       }
     }
 
+    // 3. Intento Scraping Mobile
     if (!videoInfo) {
       try {
-        const head = getAntiBlockHeaders(true);
-        const pageResponse = await fetch(finalUrl, { headers: head });
+        const pageResponse = await fetch(finalUrl, { headers: MOBILE_HEADERS });
         if (pageResponse.ok) {
           const html = await pageResponse.text();
           videoInfo = extractVideoData(html);
           if (videoInfo) {
-            console.log(`[TikTok-Downloader] Success: Mobile Scraping (${finalUrl})`);
+            console.log(`[TikTok-Downloader] Success: Mobile Scraping`);
             const rawCookies = pageResponse.headers.get("set-cookie");
             formattedCookies = formatCookiesForRequest(rawCookies);
           }
@@ -337,38 +294,46 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    // ═══════════════════════════════════════════════════════════════
-    // FALLBACK FINAL: Proxy a través de Google Translate (IPs de Google)
-    // ═══════════════════════════════════════════════════════════════
+    // 4. FALLBACK EMERGENCIAL: TikWM Public API (Sin API Key)
+    // Solo se activa si Vercel está completamente bloqueado por TikTok.
     if (!videoInfo) {
-      console.log("[TikTok-Downloader] Datacenter IPs blocked? Attempting Google Proxy...");
+      console.log("[TikTok-Downloader] All direct methods failed. Using Emergency Fallback...");
       try {
-        // Usamos Google Translate como puente para usar las IPs de Google que no están bloqueadas
-        const googleProxyUrl = `https://translate.google.com/translate?sl=auto&tl=en&u=${encodeURIComponent(finalUrl)}`;
-        const pageResponse = await fetch(googleProxyUrl, { 
-          headers: {
-            ...DESKTOP_HEADERS,
-            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
-          }
-        });
-        
-        if (pageResponse.ok) {
-          const html = await pageResponse.text();
-          videoInfo = extractVideoData(html);
-          if (videoInfo) {
-            console.log(`[TikTok-Downloader] Success: Google Proxy Fallback!`);
-            // Por seguridad, para el proxy de descarga usamos las cookies del host original si podemos, 
-            // pero para Google Proxy usualmente no obtenemos cookies útiles de TikTok directamente.
+        const tikwmRes = await fetch(`https://www.tikwm.com/api/?url=${encodeURIComponent(finalUrl)}`);
+        if (tikwmRes.ok) {
+          const data = await tikwmRes.json();
+          if (data.code === 0 && data.data) {
+            const d = data.data;
+            const downloadOptions: any[] = [];
+            
+            if (d.play) downloadOptions.push({ label: "Video (HD)", url: d.play, type: "video" });
+            if (d.wmplay) downloadOptions.push({ label: "Video (Marca de agua)", url: d.wmplay, type: "video" });
+            if (d.music) downloadOptions.push({ label: "Audio (MP3)", url: d.music, type: "audio" });
+
+            videoInfo = {
+              id: d.id,
+              type: d.images ? "photo" : "video",
+              author: {
+                uniqueId: d.author?.unique_id || "",
+                nickname: d.author?.nickname || "",
+                avatar: d.author?.avatar || "",
+              },
+              description: d.title || "",
+              cover: d.cover || "",
+              downloadOptions,
+              images: d.images || undefined,
+            };
+            console.log(`[TikTok-Downloader] Success: TikWM Emergency Fallback`);
           }
         }
       } catch (e) {
-        console.error("Google Proxy error:", e);
+        console.error("Emergency fallback error:", e);
       }
     }
 
     if (!videoInfo) {
       return NextResponse.json(
-        { error: "No se pudo extraer la información. Intenta de nuevo en unos segundos." },
+        { error: "TikTok está bloqueando temporalmente la conexión. Intenta de nuevo en unos minutos." },
         { status: 500 }
       );
     }
