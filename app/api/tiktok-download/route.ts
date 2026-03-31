@@ -253,7 +253,8 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    // Tercer intento: API proxy (tikwm.com)
+    // Tercer intento: API proxy (tikwm.com) — comentado para pruebas
+    /*
     if (!videoInfo) {
       console.log("Intento 2 fallido, usando API proxy como fallback...");
       try {
@@ -310,6 +311,7 @@ export async function POST(request: NextRequest) {
         console.error("Error en API proxy fallback:", e);
       }
     }
+    */
 
     if (!videoInfo) {
       return NextResponse.json(

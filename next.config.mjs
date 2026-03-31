@@ -18,6 +18,10 @@ const nextConfig = {
       },
       {
         protocol: "https",
+        hostname: "**.tikwm.com",
+      },
+      {
+        protocol: "https",
         hostname: "placehold.co",
       },
       {

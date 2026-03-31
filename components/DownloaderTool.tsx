@@ -254,12 +254,14 @@ export default function DownloaderTool() {
         <Card className="bg-gray-900 border-gray-700 rounded-2xl overflow-hidden animate-in slide-in-from-bottom-4 duration-500">
           <CardContent className="p-6 space-y-4">
             <div className="flex items-center space-x-3">
-              <Image
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
                 src={videoInfo.author.avatar}
                 alt={`Avatar de ${videoInfo.author.nickname}`}
                 width={40}
                 height={40}
-                className="rounded-full border-2 border-gray-700"
+                className="rounded-full border-2 border-gray-700 w-10 h-10 object-cover"
+                onError={(e) => { (e.target as HTMLImageElement).src = `https://ui-avatars.com/api/?name=${encodeURIComponent(videoInfo!.author.nickname)}&background=FE2C55&color=fff&size=40`; }}
               />
               <div>
                 <p className="font-semibold text-white">
