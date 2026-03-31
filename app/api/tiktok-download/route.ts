@@ -221,43 +221,102 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    // Primer intento con headers de iOS Safari
+    // Primer intento: scraping directo con headers de iOS Safari
     let pageResponse = await fetch(finalUrl, { headers: BROWSER_HEADERS });
+    let videoInfo: Omit<VideoInfo, "cookies"> | null = null;
+    let formattedCookies: string | null = null;
 
-    if (!pageResponse.ok) {
-      return NextResponse.json(
-        { error: "No se pudo acceder a la página de TikTok." },
-        { status: pageResponse.status }
-      );
+    if (pageResponse.ok) {
+      const html = await pageResponse.text();
+      videoInfo = extractVideoData(html);
+      if (videoInfo) {
+        const rawCookies = pageResponse.headers.get("set-cookie");
+        formattedCookies = formatCookiesForRequest(rawCookies);
+      }
     }
 
-    let html = await pageResponse.text();
-    let videoInfo = extractVideoData(html);
-
-    // Si falla, reintentar con headers de Android Chrome
+    // Segundo intento: headers de Android Chrome
     if (!videoInfo) {
-      console.log("Primer intento fallido, reintentando con User-Agent alternativo...");
+      console.log("Intento 1 fallido, reintentando con User-Agent Android...");
       try {
         pageResponse = await fetch(finalUrl, { headers: ALT_HEADERS });
         if (pageResponse.ok) {
-          html = await pageResponse.text();
+          const html = await pageResponse.text();
           videoInfo = extractVideoData(html);
+          if (videoInfo) {
+            const rawCookies = pageResponse.headers.get("set-cookie");
+            formattedCookies = formatCookiesForRequest(rawCookies);
+          }
         }
       } catch (e) {
-        console.error("Error en segundo intento:", e);
+        console.error("Error en intento 2:", e);
+      }
+    }
+
+    // Tercer intento: API proxy (tikwm.com)
+    if (!videoInfo) {
+      console.log("Intento 2 fallido, usando API proxy como fallback...");
+      try {
+        const apiRes = await fetch("https://www.tikwm.com/api/", {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: new URLSearchParams({ url: finalUrl, count: "12", cursor: "0", web: "1", hd: "1" }),
+        });
+        if (apiRes.ok) {
+          const apiData = await apiRes.json();
+          if (apiData?.data) {
+            const d = apiData.data;
+            const isPhoto = d.images && d.images.length > 0;
+
+            const downloadOptions: VideoInfo["downloadOptions"] = [];
+            const images: string[] = [];
+
+            if (isPhoto) {
+              images.push(...d.images.map((img: any) => typeof img === "string" ? img : img.url || img));
+            } else {
+              if (d.play) {
+                downloadOptions.push({
+                  label: "Video (HD - Sin marca de agua)",
+                  url: d.hdplay || d.play,
+                  type: "video" as const,
+                });
+              }
+            }
+
+            if (d.music) {
+              downloadOptions.push({
+                label: "Audio (MP3)",
+                url: d.music,
+                type: "audio" as const,
+              });
+            }
+
+            videoInfo = {
+              id: d.id || "",
+              type: isPhoto ? "photo" : "video",
+              author: {
+                uniqueId: d.author?.unique_id || "",
+                nickname: d.author?.nickname || "",
+                avatar: d.author?.avatar || "",
+              },
+              description: d.title || "",
+              cover: isPhoto ? (images[0] || "") : (d.origin_cover || d.cover || ""),
+              downloadOptions,
+              images: images.length > 0 ? images : undefined,
+            };
+          }
+        }
+      } catch (e) {
+        console.error("Error en API proxy fallback:", e);
       }
     }
 
     if (!videoInfo) {
-      console.error("HTML length:", html.length, "| Contiene REHYDRATION:", html.includes("REHYDRATION"), "| Contiene api-data:", html.includes("api-data"), "| Contiene SIGI_STATE:", html.includes("SIGI_STATE"));
       return NextResponse.json(
-        { error: "No se pudo extraer la información del video. TikTok puede estar bloqueando solicitudes temporalmente. Intenta de nuevo en unos segundos." },
+        { error: "No se pudo extraer la información. TikTok puede estar bloqueando solicitudes temporalmente. Intenta de nuevo en unos segundos." },
         { status: 500 }
       );
     }
-
-    const rawCookies = pageResponse.headers.get("set-cookie");
-    const formattedCookies = formatCookiesForRequest(rawCookies);
 
     return NextResponse.json({
       success: true,
