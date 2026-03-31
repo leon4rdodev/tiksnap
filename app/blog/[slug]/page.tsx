@@ -1,7 +1,6 @@
 import { notFound } from "next/navigation";
 import { getAllPosts, getPostBySlug } from "@/lib/blog-data";
 import type { Metadata, ResolvingMetadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import Tag from "@/components/blog/Tag";
 import ShareButtons from "@/components/ShareButtons";
@@ -132,12 +131,14 @@ export default function PostPage({ params }: PageProps) {
             {post.title}
           </h1>
           <div className="flex items-center text-gray-400">
-            <Image
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
               src={post.author.avatar}
               alt={post.author.name}
               width={40}
               height={40}
-              className="rounded-full mr-4"
+              className="rounded-full mr-4 w-10 h-10 object-cover"
+              onError={(e) => { (e.target as HTMLImageElement).src = `https://ui-avatars.com/api/?name=${encodeURIComponent(post.author.name)}&background=FE2C55&color=fff&size=40`; }}
             />
             <div>
               <p className="font-semibold text-white">{post.author.name}</p>

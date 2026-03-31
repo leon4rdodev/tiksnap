@@ -37,7 +37,6 @@ interface VideoInfo {
   cookies: string | null;
 }
 
-// Desktop Chrome — funciona en Vercel para videos (probado en versión original)
 const DESKTOP_HEADERS = {
   "User-Agent":
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36",
@@ -51,7 +50,6 @@ const DESKTOP_HEADERS = {
   "Pragma": "no-cache",
 };
 
-// Mobile iOS Safari — necesario para extraer imagePost (fotos/sliders)
 const MOBILE_HEADERS = {
   "User-Agent":
     "Mozilla/5.0 (iPhone; CPU iPhone OS 17_5_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4.1 Mobile/15E148 Safari/604.1",
@@ -63,7 +61,33 @@ const MOBILE_HEADERS = {
   "Sec-Fetch-User": "?1",
 };
 
-// Construye VideoInfo a partir de un itemStruct de TikTok (compartida entre API y scraping)
+// Genera un msToken aleatorio para simular una sesión real
+function generateMsToken(length = 120) {
+  const chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_-";
+  let token = "";
+  for (let i = 0; i < length; i++) {
+    token += chars.charAt(Math.floor(Math.random() * chars.length));
+  }
+  return token;
+}
+
+// Genera una IP residencial aleatoria para el header X-Forwarded-For
+function generateRandomIP() {
+  return Array.from({ length: 4 }, () => Math.floor(Math.random() * 256)).join(".");
+}
+
+function getAntiBlockHeaders(isMobile = false) {
+  const headers = isMobile ? { ...MOBILE_HEADERS } : { ...DESKTOP_HEADERS };
+  const randomIP = generateRandomIP();
+  return {
+    ...headers,
+    "X-Forwarded-For": randomIP,
+    "X-Real-IP": randomIP,
+    "Client-IP": randomIP,
+    "Cookie": `msToken=${generateMsToken()};`,
+  };
+}
+
 function buildVideoInfo(itemStruct: any): Omit<VideoInfo, "cookies"> | null {
   try {
     const downloadOptions: VideoInfo["downloadOptions"] = [];
@@ -123,7 +147,16 @@ function buildVideoInfo(itemStruct: any): Omit<VideoInfo, "cookies"> | null {
   }
 }
 
-// Extrae itemStruct del HTML de TikTok y lo convierte a VideoInfo
+function decodeHtml(html: string): string {
+  return html
+    .replace(/&quot;/g, '"')
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&#39;/g, "'")
+    .replace(/\\u0022/g, '"');
+}
+
 function extractVideoData(html: string): Omit<VideoInfo, "cookies"> | null {
   let itemStruct: any = null;
 
@@ -131,7 +164,7 @@ function extractVideoData(html: string): Omit<VideoInfo, "cookies"> | null {
   const rehydrationMatch = html.match(/<script id="__UNIVERSAL_DATA_FOR_REHYDRATION__"[^>]*>({.+?})<\/script>/);
   if (rehydrationMatch?.[1]) {
     try {
-      const jsonData = JSON.parse(rehydrationMatch[1]);
+      const jsonData = JSON.parse(decodeHtml(rehydrationMatch[1]));
       itemStruct = jsonData?.__DEFAULT_SCOPE__?.["webapp.video-detail"]?.itemInfo?.itemStruct;
     } catch {}
   }
@@ -144,7 +177,7 @@ function extractVideoData(html: string): Omit<VideoInfo, "cookies"> | null {
       const end = html.indexOf('</script>', start);
       if (start > 0 && end > start) {
         try {
-          const jsonData = JSON.parse(html.substring(start, end).trim());
+          const jsonData = JSON.parse(decodeHtml(html.substring(start, end).trim()));
           itemStruct = jsonData?.videoDetail?.itemInfo?.itemStruct
             || jsonData?.ItemModule?.[Object.keys(jsonData?.ItemModule || {})[0]];
         } catch {}
@@ -157,13 +190,29 @@ function extractVideoData(html: string): Omit<VideoInfo, "cookies"> | null {
     const sigiMatch = html.match(/<script id="SIGI_STATE"[^>]*>({.+?})<\/script>/);
     if (sigiMatch?.[1]) {
       try {
-        const sigiData = JSON.parse(sigiMatch[1]);
+        const sigiData = JSON.parse(decodeHtml(sigiMatch[1]));
         const itemModule = sigiData?.ItemModule;
         if (itemModule) {
           const firstKey = Object.keys(itemModule)[0];
           if (firstKey) itemStruct = itemModule[firstKey];
         }
       } catch {}
+    }
+  }
+
+  // 4. Catch-all fallback (búsqueda de itemStruct en cualquier bloque JSON)
+  if (!itemStruct) {
+    const allJsonMatches = html.match(/{[^{}]*"itemStruct"[^{}]*}/g);
+    if (allJsonMatches) {
+      for (const match of allJsonMatches) {
+        try {
+          const candidate = JSON.parse(decodeHtml(match));
+          if (candidate.itemStruct) {
+            itemStruct = candidate.itemStruct;
+            break;
+          }
+        } catch {}
+      }
     }
   }
 
@@ -194,7 +243,6 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Resolver URLs acortadas (vt.tiktok.com) siguiendo redirecciones
     let finalUrl = validation.data.url;
     if (finalUrl.includes("vt.tiktok.com") || finalUrl.includes("/t/")) {
       try {
@@ -216,80 +264,105 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    // Extraer el ID del post de la URL
     const postIdMatch = finalUrl.match(/(?:video|photo|v)\/(\d+)/);
     const postId = postIdMatch ? postIdMatch[1] : null;
 
     let videoInfo: Omit<VideoInfo, "cookies"> | null = null;
     let formattedCookies: string | null = null;
 
-    // ═══════════════════════════════════════════════════════════════
-    // INTENTO 1: API interna de TikTok (JSON, sin scraping HTML)
-    // Endpoint que el propio frontend web de TikTok utiliza
-    // ═══════════════════════════════════════════════════════════════
     if (postId) {
       try {
         const apiUrl = `https://www.tiktok.com/api/item/detail/?itemId=${postId}`;
+        const head = getAntiBlockHeaders(false);
         const apiRes = await fetch(apiUrl, {
           headers: {
-            ...DESKTOP_HEADERS,
+            ...head,
             "Referer": "https://www.tiktok.com/",
-            "Cookie": "tt_chain_token=VWkGFABBbxg;",
           },
         });
+        
         if (apiRes.ok) {
-          const apiData = await apiRes.json();
-          const itemStruct = apiData?.itemInfo?.itemStruct;
-          if (itemStruct) {
-            videoInfo = buildVideoInfo(itemStruct);
-            if (videoInfo) {
-              const rawCookies = apiRes.headers.get("set-cookie");
-              formattedCookies = formatCookiesForRequest(rawCookies);
+          const text = await apiRes.text();
+          if (text && text.trim().startsWith("{")) {
+            const apiData = JSON.parse(text);
+            const itemStruct = apiData?.itemInfo?.itemStruct;
+            if (itemStruct) {
+              videoInfo = buildVideoInfo(itemStruct);
+              if (videoInfo) {
+                console.log(`[TikTok-Downloader] Success: Internal API (postId: ${postId})`);
+                const rawCookies = apiRes.headers.get("set-cookie");
+                formattedCookies = formatCookiesForRequest(rawCookies);
+              }
             }
           }
         }
       } catch (e) {
-        console.error("Intento 1 (API interna TikTok) falló:", e);
+        console.error("TikTok API error:", e);
       }
     }
 
-    // ═══════════════════════════════════════════════════════════════
-    // INTENTO 2: Scraping directo con Desktop Chrome UA
-    // ═══════════════════════════════════════════════════════════════
     if (!videoInfo) {
-      console.log("API interna falló, intentando scraping con Desktop UA...");
       try {
-        const pageResponse = await fetch(finalUrl, { headers: DESKTOP_HEADERS });
+        const head = getAntiBlockHeaders(false);
+        const pageResponse = await fetch(finalUrl, { headers: head });
         if (pageResponse.ok) {
           const html = await pageResponse.text();
           videoInfo = extractVideoData(html);
           if (videoInfo) {
+            console.log(`[TikTok-Downloader] Success: Desktop Scraping (${finalUrl})`);
             const rawCookies = pageResponse.headers.get("set-cookie");
             formattedCookies = formatCookiesForRequest(rawCookies);
           }
         }
       } catch (e) {
-        console.error("Intento 2 (Desktop) falló:", e);
+        console.error("Desktop scraping error:", e);
       }
     }
 
-    // ═══════════════════════════════════════════════════════════════
-    // INTENTO 3: Scraping con Mobile iOS Safari UA (fotos/sliders)
-    // ═══════════════════════════════════════════════════════════════
     if (!videoInfo) {
-      console.log("Desktop UA falló, intentando con Mobile UA...");
       try {
-        const pageResponse = await fetch(finalUrl, { headers: MOBILE_HEADERS });
+        const head = getAntiBlockHeaders(true);
+        const pageResponse = await fetch(finalUrl, { headers: head });
         if (pageResponse.ok) {
           const html = await pageResponse.text();
           videoInfo = extractVideoData(html);
           if (videoInfo) {
+            console.log(`[TikTok-Downloader] Success: Mobile Scraping (${finalUrl})`);
             const rawCookies = pageResponse.headers.get("set-cookie");
             formattedCookies = formatCookiesForRequest(rawCookies);
           }
         }
       } catch (e) {
-        console.error("Intento 3 (Mobile) falló:", e);
+        console.error("Mobile scraping error:", e);
+      }
+    }
+
+    // ═══════════════════════════════════════════════════════════════
+    // FALLBACK FINAL: Proxy a través de Google Translate (IPs de Google)
+    // ═══════════════════════════════════════════════════════════════
+    if (!videoInfo) {
+      console.log("[TikTok-Downloader] Datacenter IPs blocked? Attempting Google Proxy...");
+      try {
+        // Usamos Google Translate como puente para usar las IPs de Google que no están bloqueadas
+        const googleProxyUrl = `https://translate.google.com/translate?sl=auto&tl=en&u=${encodeURIComponent(finalUrl)}`;
+        const pageResponse = await fetch(googleProxyUrl, { 
+          headers: {
+            ...DESKTOP_HEADERS,
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+          }
+        });
+        
+        if (pageResponse.ok) {
+          const html = await pageResponse.text();
+          videoInfo = extractVideoData(html);
+          if (videoInfo) {
+            console.log(`[TikTok-Downloader] Success: Google Proxy Fallback!`);
+            // Por seguridad, para el proxy de descarga usamos las cookies del host original si podemos, 
+            // pero para Google Proxy usualmente no obtenemos cookies útiles de TikTok directamente.
+          }
+        }
+      } catch (e) {
+        console.error("Google Proxy error:", e);
       }
     }
 

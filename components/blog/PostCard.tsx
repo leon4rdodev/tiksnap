@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { Post } from "@/lib/blog-data";
 import Tag from "./Tag";
 
@@ -29,12 +28,14 @@ export default function PostCard({ post }: PostCardProps) {
             </p>
           </div>
           <div className="flex items-center mt-6 pt-4 border-t border-gray-700">
-            <Image
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
               src={post.author.avatar}
               alt={post.author.name}
               width={32}
               height={32}
-              className="rounded-full mr-3"
+              className="rounded-full mr-3 w-8 h-8 object-cover"
+              onError={(e) => { (e.target as HTMLImageElement).src = `https://ui-avatars.com/api/?name=${encodeURIComponent(post.author.name)}&background=FE2C55&color=fff&size=32`; }}
             />
             <div>
               <p className="text-sm font-semibold text-white">
