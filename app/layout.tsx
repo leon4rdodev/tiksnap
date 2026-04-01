@@ -7,6 +7,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import CookieBanner from "@/components/CookieBanner";
 import Script from "next/script";
+import { Analytics } from "@vercel/analytics/next";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -178,6 +179,7 @@ export default function RootLayout({
           </div>
           <CookieBanner />
         </div>
+        <Analytics />
         <Script id="pwa-install-sw" strategy="afterInteractive">
           {`
             if ('serviceWorker' in navigator) {
