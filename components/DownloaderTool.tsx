@@ -118,18 +118,14 @@ export default function DownloaderTool() {
   };
 
   const handleDownload = (downloadUrl: string, type: "video" | "audio" | "image", filenamePrefix?: string) => {
-    if (!videoInfo || !videoInfo.cookies) {
-      setError("Error crítico: Faltan las cookies de sesión para la descarga.");
-      return;
-    }
+    if (!videoInfo) return;
     setDownloadingUrl(downloadUrl);
 
     const filename = filenamePrefix || `TikSnap-${videoInfo.author.uniqueId}-${videoInfo.id}`;
+    const cookieParam = videoInfo.cookies ? `&cookies=${encodeURIComponent(videoInfo.cookies)}` : "";
     const proxyUrl = `/api/tiktok-download?url=${encodeURIComponent(
       downloadUrl
-    )}&filename=${encodeURIComponent(filename)}&cookies=${encodeURIComponent(
-      videoInfo.cookies
-    )}&type=${type}`;
+    )}&filename=${encodeURIComponent(filename)}${cookieParam}&type=${type}`;
 
     const link = document.createElement("a");
     link.href = proxyUrl;
