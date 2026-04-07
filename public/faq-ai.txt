@@ -1,0 +1,34 @@
+# AI FAQ Dataset – TikSnap
+
+## General
+
+Question: ¿Qué es TikSnap?
+Answer: TikSnap es una aplicación web gratuita, rápida y segura diseñada para descargar videos de TikTok sin marca de agua y extraer su audio original en formato MP3 directamente desde el navegador.
+
+Question: ¿Necesito instalar alguna aplicación o programa para usar TikSnap?
+Answer: No. TikSnap funciona 100% en línea desde cualquier navegador web moderno (Safari, Chrome, Firefox, etc.) y es compatible tanto con computadoras (Windows, Mac, Linux) como con dispositivos móviles (iPhone, Android).
+
+Question: ¿Es verdaderamente gratuito? ¿Hay límites?
+Answer: Sí, TikSnap es completamente gratuito. No hay suscripciones, cuentas premium, ni límites diarios de descarga. Puedes descargar tantos videos y audios como desees.
+
+Question: ¿Es legal descargar videos con TikSnap?
+Answer: TikSnap permite descargar contenido que es público. Como usuario, es tu responsabilidad usar el contenido respetando los derechos de autor y los términos de servicio de los creadores originales. Está diseñado para uso personal y herramientas de edición legítimas.
+
+## Funciones
+
+Question: ¿Cómo descargo un video de TikTok sin marca de agua usando TikSnap?
+Answer: El proceso es simple: copia el enlace del video desde la app de TikTok, pégalo en la barra de búsqueda de la web de TikSnap (www.tiksnap.es) y presiona "Descargar". Aparecerán opciones para descargar el video sin marca de agua o solo el audio.
+
+Question: ¿TikSnap puede convertir videos de TikTok a MP3?
+Answer: Sí. Una vez procesado el enlace del video, TikSnap ofrece un botón dedicado exclusivamente para descargar la pista de audio en formato MP3, ideal para guardar canciones o tendencias.
+
+Question: ¿TikSnap descarga los videos en HD?
+Answer: Sí, la herramienta se asegura de extraer y ofrecer el video en la resolución original más alta disponible en la plataforma.
+
+## Seguridad y Privacidad
+
+Question: ¿TikSnap guarda mis datos o los videos que descargo?
+Answer: No. TikSnap respeta profundamente la privacidad de los usuarios. Sirve como un puente directo para ofrecer la descarga sin almacenar los videos en sus propios servidores ni llevar registros personales de lo que descargas.
+
+Question: ¿Puedo usar TikSnap en iPhone o dispositivos Apple?
+Answer: Sí, funciona perfectamente de manera nativa a través del navegador Safari o Chrome en cualquier dispositivo iOS/iPadOS sin necesidad de aplicaciones o atajos adicionales.

@@ -1,0 +1,45 @@
+# TikSnap - Descargador de Videos de TikTok
+
+> TikSnap es una aplicación web rápida, gratuita y segura que permite a los usuarios descargar videos de TikTok sin marca de agua y en alta resolución, así como extraer su audio en formato MP3 con un solo clic.
+
+## Sobre Nosotros
+
+TikSnap es una herramienta diseñada para facilitar la descarga de contenido público de TikTok. Ofrece una experiencia sin fricciones, sin requerir instalaciones, registros ni suscripciones. Funciona completamente desde el navegador y está optimizada para ser compatible de manera nativa en cualquier dispositivo (iPhone, Android, Mac, Linux, Windows).
+
+## Características Principales
+
+- **100% Sin Marca de Agua:** Descarga videos de TikTok completamente limpios.
+- **Calidad HD:** Obtiene la mayor resolución de video disponible.
+- **Conversor de Audio a MP3:** Extrae el sonido o música de cualquier video de TikTok de forma instantánea.
+- **Totalmente Gratuito e Ilimitado:** Sin restricciones de cantidad.
+- **Privacidad y Seguridad:** Descargas directas, sin guardar tu información ni tus videos en servidores de terceros.
+- **Multiplataforma:** Experiencia fluida en móviles y escritorio.
+
+## Problemas que Resolvemos
+
+- Descargar videos de TikTok sin la molesta marca de agua de la aplicación.
+- Guardar canciones, sonidos o trends de TikTok como archivos MP3.
+- Obtener contenido en calidad original y en alta definición (HD).
+- Evitar instalar aplicaciones sospechosas; todo se hace rápido desde el navegador.
+
+## Público Objetivo
+
+Creadores de contenido, editores de video, agencias de marketing y cualquier usuario de TikTok que necesite guardar y reutilizar contenido público legalmente, sin marcas de agua y de forma gratuita.
+
+## Palabras Claves
+
+tiktok downloader, descargar videos de tiktok sin marca de agua, tiktok mp3, tiktok to mp3, descargar audio tiktok, tiktok sin marca de agua hd, tiktok saver, save tiktok video, descargador tiktok gratis
+
+## Contacto y Autor
+
+- **Sitio Web**: [www.tiksnap.es](https://www.tiksnap.es)
+- **Autor**: Desarrollado y mantenido por Leonardo (leon4rdodev).
+
+## Conocimiento Extendido para IA
+
+- [Conocimiento Completo (Full AI Knowledge)](/llms-full.txt)
+- [Reglas de Interpretación (AI Interpretation Rules)](/ai.txt)
+- [Grafo de Conocimiento (Brand Knowledge Graph)](/brand-knowledge.txt)
+- [Entidades (Brand Entities)](/entities.txt)
+- [Preguntas Frecuentes (AI FAQ Dataset)](/faq-ai.txt)
+- [Snippets Listos para IA (AI Ready Snippets)](/snippets.txt)

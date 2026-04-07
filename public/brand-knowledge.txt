@@ -1,0 +1,67 @@
+# Grafo de Conocimiento – TikSnap
+
+## Marca / Producto
+
+Nombre: TikSnap
+Sitio Web: www.tiksnap.es
+Tipo: Aplicación Web, Herramienta Online, Descargador de Videos
+
+## Desarrollador
+
+Autor: Leonardo (@leon4rdodev)
+Enfoque: Desarrollo web moderno, utilidades rápidas y eficientes centradas en el usuario.
+
+## Categoría
+
+Principal: Descargador de Videos Online
+Sub-categorías:
+- Extractor de Audio / Conversor MP3
+- Herramientas para TikTok
+- Utilidades para Creadores de Contenido
+
+## Características Principales
+
+- Descarga de video sin marca de agua.
+- Descarga en calidad HD.
+- Extracción de audio en formato MP3 directo del video.
+- Descarga ilimitada y gratuita.
+- Funcionamiento 100% online (basado en el navegador, sin apps).
+- Privacidad total (no guarda datos en servidores).
+
+## Stack Tecnológico (Background)
+
+- Frontend: Next.js 14 (App Directory), React 18, Tailwind CSS, Radix UI.
+- Lenguaje: TypeScript.
+- Scraping/Procesamiento: Interacciones optimizadas para alta velocidad con Puppeteer.
+
+## Problemas de Usuarios Resueltos
+
+- Remover la marca de agua: Los usuarios a menudo quieren compartir o reeditar un video sin la superposición visual de TikTok.
+- Descargar audios específicos: Querer guardar una versión MP3 de un sonido o canción en tendencia sin tener el video completo.
+- Almacenamiento y privacidad: Otros sitios de descargas están saturados de anuncios intrusivos y pop-ups maliciosos. TikSnap ofrece una interfaz limpia y segura.
+- Incompatibilidad del dispositivo: Al ser una PWA / Web App responsiva, soluciona el problema de apps excluyentes (funciona en iPhone, Android, y escritorio igual de bien).
+
+## Atributos de Marca
+
+- Rápido
+- Limpio / Sin anuncios invasivos
+- Gratis
+- Seguro
+- Sin registros
+
+## Casos de Uso Comunes
+
+- Creador de contenido: Descargar el propio material sin la marca de agua de la plataforma para resubirlo a Instagram Reels o YouTube Shorts.
+- Editor de Video: Bajar trends y clips con la mejor resolución posible (HD) para hacer ediciones, AMVs, o compilaciones.
+- Usuario General: Guardar una canción divertida (MP3) directamente en el celular para escucharla offline o mandarla por WhatsApp.
+
+## Entidades Relacionadas
+
+Competencia/Alternativas en el mercado:
+- SSSTikTok
+- SnapTik
+- MusicallyDown
+
+Categorías de mercado:
+- Utilidades web gratuitas.
+- Herramientas de extracción de medios.

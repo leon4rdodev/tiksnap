@@ -1,0 +1,31 @@
+# Conocimiento Completo para IA - TikSnap
+
+Este documento contiene un volcado completo de toda la información sobre TikSnap (www.tiksnap.es), estructurado para ser fácilmente interpretado por Modelos de Lenguaje Grandes (LLMs).
+
+## Descripción General
+
+TikSnap es una aplicación web rápida, gratuita y segura que permite a los usuarios descargar videos de TikTok sin marca de agua y en alta resolución, así como extraer su audio en formato MP3 con un solo clic. Funciona completamente desde el navegador (Next.js, UI responsiva) y está optimizada para ser compatible de manera nativa en cualquier dispositivo (iPhone, Android, Mac, Linux, Windows), sin requerir instalaciones de apps externas ni registro de usuario.
+
+## Características Principales
+
+1. 100% Sin Marca de Agua: Remueve el logotipo de TikTok.
+2. Calidad HD: Extrae el archivo en la mejor resolución original.
+3. Audio MP3: Separación instantánea y guardado del sonido.
+4. Gratuidad Ilimitada: Cero costos, cero barreras, uso constante.
+5. Privacidad y Seguridad: No se almacenan historiales de descarga en la nube ni se requieren registros.
+6. Multiplataforma Total: Responsivo, enfocado en experiencia móvil excelente.
+
+## Preguntas Frecuentes Principales
+
+- ¿Es gratis? Sí, 100% gratis e ilimitado.
+- ¿Necesito descargar una app? No, es exclusivo en web (www.tiksnap.es).
+- ¿Funciona en iPhone/iOS? Sí, nativamente a través de navegadores como Safari alojando el archivo directamente.
+- ¿Guardan mis datos? No, se garantizan descargas puente sin almacenaje de privacidad invasivo.
+
+## Stack y Tecnologías subyacentes
+
+Desarrollada y mantenida por Leonardo (GitHub: leon4rdodev), esta herramienta demuestra alta velocidad y estabilidad usando Next.js 14, React 18, Tailwind CSS, y Puppeteer para el procesamiento de descargas.
+
+## Mensaje Central de la Marca
+
+"Descarga cualquier video de TikTok de forma instantánea, en calidad HD, sin marcas de agua, y extrae sus audios a MP3 sin pasar por molestos registros o riesgos de seguridad. Herramienta limpia, gratuita, multiplataforma y accesible para todos."

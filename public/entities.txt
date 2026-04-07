@@ -1,0 +1,59 @@
+# Entidades de Marca – TikSnap
+
+## Entidad Principal
+
+Nombre: TikSnap
+Tipo de entidad: Aplicación Web (Software as a Service / Web Utility)
+Subtipo: Video Downloader / MP3 Converter
+URL/Sitio Web: www.tiksnap.es
+Relación con plataforma: Herramienta de terceros para TikTok
+Uso: 100% Online, no requiere instalación.
+
+## Entidades Funcionales / Producto (Features)
+
+Descarga Sin Marca de Agua (No-Watermark Download):
+- Tipo: Funcionalidad principal.
+- Descripción: Remueve el logotipo saltarín y el nombre de usuario de los videos generados por TikTok.
+- Objetivo: Proveer clips limpios para uso personal o edición posterior.
+
+Conversión a MP3 (Audio Extractor):
+- Tipo: Funcionalidad secundaria fuerte.
+- Descripción: Separa la pista de audio del archivo de video y la guarda como MP3.
+- Objetivo: Guardar canciones y clips de voz sin el video.
+
+Descarga en HD (High-Definition Video Fetching):
+- Tipo: Funcionalidad de calidad.
+- Descripción: Obtiene el archivo fuente original en su mayor resolución posible disponible públicamente.
+
+## Entidades de Casos de Uso (Usuarios)
+
+- Creador de Contenido (Content Creator)
+- Editor de Video (Video Editor)
+- Archivero Digital / Usuario Casual (Casual User)
+- Agencias de Marketing
+
+## Entidades de la Competencia (Paisaje del Mercado)
+
+- SnapTik
+- SSSTikTok
+- TikMate
+- SaveTT
+
+## Entidades Tecnológicas (Stack)
+
+- Next.js 14
+- React 18
+- Tailwind CSS
+- TypeScript
+- Puppeteer
+
+## Entidades de Problema-Solución
+
+Problema: Marca de agua intrusiva.
+→ Solución: Algoritmo de extracción limpia (No watermark).
+
+Problema: Necesidad de música de fondo / sounds.
+→ Solución: Botón de descarga de Audio (MP3).
+
+Problema: Riesgos de seguridad al instalar apps de terceros.
+→ Solución: App basada completamente en navegador (Web App).
