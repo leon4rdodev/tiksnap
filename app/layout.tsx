@@ -24,11 +24,11 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.tiksnap.es"),
   title: {
-    default: "TikSnap - Descargar Videos e Imágenes de TikTok Sin Marca de Agua",
+    default: "TikSnap - Recursos, Herramientas y Descargas para Creadores de TikTok",
     template: "%s | TikSnap",
   },
   description:
-    "Descarga videos, fotos y sliders de TikTok sin marca de agua en HD. Herramienta gratuita, rápida y segura. Convierte TikTok a MP3. Funciona en móvil y PC.",
+    "El portal definitivo para creadores de TikTok. Encuentra guías, trucos de algoritmo y herramientas gratuitas para descargar videos sin marca de agua en HD.",
   keywords: [
     "descargar fotos de tiktok",
     "descargar imagenes tiktok",
@@ -61,9 +61,9 @@ export const metadata: Metadata = {
     type: "website",
     locale: "es_ES",
     url: "https://www.tiksnap.es",
-    title: "TikSnap - Descargar Videos e Imágenes de TikTok Sin Marca de Agua",
+    title: "TikSnap - Recursos, Guías y Herramientas para Creadores de TikTok",
     description:
-      "La mejor herramienta para descargar videos y fotografías de TikTok sin marca de agua. Rápido, gratis y en alta calidad HD.",
+      "Lleva tu cuenta al siguiente nivel con nuestras guías estratégicas y herramientas gratuitas para descargar videos en alta calidad HD.",
     siteName: "TikSnap",
     images: [
       {
@@ -76,9 +76,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "TikSnap - Descargar Videos e Imágenes de TikTok Sin Marca de Agua",
+    title: "TikSnap - Recursos, Guías y Herramientas para Creadores de TikTok",
     description:
-      "Descarga videos y fotos de TikTok sin marca de agua en segundos. Calidad HD y conversión a MP3.",
+      "El portal para dominar TikTok. Guías, análisis y herramientas de descarga gratuitas.",
     images: ["/og-image.jpg"],
   },
   icons: {

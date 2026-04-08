@@ -157,14 +157,14 @@ export default function HomePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
       <div className="flex flex-col items-center justify-center min-h-screen px-4 md:px-6">
-        {/* Hero Section - Ultra Compacto */}
+        {/* Hero Section - Hub de Creadores */}
         <section className="w-full max-w-2xl text-center mb-6 px-4">
-          <h1 className="text-3xl md:text-4xl font-bold mb-2 leading-tight">
-            Descargador de Videos y Fotos <span className="text-[#FE2C55]">TikTok</span>
+          <h1 className="text-3xl md:text-4xl font-bold mb-3 leading-tight">
+            Herramientas y Recursos para Creadores de <span className="text-[#FE2C55]">TikTok</span>
           </h1>
 
           <p className="text-sm md:text-base text-gray-400">
-            Descarga sin marca de agua • Videos • Sliders de Fotos • MP3
+            Descubre guías estratégicas, analiza algoritmos y usa nuestras herramientas 100% gratuitas para potenciar tu contenido.
           </p>
         </section>
 
@@ -180,6 +180,36 @@ export default function HomePage() {
 
       {/* Resto del contenido */}
       <div className="flex flex-col items-center justify-center px-4 md:px-6 py-4">
+        
+        {/* Sección de Blog Destacado Arriba */}
+        <section className="w-full max-w-6xl mx-auto my-12 px-4">
+          <div className="flex flex-col items-center mb-8">
+            <h2 className="text-3xl font-bold text-white mb-2 text-center">
+              Aprende a Dominar TikTok
+            </h2>
+            <p className="text-gray-400 text-center max-w-xl">
+              Nuestras guías más recientes para entender el algoritmo, 
+              mejorar tu retención y viralizarte rápidamente.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {latestPosts.map((post) => (
+              <div key={post.slug} className="bg-gray-900 border border-gray-700 rounded-xl overflow-hidden hover:border-[#FE2C55] transition-colors p-5 flex flex-col justify-between h-full">
+                <div>
+                  <div className="text-xs font-semibold text-[#FE2C55] mb-2">{post.tags[0]}</div>
+                  <h3 className="text-lg font-bold text-white mb-2 leading-snug"><a href={`/blog/${post.slug}`} className="hover:underline">{post.title}</a></h3>
+                  <p className="text-sm text-gray-400 line-clamp-3 mb-4">{post.description}</p>
+                </div>
+                <div className="flex items-center text-xs text-gray-500">
+                  <span className="font-medium mr-2">{post.author.name}</span> • <span className="ml-2">{post.date}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="text-center mt-6">
+            <a href="/blog" className="text-[#FE2C55] hover:underline font-semibold text-sm">Ver todas las guías y consejos →</a>
+          </div>
+        </section>
         {/* 2. Sección "Cómo Funciona" */}
         <section
           className="max-w-3xl w-full text-center mt-0 px-4"
@@ -499,9 +529,9 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Final CTA + Latest Blog Posts */}
-        <div className="mt-20">
-          <FinalCTA latestPosts={latestPosts} />
+        {/* Final CTA */}
+        <div className="my-20">
+          <FinalCTA />
         </div>
       </div>
     </>

@@ -100,6 +100,25 @@ export default function AboutPage() {
 
         <section>
           <h2 className="text-2xl font-semibold text-white mb-4">
+            Nuestro Equipo Editorial
+          </h2>
+          <p className="leading-relaxed mb-4">
+            Detrás de las guías, artículos técnicos y tutoriales que publicamos, hay un equipo dedicado de expertos en marketing digital y desarrollo. Nos aseguramos de mantener un estándar de calidad riguroso (E-E-A-T) para proporcionarte información veraz, actualizada y útil sobre el ecosistema de creadores.
+          </p>
+          <div className="bg-gray-900 border border-gray-700 p-6 rounded-lg flex flex-col md:flex-row items-center gap-6">
+            <div className="w-24 h-24 bg-gray-800 rounded-full flex-shrink-0 border-2 border-[#FE2C55] overflow-hidden">
+               <img src="https://ui-avatars.com/api/?name=Equipo+TikSnap&background=FE2C55&color=fff" alt="Logo Editorial" className="w-full h-full object-cover" />
+            </div>
+            <div>
+              <h3 className="font-bold text-white text-xl mb-1">El Equipo TikSnap</h3>
+              <p className="text-sm text-[#FE2C55] uppercase font-semibold tracking-wider mb-2">Expertos en Social Media y Desarrollo</p>
+              <p className="text-sm text-gray-400">Nuestro compromiso es investigar a fondo los últimos cambios en algoritmos y proveer herramientas que realmente funcionen. Si lees una de nuestras guías, ten la certeza de que fue escrita y validada por creadores, para creadores.</p>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h2 className="text-2xl font-semibold text-white mb-4">
             Cómo Funciona Nuestro Sistema
           </h2>
           <p className="leading-relaxed mb-4">

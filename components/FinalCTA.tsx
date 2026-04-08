@@ -1,15 +1,8 @@
 "use client";
 
-import Link from "next/link";
 import { ArrowRight, Sparkles } from "lucide-react";
-import { Post } from "@/lib/blog-data";
-import PostCard from "@/components/blog/PostCard";
 
-interface FinalCTAProps {
-  latestPosts?: Post[];
-}
-
-export default function FinalCTA({ latestPosts = [] }: FinalCTAProps) {
+export default function FinalCTA() {
 
   return (
     <div className="w-full max-w-6xl mx-auto px-4 space-y-16">
@@ -44,35 +37,6 @@ export default function FinalCTA({ latestPosts = [] }: FinalCTAProps) {
             <span>Comenzar Ahora</span>
             <ArrowRight className="w-5 h-5" />
           </button>
-        </div>
-      </section>
-
-      {/* Latest Blog Posts Section */}
-      <section className="space-y-8">
-        <div className="text-center">
-          <h2 className="text-3xl font-bold text-white mb-3">
-            Aprende Más Sobre TikTok
-          </h2>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-            Descubre consejos, trucos y guías para sacarle el máximo provecho a
-            tus descargas y contenido
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {latestPosts.map((post) => (
-            <PostCard key={post.slug} post={post} />
-          ))}
-        </div>
-
-        <div className="text-center">
-          <Link
-            href="/blog"
-            className="inline-flex items-center space-x-2 text-[#FE2C55] hover:text-[#FE2C55]/80 font-medium transition-colors"
-          >
-            <span>Ver todos los artículos</span>
-            <ArrowRight className="w-4 h-4" />
-          </Link>
         </div>
       </section>
     </div>

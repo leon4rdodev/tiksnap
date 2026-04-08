@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Download, Shield, Lock, Heart } from "lucide-react";
+import { Download, Shield, Lock, Heart, ExternalLink } from "lucide-react";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -110,20 +110,36 @@ export default function Footer() {
       {/* Bottom Bar */}
       <div className="border-t border-gray-800/50">
         <div className="max-w-6xl mx-auto px-4 md:px-6 py-4">
-          <div className="flex flex-col md:flex-row justify-between items-center text-xs text-gray-300 space-y-2 md:space-y-0">
-            <p>
-              Copyright © {currentYear} TikSnap. Todos los derechos reservados.
-            </p>
-            <p className="flex items-center space-x-1">
-              <span>Hecho con</span>
-              <Heart className="w-3 h-3 text-[#FE2C55] fill-current" />
-              <span>en República Dominicana</span>
-            </p>
+          <div className="flex flex-col md:flex-row justify-between items-center text-xs text-gray-300 space-y-6 md:space-y-0">
+            <div className="flex flex-col space-y-2 text-center md:text-left">
+              <p>
+                Copyright © {currentYear} TikSnap. Todos los derechos reservados.
+              </p>
+              <p className="text-gray-400 max-w-md">
+                TikSnap es un servicio independiente y no está afiliado, patrocinado
+                ni asociado con TikTok o ByteDance Ltd.
+              </p>
+            </div>
+            
+            <div className="flex flex-col items-center md:items-end space-y-3">
+              <p className="flex items-center space-x-1">
+                <span>Hecho con</span>
+                <Heart className="w-3 h-3 text-[#FE2C55] fill-current" />
+                <span>en República Dominicana</span>
+              </p>
+
+              <a 
+                href="https://wa.me/18493997434?text=Hola%20Leonardo,%20vengo%20desde%20TikSnap"
+                target="_blank"
+                rel="noopener noreferrer" 
+                className="group flex items-center space-x-1.5 text-gray-500 hover:text-gray-300 transition-colors"
+                title="Desarrollado por 0xLeon4rdo"
+              >
+                <span className="font-medium text-[11px] tracking-wide">Desarrollado por 0xLeon4rdo</span>
+                <ExternalLink className="w-3 h-3 opacity-50 group-hover:opacity-100 transition-opacity" />
+              </a>
+            </div>
           </div>
-          <p className="text-xs text-gray-400 mt-2 text-center md:text-left">
-            TikSnap es un servicio independiente y no está afiliado, patrocinado
-            ni asociado con TikTok o ByteDance Ltd.
-          </p>
         </div>
       </div>
     </footer>
