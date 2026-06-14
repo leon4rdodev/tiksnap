@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Download, Shield, Lock, Heart, ExternalLink } from "lucide-react";
+import { Download, Shield, Lock, Heart, ExternalLink, Instagram, Twitter, Github } from "lucide-react";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -122,6 +122,17 @@ export default function Footer() {
             </div>
             
             <div className="flex flex-col items-center md:items-end space-y-3">
+              <div className="flex items-center space-x-4">
+                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-[#FE2C55] transition-colors">
+                  <Instagram className="w-5 h-5" />
+                </a>
+                <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-[#FE2C55] transition-colors">
+                  <Twitter className="w-5 h-5" />
+                </a>
+                <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-[#FE2C55] transition-colors">
+                  <Github className="w-5 h-5" />
+                </a>
+              </div>
               <p className="flex items-center space-x-1">
                 <span>Hecho con</span>
                 <Heart className="w-3 h-3 text-[#FE2C55] fill-current" />
