@@ -129,7 +129,7 @@ export default function Footer() {
                 <a href="https://x.com/leon4rdodev" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-[#FE2C55] transition-colors">
                   <Twitter className="w-5 h-5" />
                 </a>
-                <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-[#FE2C55] transition-colors">
+                <a href="https://github.com/leon4rdodev" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-[#FE2C55] transition-colors">
                   <Github className="w-5 h-5" />
                 </a>
               </div>
