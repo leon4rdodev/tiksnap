@@ -1,12 +1,5 @@
 import Link from "next/link";
-import { Home, Search, BookOpen, HelpCircle, Smartphone, ArrowRight } from "lucide-react";
-
-const popularLinks = [
-  { href: "/como-usar", label: "Cómo Descargar", icon: Smartphone },
-  { href: "/blog", label: "Blog y Guías", icon: BookOpen },
-  { href: "/#faq", label: "Preguntas Frecuentes", icon: HelpCircle },
-  { href: "/#descargador", label: "Descargar Ahora", icon: Search },
-];
+import { Home, Search, Shield } from "lucide-react";
 
 export default function NotFound() {
   return (
@@ -50,43 +43,24 @@ export default function NotFound() {
           </Link>
         </div>
 
-        {/* Popular Links */}
-        <div className="border border-gray-700 rounded-xl p-6 md:p-8">
-          <h2 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-5 text-center">
-            Navegación Rápida
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            {popularLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="flex items-center space-x-3 p-4 rounded-lg border border-gray-700 hover:border-rose-600 hover:bg-gray-800/50 transition-all group text-left"
-              >
-                <link.icon className="w-5 h-5 text-gray-400 group-hover:text-rose-600 transition-colors flex-shrink-0" />
-                <span className="text-sm font-medium text-gray-300 group-hover:text-white transition-colors">
-                  {link.label}
-                </span>
-                <ArrowRight className="w-4 h-4 text-gray-500 group-hover:text-rose-600 ml-auto transition-colors" />
-              </Link>
-            ))}
-          </div>
-        </div>
-
         {/* Fun Fact Disclaimer */}
-        <div className="border border-yellow-700/50 rounded-xl p-6">
-          <p className="text-xs text-yellow-400 font-semibold mb-2">
-            💡 DATO CURIOSO
-          </p>
-          <p className="text-sm text-yellow-100/90">
-            Mientras estás aquí, ¿sabías que TikSnap te permite descargar videos
-            de TikTok en calidad HD sin marca de agua? 100% gratis, sin registro.
+        <div className="border border-yellow-700/50 rounded-lg p-6 text-left">
+          <h3 className="text-lg font-bold text-yellow-200 mb-3 flex items-center">
+            <Shield className="w-5 h-5 mr-2" />
+            ¿Sabías que...?
+          </h3>
+          <p className="text-sm text-yellow-100/90 leading-relaxed">
+            TikSnap te permite descargar videos de TikTok en calidad HD{" "}
+            <strong>sin marca de agua</strong>, completamente gratis y sin
+            registro. También puedes bajar carruseles de fotos y extraer audio
+            en MP3.
           </p>
           <Link
             href="/#descargador"
             className="inline-flex items-center space-x-1.5 mt-4 text-rose-600 hover:text-rose-500 font-semibold text-sm transition-colors"
           >
             <span>Pruébalo ahora</span>
-            <ArrowRight className="w-4 h-4" />
+            <Search className="w-4 h-4" />
           </Link>
         </div>
       </div>
