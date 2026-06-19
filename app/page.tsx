@@ -598,7 +598,7 @@ export default function HomePage() {
           <p className="text-center text-gray-400 mb-8">
             Resuelve tus dudas sobre cómo descargar videos y fotos de TikTok sin marca de agua gratis
           </p>
-          <div className="space-y-4">
+          <div className="rounded-xl border border-gray-700 divide-y divide-gray-800">
             <FAQItem
               question="¿Es legal descargar videos de TikTok con TikSnap?"
               answer="TikSnap permite descargar contenido público de TikTok. Es tu responsabilidad usar el contenido descargado de manera ética y respetar los derechos de autor. Recomendamos usar los videos para uso personal, crear compilaciones con crédito al autor original, o pedir permiso si planeas uso comercial."

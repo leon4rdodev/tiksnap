@@ -130,13 +130,13 @@ export default function LandingPage({ params }: PageProps) {
           >
             Preguntas Frecuentes
           </h2>
-          <div className="space-y-4">
+          <div className="rounded-xl border border-gray-700 divide-y divide-gray-800">
             {page.faqs.map((faq, i) => (
               <details
                 key={i}
-                className=" border border-gray-700 rounded-lg overflow-hidden group"
+                className="group"
               >
-                <summary className="p-4 font-semibold text-white cursor-pointer hover:bg-gray-800 transition-colors list-none flex items-center justify-between">
+                <summary className="p-4 font-semibold text-white cursor-pointer hover:bg-white/[0.02] transition-colors list-none flex items-center justify-between">
                   <span>{faq.q}</span>
                   <svg
                     className="w-5 h-5 text-gray-400 group-open:rotate-180 transition-transform flex-shrink-0 ml-4"
