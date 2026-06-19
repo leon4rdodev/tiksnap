@@ -86,7 +86,7 @@ export default function BlogSearch({ posts }: BlogSearchProps) {
             placeholder="Buscar artículos por título, tema o etiqueta..."
             value={query}
             onChange={(e) => handleSearch(e.target.value)}
-            className="w-full pl-12 pr-4 py-3.5 bg-gray-900 border border-gray-700 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-[#FE2C55] focus:ring-1 focus:ring-[#FE2C55] transition-colors"
+            className="w-full pl-12 pr-4 py-3.5 bg-gray-900 border border-gray-700 rounded-full text-white placeholder-gray-500 focus:outline-none focus:border-[#FE2C55] focus:ring-1 focus:ring-[#FE2C55] transition-colors"
           />
           {query && (
             <button
