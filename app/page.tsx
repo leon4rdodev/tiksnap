@@ -23,7 +23,7 @@ export default function HomePage() {
       availability: "https://schema.org/InStock",
     },
     description:
-      "Descarga videos y fotos de TikTok sin marca de agua en alta calidad. Herramienta gratuita, rápida y segura para descargar posts interactivos de cualquier dispositivo.",
+      "Descarga videos y fotos de TikTok sin marca de agua en HD gratis. TikTok downloader online rápido y seguro para bajar videos TikTok MP4, MP3 y carruseles de imágenes en segundos.",
     url: "https://www.tiksnap.es",
     publisher: {
       "@type": "Organization",
@@ -41,9 +41,9 @@ export default function HomePage() {
   const howToSchema = {
     "@context": "https://schema.org",
     "@type": "HowTo",
-    name: "Cómo Descargar Videos e Imágenes de TikTok Sin Marca de Agua",
+    name: "Cómo Descargar Videos y Fotos de TikTok Sin Marca de Agua",
     description:
-      "Guía paso a paso para descargar videos y carruseles de fotos de TikTok sin marca de agua usando TikSnap",
+      "Guía paso a paso para descargar TikTok sin marca de agua en HD y bajar carruseles de fotos con TikSnap, el mejor TikTok downloader online gratuito",
     step: [
       {
         "@type": "HowToStep",
@@ -78,6 +78,14 @@ export default function HomePage() {
         acceptedAnswer: {
           "@type": "Answer",
           text: "TikSnap permite descargar contenido público de TikTok. Es tu responsabilidad usar el contenido descargado de manera ética y respetar los derechos de autor. Recomendamos usar los videos para uso personal, crear compilaciones con crédito al autor original, o pedir permiso si planeas uso comercial.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "¿Puedo descargar carruseles de fotos y sliders de TikTok?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Sí, TikSnap detecta automáticamente los carruseles de fotos de TikTok. Cuando pegas el enlace de un slider, la herramienta muestra todas las imágenes disponibles y puedes descargar cada una individualmente en alta resolución JPG sin marca de agua.",
         },
       },
       {
@@ -133,7 +141,7 @@ export default function HomePage() {
         name: "¿Por qué TikSnap es mejor que otros descargadores?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "TikSnap ofrece descargas sin marca de agua en HD, funciona en todos los dispositivos, no tiene límites de descargas, es completamente gratis, respeta tu privacidad (no guardamos datos), y tiene una interfaz limpia sin pop-ups molestos. Además, ofrecemos conversión a MP3 integrada.",
+          text: "TikSnap ofrece descargas sin marca de agua en HD, descarga de carruseles de fotos, funciona en todos los dispositivos, no tiene límites de descargas, es completamente gratis, respeta tu privacidad (no guardamos datos), y tiene una interfaz limpia sin pop-ups molestos. Además, ofrecemos conversión a MP3 integrada.",
         },
       },
     ],
@@ -160,11 +168,11 @@ export default function HomePage() {
         {/* Hero Section - Hub de Creadores */}
         <section className="w-full max-w-2xl text-center mb-6 px-4">
           <h1 className="text-3xl md:text-4xl font-bold mb-3 leading-tight">
-            Herramientas y Recursos para Creadores de <span className="text-[#FE2C55]">TikTok</span>
+            Descargar Videos y Fotos de <span className="text-[#FE2C55]">TikTok</span> Sin Marca de Agua en HD
           </h1>
 
           <p className="text-sm md:text-base text-gray-400">
-            Descubre guías estratégicas, analiza algoritmos y usa nuestras herramientas 100% gratuitas para potenciar tu contenido.
+            Descarga videos de TikTok sin marca de agua gratis en HD. También baja carruseles de fotos y sliders de TikTok como imágenes individuales. TikTok downloader online rápido para toda LATAM y República Dominicana.
           </p>
         </section>
 
@@ -216,10 +224,10 @@ export default function HomePage() {
           aria-labelledby="how-it-works-heading"
         >
           <h2 id="how-it-works-heading" className="text-3xl font-bold mb-2">
-            Descarga Videos de TikTok Sin Marca de Agua en Segundos
+            Cómo Descargar Videos y Fotos de TikTok Sin Marca de Agua
           </h2>
           <p className="text-gray-400 mb-8 text-lg">
-            Solo 3 pasos simples para obtener tus videos favoritos en HD
+            Solo 3 pasos para descargar TikTok sin marca de agua en HD o bajar carruseles de imágenes
           </p>
           <div className="grid md:grid-cols-3 gap-8 text-left">
             <article className="bg-gray-900 p-6 rounded-lg border border-gray-700 hover:border-[#FE2C55] transition-all">
@@ -245,12 +253,11 @@ export default function HomePage() {
             <article className="bg-gray-900 p-6 rounded-lg border border-gray-700 hover:border-[#FE2C55] transition-all">
               <div className="text-4xl font-bold text-[#FE2C55] mb-3">3</div>
               <h3 className="font-bold text-lg mb-2 text-white">
-                ¡Descarga y Disfruta!
+                Descarga y Disfruta
               </h3>
               <p className="text-sm text-gray-400">
-                Selecciona la calidad (Video HD o Audio MP3) y descarga
-                directamente a tu dispositivo. Sin esperas, sin anuncios
-                molestos.
+                Elige Video HD, Audio MP3 o Imágenes si es un carrusel de fotos.
+                Descarga directa a tu dispositivo. Sin esperas ni anuncios.
               </p>
             </article>
           </div>
@@ -290,11 +297,10 @@ export default function HomePage() {
             id="features-heading"
             className="text-3xl font-bold text-white text-center"
           >
-            ¿Por Qué Elegir TikSnap Como Tu Descargador de TikTok?
+            ¿Por Qué Elegir TikSnap Como Tu TikTok Downloader Sin Marca de Agua?
           </h2>
           <p className="text-center text-lg">
-            Nos diferenciamos de la competencia con características premium que
-            hacen de TikSnap la mejor opción para descargar contenido de TikTok.
+            TikSnap es el mejor descargador de TikTok sin marca de agua: gratis, rápido, sin límites y compatible con todos los dispositivos.
           </p>
 
           <div className="grid md:grid-cols-2 gap-6 mt-8">
@@ -337,10 +343,20 @@ export default function HomePage() {
             <div className="bg-gray-900 p-6 rounded-lg border border-gray-700">
               <CheckCircle className="w-8 h-8 text-[#FE2C55] mb-3" />
               <h3 className="text-xl font-bold text-white mb-2">
+                Descarga Carruseles de Fotos
+              </h3>
+              <p className="text-sm text-gray-400">
+                ¿Ese TikTok es un slider de imágenes? TikSnap detecta automáticamente los carruseles de fotos y te permite descargar cada imagen individualmente en alta resolución.
+              </p>
+            </div>
+
+            <div className="bg-gray-900 p-6 rounded-lg border border-gray-700">
+              <CheckCircle className="w-8 h-8 text-[#FE2C55] mb-3" />
+              <h3 className="text-xl font-bold text-white mb-2">
                 Totalmente Gratis, Sin Límites
               </h3>
               <p className="text-sm text-gray-400">
-                Descarga ilimitados videos al día. No pedimos registro, no hay
+                Descarga ilimitados videos y fotos al día. No pedimos registro, no hay
                 suscripciones ocultas ni restricciones. TikSnap es y siempre
                 será 100% gratuito.
               </p>
@@ -364,7 +380,7 @@ export default function HomePage() {
                 Privacidad y Seguridad
               </h3>
               <p className="text-sm text-gray-400">
-                No guardamos tus videos ni tu historial. El proceso es directo
+                No guardamos tus videos, fotos ni tu historial. El proceso es directo
                 desde TikTok a tu dispositivo. Tu privacidad es nuestra
                 prioridad máxima.
               </p>
@@ -382,10 +398,10 @@ export default function HomePage() {
             id="guia-heading"
             className="text-3xl font-bold text-white text-center"
           >
-            Guía Completa: Todo Sobre Descargar Videos de TikTok
+            Guía Completa para Descargar Videos y Fotos de TikTok Sin Marca de Agua
           </h2>
           <p className="text-center text-lg text-gray-400">
-            Todo lo que necesitas saber sobre la descarga de contenido de TikTok, formatos disponibles, calidad de video y mejores prácticas.
+            Todo lo que necesitas saber sobre cómo descargar TikTok sin marca de agua, descargar carruseles de fotos, formatos MP4, MP3 y calidad HD.
           </p>
 
           <div className="space-y-8 mt-8">
@@ -424,6 +440,26 @@ export default function HomePage() {
                   </p>
                   <p className="text-sm md:text-base text-gray-400 leading-relaxed">
                     El formato <strong className="text-white">MP3 (Audio)</strong> extrae únicamente la pista de audio del video. Es perfecto cuando te interesa una canción, un efecto de sonido o un fragmento de voz de un TikTok. El audio se descarga en alta calidad, listo para reproducir en cualquier reproductor de música o usar en tus propios proyectos creativos.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Carruseles de Fotos */}
+            <div className="bg-gray-900 p-6 md:p-8 rounded-2xl border border-gray-700">
+              <div className="flex flex-col md:flex-row items-start gap-6 text-left">
+                <div className="bg-[#FE2C55]/10 p-4 rounded-full flex-shrink-0">
+                  <BookOpen className="w-8 h-8 text-[#FE2C55]" />
+                </div>
+                <div>
+                  <h3 className="text-xl md:text-2xl font-bold text-white mb-3">
+                    Cómo Descargar Carruseles de Fotos y Sliders de TikTok
+                  </h3>
+                  <p className="text-sm md:text-base text-gray-400 leading-relaxed mb-4">
+                    Muchos creadores publican carruseles de fotos (slideshows) en TikTok, conocidos como "photo dumps" o sliders de imágenes. Con TikSnap puedes descargar cada foto del carrusel individualmente en alta resolución, sin marca de agua. Solo pega el enlace del TikTok, y si es un carrusel, la herramienta mostrará automáticamente todas las imágenes disponibles para descargar una por una.
+                  </p>
+                  <p className="text-sm md:text-base text-gray-400 leading-relaxed">
+                    Esto es ideal si quieres guardar fotos de tus creadores favoritos, descargar imágenes de referencia para inspiración, o conservar sliders de productos, moda, arte, recetas y más. Cada imagen se descarga en formato JPG con la máxima calidad disponible.
                   </p>
                 </div>
               </div>
@@ -481,15 +517,20 @@ export default function HomePage() {
             id="faq-heading"
             className="text-3xl font-bold text-white text-center mb-3"
           >
-            Preguntas Frecuentes
+            Preguntas Frecuentes sobre Descargar TikTok Sin Marca de Agua
           </h2>
           <p className="text-center text-gray-400 mb-8">
-            Todo lo que necesitas saber sobre cómo descargar videos de TikTok
+            Resuelve tus dudas sobre cómo descargar videos y fotos de TikTok sin marca de agua gratis
           </p>
           <div className="space-y-4">
             <FAQItem
               question="¿Es legal descargar videos de TikTok con TikSnap?"
               answer="TikSnap permite descargar contenido público de TikTok. Es tu responsabilidad usar el contenido descargado de manera ética y respetar los derechos de autor. Recomendamos usar los videos para uso personal, crear compilaciones con crédito al autor original, o pedir permiso si planeas uso comercial."
+            />
+
+            <FAQItem
+              question="¿Puedo descargar carruseles de fotos y sliders de TikTok?"
+              answer="¡Sí! TikSnap detecta automáticamente los carruseles de fotos (sliders) de TikTok. Cuando pegas el enlace de un TikTok que contiene múltiples imágenes, la herramienta te mostrará todas las fotos disponibles y podrás descargar cada una individualmente en alta resolución JPG sin marca de agua."
             />
 
             <FAQItem
@@ -524,7 +565,7 @@ export default function HomePage() {
 
             <FAQItem
               question="¿Por qué TikSnap es mejor que otros descargadores?"
-              answer="TikSnap ofrece descargas sin marca de agua en HD, funciona en todos los dispositivos, no tiene límites de descargas, es completamente gratis, respeta tu privacidad (no guardamos datos), y tiene una interfaz limpia sin pop-ups molestos. Además, ofrecemos conversión a MP3 integrada."
+              answer="TikSnap ofrece descargas sin marca de agua en HD, descarga de carruseles de fotos, funciona en todos los dispositivos, no tiene límites de descargas, es completamente gratis, respeta tu privacidad (no guardamos datos), y tiene una interfaz limpia sin pop-ups molestos. Además, ofrecemos conversión a MP3 integrada."
             />
           </div>
         </section>
