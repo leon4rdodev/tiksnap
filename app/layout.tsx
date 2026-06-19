@@ -173,27 +173,20 @@ export default function RootLayout({
     <html lang="es">
       <head>
         <link rel="preconnect" href="https://pagead2.googlesyndication.com" />
-        <link rel="preconnect" href="https://googleads.g.doubleclick.net" />
-        <link rel="preconnect" href="https://adservice.google.com" />
         <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com" />
-        <link rel="dns-prefetch" href="https://googleads.g.doubleclick.net" />
         <meta
           name="google-adsense-account"
           content="ca-pub-7809217955853774"
         ></meta>
-        <Script
-          id="website-schema"
+        <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
-          strategy="beforeInteractive"
         />
-        <Script
-          id="organization-schema"
+        <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify(organizationSchema),
           }}
-          strategy="beforeInteractive"
         />
       </head>
       <body
@@ -201,10 +194,9 @@ export default function RootLayout({
       >
         <Script
           id="adsense-init"
-          async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7809217955853774"
+          strategy="lazyOnload"
           crossOrigin="anonymous"
-          strategy="afterInteractive"
         />
         <div className="relative min-h-screen bg-black text-white flex flex-col">
           <div className="absolute inset-0 bg-gradient-to-br from-black via-gray-900 to-black opacity-70" />
