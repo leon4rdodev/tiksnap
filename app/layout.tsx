@@ -122,7 +122,7 @@ export const metadata: Metadata = {
     apple: "/apple-icon.png",
   },
   verification: {
-    google: "-GLBeiN6eJGBLTtMFeJKw8gSQ5TUbGNn8kkgeP7mUQo",
+    google: "53pnwwnlo4z5",
   },
   alternates: {
     canonical: "https://www.tiksnap.es",
