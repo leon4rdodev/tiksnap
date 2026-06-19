@@ -12,16 +12,20 @@ export default function BlogPage() {
   const posts = getAllPosts();
 
   return (
-    <div className="max-w-6xl mx-auto py-12 px-6">
-      <div className="text-center mb-12">
-        <h1 className="text-4xl font-bold text-white mb-4">Nuestro Blog</h1>
-        <p className="text-lg text-gray-400 max-w-2xl mx-auto">
-          Un espacio dedicado a compartir todo lo que necesitas saber para
-          triunfar en TikTok y sacarle el máximo partido a tus videos.
-        </p>
-      </div>
+    <div className="flex flex-col items-center px-4 md:px-12">
+      <section className="w-full max-w-6xl mx-auto mb-6 pt-8 md:pt-16">
+        <div className="text-center mb-12">
+          <h1 className="text-3xl md:text-4xl font-bold mb-4 leading-tight">
+            Blog de <span className="text-[#FE2C55]">TikSnap</span>
+          </h1>
+          <p className="text-sm md:text-base text-gray-400 max-w-2xl mx-auto">
+            Guías, tutoriales y análisis para dominar TikTok. Aprende sobre el algoritmo, 
+            estrategias de contenido, edición de video y mucho más.
+          </p>
+        </div>
 
-      <BlogSearch posts={posts} />
+        <BlogSearch posts={posts} />
+      </section>
     </div>
   );
 }

@@ -1,9 +1,5 @@
-"use client";
-
 import Link from "next/link";
 import { Post } from "@/lib/blog-data";
-import Tag from "./Tag";
-import BlogAvatar from "./BlogAvatar";
 
 interface PostCardProps {
   post: Post;
@@ -12,36 +8,18 @@ interface PostCardProps {
 export default function PostCard({ post }: PostCardProps) {
   return (
     <Link href={`/blog/${post.slug}`}>
-      <div className="bg-gray-900 rounded-2xl overflow-hidden border border-gray-700 h-full flex flex-col group transition-transform duration-300 hover:scale-105 hover:border-[#FE2C55]">
-
-        <div className="p-6 flex flex-col flex-1">
-          <div className="flex-1">
-            <div className="flex flex-wrap items-center gap-2 text-sm text-gray-400 mb-2">
-              {post.tags.slice(0, 3).map((tag) => (
-                <Tag key={tag} text={tag} />
-              ))}
-            </div>
-            <h3 className="text-xl font-bold text-white mb-2 group-hover:text-[#FE2C55] transition-colors">
-              {post.title}
-            </h3>
-            <p className="text-gray-400 text-sm line-clamp-3">
-              {post.description}
-            </p>
-          </div>
-          <div className="flex items-center mt-6 pt-4 border-t border-gray-700">
-            <BlogAvatar
-              src={post.author.avatar}
-              name={post.author.name}
-              size={32}
-              className="rounded-full mr-3 w-8 h-8 object-cover"
-            />
-            <div>
-              <p className="text-sm font-semibold text-white">
-                {post.author.name}
-              </p>
-              <p className="text-xs text-gray-500">{post.date}</p>
-            </div>
-          </div>
+      <div className="border border-gray-700 rounded-xl overflow-hidden hover:border-[#FE2C55] transition-colors p-5 flex flex-col justify-between h-full group">
+        <div>
+          <div className="text-xs font-semibold text-[#FE2C55] mb-2">{post.tags[0]}</div>
+          <h3 className="text-lg font-bold text-white mb-2 leading-snug group-hover:underline">
+            {post.title}
+          </h3>
+          <p className="text-sm text-gray-400 line-clamp-3 mb-4">
+            {post.description}
+          </p>
+        </div>
+        <div className="flex items-center text-xs text-gray-500">
+          <span className="font-medium mr-2">{post.author.name}</span> • <span className="ml-2">{post.date}</span>
         </div>
       </div>
     </Link>
