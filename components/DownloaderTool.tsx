@@ -247,32 +247,32 @@ export default function DownloaderTool() {
               </>
             )}
           </Button>
-          <div className="pt-8 grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
-            <div className="flex flex-col items-center space-y-2">
-              <div className="p-3 bg-gray-800 rounded-full">
-                <Sparkles className="w-5 h-5 text-[#FE2C55]" />
+          <div className="pt-6 grid grid-cols-3 gap-4 text-center">
+            <div className="flex flex-col items-center space-y-1.5">
+              <div className="p-2.5 bg-gray-800 rounded-full">
+                <Sparkles className="w-4 h-4 text-[#FE2C55]" />
               </div>
-              <p className="font-semibold text-sm">Sin Marca de Agua</p>
-              <p className="text-xs text-gray-400">
-                Descargas limpias en calidad HD.
+              <p className="font-semibold text-[11px] leading-tight">Sin Marca de Agua</p>
+              <p className="text-[10px] text-gray-400 leading-tight">
+                Descargas limpias en HD.
               </p>
             </div>
-            <div className="flex flex-col items-center space-y-2">
-              <div className="p-3 bg-gray-800 rounded-full">
-                <Music className="w-5 h-5 text-[#FE2C55]" />
+            <div className="flex flex-col items-center space-y-1.5">
+              <div className="p-2.5 bg-gray-800 rounded-full">
+                <Music className="w-4 h-4 text-[#FE2C55]" />
               </div>
-              <p className="font-semibold text-sm">Audio en MP3</p>
-              <p className="text-xs text-gray-400">
-                Extrae el sonido original de la publicación.
+              <p className="font-semibold text-[11px] leading-tight">Audio en MP3</p>
+              <p className="text-[10px] text-gray-400 leading-tight">
+                Extrae el sonido original.
               </p>
             </div>
-            <div className="flex flex-col items-center space-y-2">
-              <div className="p-3 bg-gray-800 rounded-full">
-                <Zap className="w-5 h-5 text-[#FE2C55]" />
+            <div className="flex flex-col items-center space-y-1.5">
+              <div className="p-2.5 bg-gray-800 rounded-full">
+                <Zap className="w-4 h-4 text-[#FE2C55]" />
               </div>
-              <p className="font-semibold text-sm">Rápido y Fácil</p>
-              <p className="text-xs text-gray-400">
-                Pega, busca y descarga. Así de simple.
+              <p className="font-semibold text-[11px] leading-tight">Rápido y Fácil</p>
+              <p className="text-[10px] text-gray-400 leading-tight">
+                Pega, busca y descarga.
               </p>
             </div>
           </div>
