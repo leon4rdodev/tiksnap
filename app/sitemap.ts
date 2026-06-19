@@ -1,10 +1,12 @@
 import { MetadataRoute } from "next";
 import { getAllPosts } from "@/lib/blog-data";
+import { getAllLandingSlugs } from "@/lib/landing-content";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://www.tiksnap.es";
   const now = new Date();
   const posts = getAllPosts();
+  const landingSlugs = getAllLandingSlugs();
 
   // Static pages
   const staticPages: MetadataRoute.Sitemap = [
@@ -103,5 +105,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
-  return [...staticPages, ...blogPosts];
+  // Landing pages
+  const landingPages: MetadataRoute.Sitemap = landingSlugs.map((slug) => ({
+    url: `${baseUrl}/landings/${slug}`,
+    lastModified: now,
+    changeFrequency: "weekly" as const,
+    priority: 0.7,
+  }));
+
+  return [...staticPages, ...blogPosts, ...landingPages];
 }
