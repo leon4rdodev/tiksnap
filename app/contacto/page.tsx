@@ -63,7 +63,7 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="max-w-5xl mx-auto px-4 md:px-12 text-gray-300 pt-3 md:pt-16">
+    <div className="max-w-5xl mx-auto px-4 md:px-12 text-gray-300 pt-3 md:pt-16 pb-20">
       <div className="text-center">
         <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight">
           Contáctanos
