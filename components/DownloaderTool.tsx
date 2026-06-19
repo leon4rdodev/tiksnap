@@ -279,7 +279,7 @@ export default function DownloaderTool() {
         </>
       ) : (
         <div ref={resultRef}>
-        <Card className="bg-gray-900 border-gray-700 rounded-2xl overflow-hidden animate-in slide-in-from-bottom-4 duration-500">
+        <Card className="bg-gray-900 border-gray-700 rounded-2xl overflow-hidden animate-slide-up">
           <CardContent className="p-6 space-y-4">
             <div className="flex items-center space-x-3">
               {/* eslint-disable-next-line @next/next/no-img-element */}

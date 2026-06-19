@@ -29,7 +29,7 @@ export default function CookieBanner() {
   if (!showBanner) return null;
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-50 p-4 md:p-6 animate-in slide-in-from-bottom">
+    <div className="fixed bottom-0 left-0 right-0 z-50 p-4 md:p-6 animate-slide-up">
       <div className="max-w-6xl mx-auto bg-gray-900 border border-gray-700 rounded-lg shadow-2xl relative">
         <div className="p-6 md:flex md:items-center md:justify-between">
           {/* Content */}
