@@ -247,7 +247,7 @@ export default function DownloaderTool() {
               </>
             )}
           </Button>
-          <div className="pt-6 grid grid-cols-3 gap-4 text-center">
+          <div className="pt-6 grid grid-cols-2 md:grid-cols-3 gap-x-4 gap-y-3 text-center">
             <div className="flex flex-col items-center space-y-1.5">
               <div className="p-2.5 bg-gray-800 rounded-full">
                 <Sparkles className="w-4 h-4 text-[#FE2C55]" />
@@ -266,7 +266,7 @@ export default function DownloaderTool() {
                 Extrae el sonido original.
               </p>
             </div>
-            <div className="flex flex-col items-center space-y-1.5">
+            <div className="col-span-2 md:col-span-1 flex flex-col items-center space-y-1.5">
               <div className="p-2.5 bg-gray-800 rounded-full">
                 <Zap className="w-4 h-4 text-[#FE2C55]" />
               </div>

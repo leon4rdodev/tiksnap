@@ -182,7 +182,7 @@ export default function HomePage() {
       />
       <div className="flex flex-col items-center px-4 md:px-12">
         {/* Hero Section - Hub de Creadores */}
-        <section className="w-full max-w-2xl text-center mb-6 pt-3 md:pt-16">
+        <section className="w-full max-w-2xl text-center mb-6 pt-8 md:pt-20">
           <h1 className="text-3xl md:text-4xl font-bold mb-3 leading-tight">
             Descargar Videos y Fotos de <span className="text-[#FE2C55]">TikTok</span> Sin Marca de Agua en HD
           </h1>
