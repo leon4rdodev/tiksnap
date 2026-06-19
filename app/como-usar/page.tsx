@@ -10,9 +10,9 @@ import {
   Shield,
   Video,
   Music,
-  Download,
 } from "lucide-react";
 import Link from "next/link";
+import FinalCTA from "@/components/FinalCTA";
 
 export const metadata: Metadata = {
   title: "Cómo Descargar Videos de TikTok Sin Marca de Agua | Guía Completa",
@@ -189,7 +189,7 @@ export default function HowToUsePage() {
         </section>
 
         {/* Tips */}
-        <section className="mt-8 border border-gray-700 rounded-2xl p-6 md:p-8">
+        <section className="mt-8">
           <h2 className="text-xl md:text-2xl font-bold text-white mb-6 text-center">
             Tips y Trucos
           </h2>
@@ -210,21 +210,9 @@ export default function HowToUsePage() {
         </section>
 
         {/* CTA */}
-        <section className="mt-8 mb-20 border border-gray-700 rounded-2xl p-8 md:p-12 text-center">
-          <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
-            ¿Listo para Descargar tus Videos Favoritos?
-          </h2>
-          <p className="text-base md:text-lg text-gray-400 mb-6">
-            Empieza ahora mismo. Es gratis, rápido y no requiere registro.
-          </p>
-          <Link
-            href="/"
-            className="inline-flex items-center bg-[#FE2C55] hover:bg-[#FE2C55]/90 text-white font-bold py-3 md:py-4 px-8 md:px-10 rounded-lg transition-all"
-          >
-            <Download className="w-5 h-5 mr-2" />
-            Ir al Descargador
-          </Link>
-        </section>
+        <div className="my-20">
+          <FinalCTA />
+        </div>
       </div>
     </>
   );
