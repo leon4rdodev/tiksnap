@@ -216,7 +216,7 @@ export default function DownloaderTool() {
                 variant="ghost"
                 size="icon"
                 onClick={handlePaste}
-                className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white hover:bg-gray-700"
+                className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white hover:bg-gray-700 rounded-full"
                 aria-label="Pegar enlace del portapapeles"
               >
                 <Clipboard className="w-5 h-5" />
@@ -243,7 +243,8 @@ export default function DownloaderTool() {
               </>
             ) : (
               <>
-                <ArrowRight className="w-5 h-5 mr-2" /> Descargar Video HD
+                Descargar en HD
+                <ArrowRight className="w-5 h-5 ml-2" />
               </>
             )}
           </Button>
@@ -384,7 +385,7 @@ export default function DownloaderTool() {
                 <Button
                   onClick={() => handleDownload(videoInfo.images![currentImageIndex], "image", `TikSnap-${videoInfo.author.uniqueId}-img${currentImageIndex + 1}`)}
                   disabled={!!downloadingUrl}
-                  className="w-full py-6 text-base font-semibold bg-[#FE2C55] hover:bg-[#FF5C8A] disabled:bg-gray-700 disabled:text-gray-400 rounded-2xl transition-all duration-300"
+                  className="w-full py-6 text-base font-semibold bg-[#FE2C55] hover:bg-[#FF5C8A] disabled:bg-gray-700 disabled:text-gray-400 rounded-full transition-all duration-300"
                 >
                   {downloadingUrl === videoInfo.images![currentImageIndex] && !downloadingAll ? (
                     <Loader2 className="w-5 h-5 mr-2 animate-spin" />
@@ -400,7 +401,7 @@ export default function DownloaderTool() {
                     onClick={handleDownloadAll}
                     disabled={!!downloadingUrl || downloadingAll}
                     variant="outline"
-                    className="w-full py-6 border-gray-600 text-gray-300 hover:bg-gray-800 hover:text-white rounded-xl transition-all duration-300 bg-transparent"
+                    className="w-full py-6 border-gray-600 text-gray-300 hover:bg-gray-800 hover:text-white rounded-full transition-all duration-300 bg-transparent"
                   >
                     {downloadingAll ? (
                       <Loader2 className="w-5 h-5 mr-2 animate-spin" />
@@ -417,14 +418,16 @@ export default function DownloaderTool() {
                 <Button
                   onClick={() => handleDownload(videoOption.url, "video")}
                   disabled={!!downloadingUrl}
-                  className="w-full py-6 text-base font-semibold bg-[#FE2C55] hover:bg-[#FF5C8A] disabled:bg-gray-700 disabled:text-gray-400 rounded-2xl transition-all duration-300"
+                  className="w-full py-6 text-base font-semibold bg-[#FE2C55] hover:bg-[#FF5C8A] disabled:bg-gray-700 disabled:text-gray-400 rounded-full transition-all duration-300"
                 >
                   {downloadingUrl === videoOption.url ? (
                     <Loader2 className="w-5 h-5 mr-2 animate-spin" />
                   ) : (
-                    <Download className="w-5 h-5 mr-2" />
+                    <>
+                      Descargar en HD
+                      <ArrowRight className="w-5 h-5 ml-2" />
+                    </>
                   )}
-                  Descargar Video (HD)
                 </Button>
               )}
 
@@ -433,7 +436,7 @@ export default function DownloaderTool() {
                   onClick={() => handleDownload(audioOption.url, "audio")}
                   disabled={!!downloadingUrl}
                   variant="outline"
-                  className="w-full py-6 border-[#FE2C55] text-[#FE2C55] hover:bg-[#FE2C55]/10 hover:text-white rounded-xl transition-all duration-300 bg-transparent"
+                  className="w-full py-6 border-[#FE2C55] text-[#FE2C55] hover:bg-[#FE2C55]/10 hover:text-white rounded-full transition-all duration-300 bg-transparent"
                 >
                   {downloadingUrl === audioOption.url ? (
                     <Loader2 className="w-4 h-4 mr-2 animate-spin" />
