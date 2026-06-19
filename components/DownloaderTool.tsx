@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -49,6 +49,13 @@ export default function DownloaderTool() {
   const [downloadingUrl, setDownloadingUrl] = useState<string | null>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isImageLoading, setIsImageLoading] = useState(true);
+  const resultRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (videoInfo && resultRef.current) {
+      resultRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }, [videoInfo]);
 
   useEffect(() => {
     const onReset = () => {
@@ -247,6 +254,7 @@ export default function DownloaderTool() {
           </div>
         </>
       ) : (
+        <div ref={resultRef}>
         <Card className="bg-gray-900 border-gray-700 rounded-2xl overflow-hidden animate-in slide-in-from-bottom-4 duration-500">
           <CardContent className="p-6 space-y-4">
             <div className="flex items-center space-x-3">
@@ -407,6 +415,7 @@ export default function DownloaderTool() {
             </Button>
           </CardContent>
         </Card>
+        </div>
       )}
     </div>
   );
