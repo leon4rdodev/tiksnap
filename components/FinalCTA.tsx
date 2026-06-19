@@ -28,7 +28,7 @@ export default function FinalCTA() {
               window.scrollTo({ top: 0, behavior: "smooth" });
               window.dispatchEvent(new CustomEvent("reset-downloader"));
             }}
-            className="inline-flex items-center space-x-2 bg-[#FE2C55] hover:bg-[#FE2C55]/90 text-white font-bold px-8 py-4 rounded-full cursor-pointer"
+            className="inline-flex items-center space-x-2 bg-rose-600 hover:bg-rose-700 text-white font-bold px-8 py-4 rounded-full cursor-pointer"
           >
             <span>Comenzar Ahora</span>
             <ArrowRight className="w-5 h-5" />

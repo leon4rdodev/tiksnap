@@ -152,7 +152,7 @@ export default function HowToUsePage() {
           <div className="mt-6 text-center">
             <Link
               href="/"
-              className="inline-flex items-center space-x-2 bg-[#FE2C55] hover:bg-[#FE2C55]/90 text-white font-bold px-8 py-4 rounded-full cursor-pointer"
+              className="inline-flex items-center space-x-2 bg-rose-600 hover:bg-rose-700 text-white font-bold px-8 py-4 rounded-full cursor-pointer"
             >
               <span>Probar Ahora</span>
               <ArrowRight className="w-5 h-5" />
@@ -175,7 +175,7 @@ export default function HowToUsePage() {
               <ol className="space-y-4">
                 {g.steps.map((step, i) => (
                   <li key={i} className="flex items-start">
-                    <span className="flex-shrink-0 w-7 h-7 bg-[#FE2C55] text-white rounded-full flex items-center justify-center font-bold text-sm mr-3 mt-0.5">{i + 1}</span>
+                    <span className="flex-shrink-0 w-7 h-7 bg-rose-600 text-white rounded-full flex items-center justify-center font-bold text-sm mr-3 mt-0.5">{i + 1}</span>
                     <p className="text-sm md:text-base text-gray-400">{step}</p>
                   </li>
                 ))}

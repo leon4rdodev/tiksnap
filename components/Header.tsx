@@ -165,7 +165,7 @@ export default function Header() {
               {/* CTA Button */}
               <button
                 onClick={handleInstallClick}
-                className="bg-[#FE2C55] hover:bg-[#ff1744] text-white px-4 py-2 rounded-full font-semibold text-sm flex items-center space-x-2 cursor-pointer"
+                className="bg-rose-600 hover:bg-rose-700 text-white px-4 py-2 rounded-full font-semibold text-sm flex items-center space-x-2 cursor-pointer"
               >
                 <Download className="w-4 h-4" />
                 <span>Instalar App</span>
@@ -214,7 +214,7 @@ export default function Header() {
           
           <button
             style={{ animationDelay: `${navLinks.length * 80}ms` }}
-            className={`mt-10 bg-[#FE2C55] hover:bg-[#ff1744] text-white px-6 py-3 rounded-full font-semibold text-base flex items-center space-x-2 ${
+            className={`mt-10 bg-rose-600 hover:bg-rose-700 text-white px-6 py-3 rounded-full font-semibold text-base flex items-center space-x-2 ${
               isMenuOpen ? "animate-fade-in-up opacity-0" : ""
             }`}
             onClick={() => {

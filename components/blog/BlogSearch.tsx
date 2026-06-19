@@ -144,7 +144,7 @@ export default function BlogSearch({ posts }: BlogSearchProps) {
                       onClick={() => goToPage(page)}
                       className={`w-9 h-9 text-sm font-medium rounded-lg transition-colors ${
                         page === currentPage
-                          ? "bg-[#FE2C55] text-white"
+                          ? "bg-rose-600 text-white"
                           : "text-gray-400 hover:text-white hover:bg-gray-800"
                       }`}
                     >

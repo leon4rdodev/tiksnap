@@ -66,7 +66,7 @@ export default function CookieBanner() {
             </button>
             <button
               onClick={acceptCookies}
-              className="px-6 py-2 bg-[#FE2C55] hover:bg-[#FE2C55]/90 text-white rounded-lg transition-colors text-sm font-bold shadow-lg"
+              className="px-6 py-2 bg-rose-600 hover:bg-rose-700 text-white rounded-lg transition-colors text-sm font-bold shadow-lg"
             >
               Aceptar Todas
             </button>
