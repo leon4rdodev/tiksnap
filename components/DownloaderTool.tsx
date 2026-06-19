@@ -47,6 +47,7 @@ export default function DownloaderTool() {
   const [error, setError] = useState<string | null>(null);
   const [videoInfo, setVideoInfo] = useState<VideoInfo | null>(null);
   const [downloadingUrl, setDownloadingUrl] = useState<string | null>(null);
+  const [downloadingAll, setDownloadingAll] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isImageLoading, setIsImageLoading] = useState(true);
   const resultRef = useRef<HTMLDivElement>(null);
@@ -148,6 +149,28 @@ export default function DownloaderTool() {
     setTimeout(() => setDownloadingUrl(null), type === "image" ? 1000 : 4000);
   };
 
+  const handleDownloadAll = async () => {
+    if (!videoInfo?.images || videoInfo.images.length < 2) return;
+    setDownloadingAll(true);
+    for (let i = 0; i < videoInfo.images.length; i++) {
+      const imgUrl = videoInfo.images[i];
+      setCurrentImageIndex(i);
+      setDownloadingUrl(imgUrl);
+      const filename = `TikSnap-${videoInfo.author.uniqueId}-img${i + 1}`;
+      const cookieParam = videoInfo.cookies ? `&cookies=${encodeURIComponent(videoInfo.cookies)}` : "";
+      const proxyUrl = `/api/tiktok-download?url=${encodeURIComponent(imgUrl)}&filename=${encodeURIComponent(filename)}${cookieParam}&type=image`;
+      const link = document.createElement("a");
+      link.href = proxyUrl;
+      link.setAttribute("download", `${filename}.jpg`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      await new Promise((r) => setTimeout(r, 800));
+    }
+    setDownloadingUrl(null);
+    setDownloadingAll(false);
+  };
+
   const handleReset = () => {
     setUrl("");
     setVideoInfo(null);
@@ -155,6 +178,7 @@ export default function DownloaderTool() {
     setIsLoading(false);
     setCurrentImageIndex(0);
     setIsImageLoading(true);
+    setDownloadingAll(false);
   };
 
   const videoOption = videoInfo?.downloadOptions.find(
@@ -295,62 +319,58 @@ export default function DownloaderTool() {
 
             {videoInfo.type === "photo" && videoInfo.images && (
               <div className="space-y-5">
-                <div className="flex items-center justify-between gap-3 w-full">
+                <div className="relative w-full sm:w-[80%] mx-auto aspect-[3/4] sm:aspect-[4/5] rounded-2xl overflow-hidden shadow-xl border border-gray-800 bg-gray-900">
+                  {/* Skeleton/Loading State */}
+                  {isImageLoading && (
+                    <div className="absolute inset-0 z-10 flex items-center justify-center bg-gray-800 animate-pulse">
+                      <Loader2 className="w-10 h-10 text-gray-500 animate-spin" />
+                    </div>
+                  )}
                   
-                  {/* Botón Anterior (Izquierda) */}
+                  <Image
+                    key={currentImageIndex}
+                    src={videoInfo.images[currentImageIndex]}
+                    alt={`Imagen ${currentImageIndex + 1} de ${videoInfo.author.nickname}`}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 400px"
+                    style={{ objectFit: "contain", backgroundColor: "#000" }}
+                    onLoad={() => setIsImageLoading(false)}
+                    priority
+                    className={`transition-opacity duration-300 ${isImageLoading ? 'opacity-0' : 'opacity-100'}`}
+                  />
+                  
+                  {/* Contador */}
+                  {videoInfo.images.length > 1 && (
+                    <div className="absolute top-3 right-3 z-20 bg-black/70 backdrop-blur-sm text-white text-xs font-semibold px-3 py-1.5 rounded-full border border-white/10 shadow-lg">
+                      {currentImageIndex + 1} / {videoInfo.images.length}
+                    </div>
+                  )}
+
+                  {/* Botón Anterior (Overlay) */}
                   {videoInfo.images.length > 1 && (
                     <button
                       onClick={() => {
                         setIsImageLoading(true);
                         setCurrentImageIndex((prev) => (prev > 0 ? prev - 1 : videoInfo.images!.length - 1))
                       }}
-                      className="flex-shrink-0 p-3 bg-gray-800 hover:bg-gray-700 text-white rounded-full transition-colors border border-gray-700 shadow-md disabled:opacity-50"
+                      className="absolute left-1 top-1/2 -translate-y-1/2 z-20 p-2 bg-black/60 hover:bg-black/80 text-white rounded-full transition-colors"
                       aria-label="Imagen anterior"
                     >
-                      <ChevronLeft className="w-6 h-6" />
+                      <ChevronLeft className="w-5 h-5" />
                     </button>
                   )}
 
-                  {/* Contenedor de la Imagen */}
-                  <div className="relative flex-grow w-full max-w-sm mx-auto aspect-[3/4] sm:aspect-[4/5] rounded-2xl overflow-hidden shadow-xl border border-gray-800 bg-gray-900">
-                    {/* Skeleton/Loading State */}
-                    {isImageLoading && (
-                      <div className="absolute inset-0 z-10 flex items-center justify-center bg-gray-800 animate-pulse">
-                        <Loader2 className="w-10 h-10 text-gray-500 animate-spin" />
-                      </div>
-                    )}
-                    
-                    <Image
-                      key={currentImageIndex} // Force React to treat this as a new image to unmount the old one instantly
-                      src={videoInfo.images[currentImageIndex]}
-                      alt={`Imagen ${currentImageIndex + 1} de ${videoInfo.author.nickname}`}
-                      fill
-                      sizes="(max-width: 768px) 100vw, 400px"
-                      style={{ objectFit: "contain", backgroundColor: "#000" }}
-                      onLoad={() => setIsImageLoading(false)}
-                      priority
-                      className={`transition-opacity duration-300 ${isImageLoading ? 'opacity-0' : 'opacity-100'}`}
-                    />
-                    
-                    {/* Contador */}
-                    {videoInfo.images.length > 1 && (
-                      <div className="absolute top-3 right-3 z-20 bg-black/70 backdrop-blur-sm text-white text-xs font-semibold px-3 py-1.5 rounded-full border border-white/10 shadow-lg">
-                        {currentImageIndex + 1} / {videoInfo.images.length}
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Botón Siguiente (Derecha) */}
+                  {/* Botón Siguiente (Overlay) */}
                   {videoInfo.images.length > 1 && (
                     <button
                       onClick={() => {
                         setIsImageLoading(true);
                         setCurrentImageIndex((prev) => (prev < videoInfo.images!.length - 1 ? prev + 1 : 0))
                       }}
-                      className="flex-shrink-0 p-3 bg-gray-800 hover:bg-gray-700 text-white rounded-full transition-colors border border-gray-700 shadow-md disabled:opacity-50"
+                      className="absolute right-1 top-1/2 -translate-y-1/2 z-20 p-2 bg-black/60 hover:bg-black/80 text-white rounded-full transition-colors"
                       aria-label="Siguiente imagen"
                     >
-                      <ChevronRight className="w-6 h-6" />
+                      <ChevronRight className="w-5 h-5" />
                     </button>
                   )}
                 </div>
@@ -358,12 +378,13 @@ export default function DownloaderTool() {
             )}
             <div className="space-y-3 pt-4">
               {videoInfo.type === "photo" && videoInfo.images && (
+                <>
                 <Button
                   onClick={() => handleDownload(videoInfo.images![currentImageIndex], "image", `TikSnap-${videoInfo.author.uniqueId}-img${currentImageIndex + 1}`)}
-                  disabled={downloadingUrl === videoInfo.images![currentImageIndex]}
+                  disabled={!!downloadingUrl}
                   className="w-full py-6 text-base font-semibold bg-[#FE2C55] hover:bg-[#FF5C8A] disabled:bg-gray-700 disabled:text-gray-400 rounded-2xl transition-all duration-300 shadow-lg shadow-[#FE2C55]/20"
                 >
-                  {downloadingUrl === videoInfo.images![currentImageIndex] ? (
+                  {downloadingUrl === videoInfo.images![currentImageIndex] && !downloadingAll ? (
                     <Loader2 className="w-5 h-5 mr-2 animate-spin" />
                   ) : (
                     <Download className="w-5 h-5 mr-2" />
@@ -372,6 +393,22 @@ export default function DownloaderTool() {
                     ? `Descargar Imagen (${currentImageIndex + 1}/${videoInfo.images.length})` 
                     : "Descargar Imagen HD"}
                 </Button>
+                {videoInfo.images.length > 1 && (
+                  <Button
+                    onClick={handleDownloadAll}
+                    disabled={!!downloadingUrl || downloadingAll}
+                    variant="outline"
+                    className="w-full py-6 border-gray-600 text-gray-300 hover:bg-gray-800 hover:text-white rounded-xl transition-all duration-300 bg-transparent"
+                  >
+                    {downloadingAll ? (
+                      <Loader2 className="w-5 h-5 mr-2 animate-spin" />
+                    ) : (
+                      <Download className="w-5 h-5 mr-2" />
+                    )}
+                    Descargar Todas ({videoInfo.images.length} fotos)
+                  </Button>
+                )}
+                </>
               )}
 
               {videoInfo.type === "video" && videoOption && (
