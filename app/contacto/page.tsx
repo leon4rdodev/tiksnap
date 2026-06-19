@@ -1,6 +1,6 @@
 "use client";
 
-import { Mail, MapPin, Send, ChevronDown } from "lucide-react";
+import { Mail, MapPin, Send, ChevronDown, ArrowRight, Loader2 } from "lucide-react";
 import { useState } from "react";
 
 export default function ContactPage() {
@@ -63,24 +63,28 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="max-w-5xl mx-auto py-12 px-6">
-      <div className="text-center mb-12">
-        <h1 className="text-4xl font-bold text-white mb-4">Contáctanos</h1>
-        <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+    <div className="max-w-5xl mx-auto px-4 md:px-12 text-gray-300 pt-3 md:pt-16">
+      <div className="text-center">
+        <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight">
+          Contáctanos
+        </h1>
+        <p className="text-base md:text-lg text-gray-400 max-w-2xl mx-auto mt-4">
           ¿Tienes preguntas, sugerencias o necesitas ayuda? Estamos aquí para ti
         </p>
       </div>
 
-      <div className="grid md:grid-cols-2 gap-8">
+      <div className="grid md:grid-cols-2 gap-8 mt-8">
         {/* Contact Information */}
         <div className="space-y-6">
-          <h2 className="text-2xl font-semibold text-white mb-6">
+          <h2 className="text-xl md:text-2xl font-bold text-white">
             Información de Contacto
           </h2>
 
-          <div className="bg-gray-900 p-6 rounded-lg border border-gray-700">
+          <div className="border border-gray-700 rounded-2xl p-6">
             <div className="flex items-start space-x-4">
-              <Mail className="w-6 h-6 text-[#FE2C55] flex-shrink-0 mt-1" />
+              <div className="p-3 bg-gray-800/80 rounded-full">
+                <Mail className="w-5 h-5 text-[#FE2C55]" />
+              </div>
               <div>
                 <h3 className="font-bold text-white mb-1">Email</h3>
                 <a
@@ -96,9 +100,11 @@ export default function ContactPage() {
             </div>
           </div>
 
-          <div className="bg-gray-900 p-6 rounded-lg border border-gray-700">
+          <div className="border border-gray-700 rounded-2xl p-6">
             <div className="flex items-start space-x-4">
-              <MapPin className="w-6 h-6 text-[#FE2C55] flex-shrink-0 mt-1" />
+              <div className="p-3 bg-gray-800/80 rounded-full">
+                <MapPin className="w-5 h-5 text-[#FE2C55]" />
+              </div>
               <div>
                 <h3 className="font-bold text-white mb-1">Ubicación</h3>
                 <p className="text-gray-400">República Dominicana</p>
@@ -109,7 +115,7 @@ export default function ContactPage() {
             </div>
           </div>
 
-          <div className="bg-gradient-to-br from-[#FE2C55]/10 to-transparent p-6 rounded-lg border border-[#FE2C55]/30">
+          <div className="border border-gray-700 rounded-2xl p-6">
             <h3 className="font-bold text-white mb-3">Preguntas Frecuentes</h3>
             <p className="text-gray-400 text-sm mb-3">
               Antes de contactarnos, te recomendamos revisar nuestra sección de
@@ -124,7 +130,7 @@ export default function ContactPage() {
             </a>
           </div>
 
-          <div className="bg-gray-900 p-6 rounded-lg border border-gray-700">
+          <div className="border border-gray-700 rounded-2xl p-6">
             <h3 className="font-bold text-white mb-3">
               Reportar Problema de Derechos de Autor
             </h3>
@@ -142,33 +148,31 @@ export default function ContactPage() {
 
         {/* Contact Form */}
         <div>
-          <h2 className="text-2xl font-semibold text-white mb-6">
+          <h2 className="text-xl md:text-2xl font-bold text-white mb-6">
             Envíanos un Mensaje
           </h2>
 
           {status === "success" && (
-            <div className="bg-green-900/20 border border-green-700 p-4 rounded-lg mb-6">
+            <div className="border border-green-700 p-4 rounded-2xl mb-6">
               <p className="text-green-300">
-                ✓ Mensaje enviado exitosamente. Te responderemos pronto.
+                Mensaje enviado exitosamente. Te responderemos pronto.
               </p>
             </div>
           )}
 
           {status === "error" && (
-            <div className="bg-red-900/20 border border-red-700 p-4 rounded-lg mb-6">
+            <div className="border border-red-700 p-4 rounded-2xl mb-6">
               <p className="text-red-300">
-                ✗{" "}
-                {errorMessage ||
-                  "Error al enviar el mensaje. Intenta nuevamente."}
+                {errorMessage || "Error al enviar el mensaje. Intenta nuevamente."}
               </p>
             </div>
           )}
 
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-5">
             <div>
               <label
                 htmlFor="name"
-                className="block text-white font-medium mb-2"
+                className="block text-white font-semibold mb-2"
               >
                 Nombre
               </label>
@@ -180,7 +184,7 @@ export default function ContactPage() {
                 onChange={handleChange}
                 required
                 disabled={status === "loading"}
-                className="w-full bg-gray-900 border border-gray-700 rounded-lg px-4 py-3 text-white focus:border-[#FE2C55] focus:outline-none transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full bg-gray-900 border-2 border-gray-700 rounded-full px-5 py-4 text-base text-white focus:border-[#FE2C55] focus:outline-none transition-colors disabled:opacity-50 disabled:cursor-not-allowed placeholder:text-gray-500"
                 placeholder="Tu nombre"
               />
             </div>
@@ -188,7 +192,7 @@ export default function ContactPage() {
             <div>
               <label
                 htmlFor="email"
-                className="block text-white font-medium mb-2"
+                className="block text-white font-semibold mb-2"
               >
                 Email
               </label>
@@ -200,7 +204,7 @@ export default function ContactPage() {
                 onChange={handleChange}
                 required
                 disabled={status === "loading"}
-                className="w-full bg-gray-900 border border-gray-700 rounded-lg px-4 py-3 text-white focus:border-[#FE2C55] focus:outline-none transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full bg-gray-900 border-2 border-gray-700 rounded-full px-5 py-4 text-base text-white focus:border-[#FE2C55] focus:outline-none transition-colors disabled:opacity-50 disabled:cursor-not-allowed placeholder:text-gray-500"
                 placeholder="tu@email.com"
               />
             </div>
@@ -208,7 +212,7 @@ export default function ContactPage() {
             <div>
               <label
                 htmlFor="subject"
-                className="block text-white font-medium mb-2"
+                className="block text-white font-semibold mb-2"
               >
                 Asunto
               </label>
@@ -220,7 +224,7 @@ export default function ContactPage() {
                   onChange={handleChange}
                   required
                   disabled={status === "loading"}
-                  className="w-full bg-gray-900 border border-gray-700 rounded-lg pl-4 pr-12 py-3 text-white focus:border-[#FE2C55] focus:outline-none transition-colors disabled:opacity-50 disabled:cursor-not-allowed appearance-none"
+                  className="w-full bg-gray-900 border-2 border-gray-700 rounded-full pl-5 pr-14 py-4 text-base text-white focus:border-[#FE2C55] focus:outline-none transition-colors disabled:opacity-50 disabled:cursor-not-allowed appearance-none"
                 >
                   <option value="">Selecciona un asunto</option>
                   <option value="soporte">Soporte Técnico</option>
@@ -229,14 +233,14 @@ export default function ContactPage() {
                   <option value="negocios">Oportunidades de Negocio</option>
                   <option value="otro">Otro</option>
                 </select>
-                <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 pointer-events-none" />
+                <ChevronDown className="absolute right-5 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 pointer-events-none" />
               </div>
             </div>
 
             <div>
               <label
                 htmlFor="message"
-                className="block text-white font-medium mb-2"
+                className="block text-white font-semibold mb-2"
               >
                 Mensaje
               </label>
@@ -248,7 +252,7 @@ export default function ContactPage() {
                 required
                 disabled={status === "loading"}
                 rows={6}
-                className="w-full bg-gray-900 border border-gray-700 rounded-lg px-4 py-3 text-white focus:border-[#FE2C55] focus:outline-none transition-colors resize-none disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full bg-gray-900 border-2 border-gray-700 rounded-2xl px-5 py-4 text-base text-white focus:border-[#FE2C55] focus:outline-none transition-colors resize-none disabled:opacity-50 disabled:cursor-not-allowed placeholder:text-gray-500"
                 placeholder="Escribe tu mensaje aquí..."
               />
             </div>
@@ -256,36 +260,17 @@ export default function ContactPage() {
             <button
               type="submit"
               disabled={status === "loading"}
-              className="w-full bg-[#FE2C55] hover:bg-[#FE2C55]/90 text-white font-bold py-3 px-6 rounded-lg transition-all flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full bg-[#FE2C55] hover:bg-[#FE2C55]/90 text-white font-bold py-4 px-6 rounded-full transition-all flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {status === "loading" ? (
                 <>
-                  <svg
-                    className="animate-spin h-5 w-5"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                  >
-                    <circle
-                      className="opacity-25"
-                      cx="12"
-                      cy="12"
-                      r="10"
-                      stroke="currentColor"
-                      strokeWidth="4"
-                    ></circle>
-                    <path
-                      className="opacity-75"
-                      fill="currentColor"
-                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                    ></path>
-                  </svg>
+                  <Loader2 className="w-5 h-5 animate-spin" />
                   <span>Enviando...</span>
                 </>
               ) : (
                 <>
-                  <Send className="w-5 h-5" />
                   <span>Enviar Mensaje</span>
+                  <ArrowRight className="w-5 h-5" />
                 </>
               )}
             </button>
