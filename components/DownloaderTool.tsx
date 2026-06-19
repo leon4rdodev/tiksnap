@@ -54,7 +54,9 @@ export default function DownloaderTool() {
 
   useEffect(() => {
     if (videoInfo && resultRef.current) {
-      resultRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+      const headerHeight = 80;
+      const y = resultRef.current.getBoundingClientRect().top + window.scrollY - headerHeight;
+      window.scrollTo({ top: y, behavior: "smooth" });
     }
   }, [videoInfo]);
 
@@ -179,6 +181,7 @@ export default function DownloaderTool() {
     setCurrentImageIndex(0);
     setIsImageLoading(true);
     setDownloadingAll(false);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const videoOption = videoInfo?.downloadOptions.find(
