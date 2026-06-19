@@ -222,7 +222,7 @@ export default function Header() {
                 setIsMenuOpen(false);
                 setTimeout(() => handleInstallClick(), 300);
               }}
-              className="w-full max-w-sm bg-[#FE2C55] hover:bg-[#ff1744] text-white px-8 py-5 rounded-full font-semibold text-xl"
+              className="bg-[#FE2C55] hover:bg-[#ff1744] text-white px-6 py-3 rounded-full font-semibold text-base"
             >
               Instalar App
             </button>

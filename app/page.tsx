@@ -586,7 +586,7 @@ export default function HomePage() {
         {/* 4. Sección de Preguntas Frecuentes (FAQ) */}
         <section
           id="faq"
-          className="max-w-3xl w-full text-left mt-8"
+          className="max-w-3xl w-full text-left mt-8 scroll-mt-28"
           aria-labelledby="faq-heading"
         >
           <h2
