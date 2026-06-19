@@ -144,6 +144,22 @@ export default function HomePage() {
           text: "TikSnap ofrece descargas sin marca de agua en HD, descarga de carruseles de fotos, funciona en todos los dispositivos, no tiene límites de descargas, es completamente gratis, respeta tu privacidad (no guardamos datos), y tiene una interfaz limpia sin pop-ups molestos. Además, ofrecemos conversión a MP3 integrada.",
         },
       },
+      {
+        "@type": "Question",
+        name: "¿Puedo descargar solo el audio de un TikTok en MP3?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Sí, TikSnap te permite extraer y descargar el audio de cualquier video TikTok en formato MP3 de alta calidad. Es perfecto para descargar música de TikTok, canciones virales, efectos de sonido y cualquier audio sin marca de agua.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "¿TikSnap funciona en República Dominicana y Latinoamérica?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Sí, TikSnap funciona sin restricciones en República Dominicana y todos los países de LATAM incluyendo México, Colombia, Argentina, Chile, Perú, Ecuador y Venezuela. No hay bloqueos geográficos ni límites de descarga por región.",
+        },
+      },
     ],
   };
 
@@ -465,6 +481,66 @@ export default function HomePage() {
               </div>
             </div>
 
+            {/* Quitar Marca de Agua */}
+            <div className="bg-gray-900 p-6 md:p-8 rounded-2xl border border-gray-700">
+              <div className="flex flex-col md:flex-row items-start gap-6 text-left">
+                <div className="bg-[#FE2C55]/10 p-4 rounded-full flex-shrink-0">
+                  <CheckCircle className="w-8 h-8 text-[#FE2C55]" />
+                </div>
+                <div>
+                  <h3 className="text-xl md:text-2xl font-bold text-white mb-3">
+                    Cómo Quitar la Marca de Agua de Videos TikTok
+                  </h3>
+                  <p className="text-sm md:text-base text-gray-400 leading-relaxed mb-4">
+                    Una de las principales razones por las que los usuarios buscan un TikTok downloader es para quitar la marca de agua de los videos de TikTok. TikSnap elimina automáticamente el logo y el nombre de usuario que TikTok superpone en los videos descargados. No necesitas editar ni recortar nada: el video se descarga limpio, listo para usar.
+                  </p>
+                  <p className="text-sm md:text-base text-gray-400 leading-relaxed">
+                    Olvídate de otras herramientas complicadas. Con TikSnap puedes bajar videos de TikTok sin marca de agua en un solo clic. Ya sea que quieras descargar un TikTok sin logo para reutilizarlo en Instagram Reels, YouTube Shorts, o simplemente guardarlo en tu galería sin el watermark, nuestro TikTok downloader sin marca de agua te lo permite al instante.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Descargar Música */}
+            <div className="bg-gray-900 p-6 md:p-8 rounded-2xl border border-gray-700">
+              <div className="flex flex-col md:flex-row items-start gap-6 text-left">
+                <div className="bg-[#FE2C55]/10 p-4 rounded-full flex-shrink-0">
+                  <Headphones className="w-8 h-8 text-[#FE2C55]" />
+                </div>
+                <div>
+                  <h3 className="text-xl md:text-2xl font-bold text-white mb-3">
+                    Descargar Música y Audio de TikTok en MP3
+                  </h3>
+                  <p className="text-sm md:text-base text-gray-400 leading-relaxed mb-4">
+                    ¿Escuchaste una canción en TikTok y quieres descargarla? Con TikSnap puedes extraer el audio de cualquier video TikTok y descargarlo en formato MP3 de alta calidad. Es perfecto para descargar música de TikTok, guardar audios virales, efectos de sonido, voces, fragmentos de podcasts y más. Todo sin necesidad de instalar aplicaciones.
+                  </p>
+                  <p className="text-sm md:text-base text-gray-400 leading-relaxed">
+                    Para descargar audio de TikTok solo tienes que pegar el enlace del video, seleccionar la opción "MP3" y la descarga comenzará al instante. Puedes descargar canciones de TikTok para escucharlas offline, crear tu propia biblioteca de música viral, o usar los audios en tus propios proyectos creativos. TikSnap es el mejor convertidor de TikTok a MP3 gratis y online.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* LATAM / República Dominicana */}
+            <div className="bg-gray-900 p-6 md:p-8 rounded-2xl border border-gray-700">
+              <div className="flex flex-col md:flex-row items-start gap-6 text-left">
+                <div className="bg-[#FE2C55]/10 p-4 rounded-full flex-shrink-0">
+                  <Globe className="w-8 h-8 text-[#FE2C55]" />
+                </div>
+                <div>
+                  <h3 className="text-xl md:text-2xl font-bold text-white mb-3">
+                    Descargar TikTok en República Dominicana y toda LATAM
+                  </h3>
+                  <p className="text-sm md:text-base text-gray-400 leading-relaxed mb-4">
+                    TikSnap está disponible para toda Latinoamérica y especialmente optimizado para usuarios en República Dominicana. No importa si estás en Santo Domingo, Santiago, Punta Cana, Ciudad de México, Bogotá, Buenos Aires, Lima o Santiago de Chile — puedes descargar videos de TikTok sin marca de agua sin restricciones geográficas ni bloqueos por país.
+                  </p>
+                  <p className="text-sm md:text-base text-gray-400 leading-relaxed">
+                    Miles de usuarios en RD y LATAM ya usan TikSnap a diario para bajar videos TikTok, descargar carruseles de fotos, guardar música y audio, y compartir contenido viral con amigos y familiares por WhatsApp, Telegram y otras redes. Rápido, gratis y sin límites de descarga. Si buscas un TikTok downloader que funcione en República Dominicana, Argentina, Colombia, México, Perú, Chile o cualquier país de habla hispana, TikSnap es tu mejor opción.
+                  </p>
+                </div>
+              </div>
+            </div>
+
             {/* Compatibilidad */}
             <div className="bg-gray-900 p-6 md:p-8 rounded-2xl border border-gray-700">
               <div className="flex flex-col md:flex-row items-start gap-6 text-left">
@@ -566,6 +642,16 @@ export default function HomePage() {
             <FAQItem
               question="¿Por qué TikSnap es mejor que otros descargadores?"
               answer="TikSnap ofrece descargas sin marca de agua en HD, descarga de carruseles de fotos, funciona en todos los dispositivos, no tiene límites de descargas, es completamente gratis, respeta tu privacidad (no guardamos datos), y tiene una interfaz limpia sin pop-ups molestos. Además, ofrecemos conversión a MP3 integrada."
+            />
+
+            <FAQItem
+              question="¿Puedo descargar solo el audio de un TikTok en MP3?"
+              answer="Sí, TikSnap te permite descargar el audio de cualquier video TikTok en formato MP3 de alta calidad. Solo pega el enlace, selecciona la opción MP3 y obtén la pista de audio limpia, sin marca de agua. Ideal para descargar música y canciones de TikTok."
+            />
+
+            <FAQItem
+              question="¿TikSnap funciona en República Dominicana y Latinoamérica?"
+              answer="Sí, TikSnap funciona perfectamente en República Dominicana y todos los países de LATAM: México, Colombia, Argentina, Chile, Perú, Ecuador, Venezuela y más. No hay restricciones geográficas ni bloqueos. Puedes descargar videos TikTok sin marca de agua desde cualquier país sin límites."
             />
           </div>
         </section>
