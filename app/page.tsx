@@ -218,7 +218,7 @@ export default function HomePage() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {latestPosts.map((post) => (
-              <div key={post.slug} className="bg-gray-900 border border-gray-700 rounded-xl overflow-hidden hover:border-[#FE2C55] transition-colors p-5 flex flex-col justify-between h-full">
+              <div key={post.slug} className=" border border-gray-700 rounded-xl overflow-hidden hover:border-[#FE2C55] transition-colors p-5 flex flex-col justify-between h-full">
                 <div>
                   <div className="text-xs font-semibold text-[#FE2C55] mb-2">{post.tags[0]}</div>
                   <h3 className="text-lg font-bold text-white mb-2 leading-snug"><a href={`/blog/${post.slug}`} className="hover:underline">{post.title}</a></h3>
@@ -246,7 +246,7 @@ export default function HomePage() {
             Solo 3 pasos para descargar TikTok sin marca de agua en HD o bajar carruseles de imágenes
           </p>
           <div className="grid md:grid-cols-3 gap-8 text-left">
-            <article className="bg-gray-900 p-6 rounded-lg border border-gray-700 hover:border-[#FE2C55] transition-all">
+            <article className=" p-6 rounded-lg border border-gray-700 hover:border-[#FE2C55] transition-all">
               <div className="text-4xl font-bold text-[#FE2C55] mb-3">1</div>
               <h3 className="font-bold text-lg mb-2 text-white">
                 Copia el Enlace del Video
@@ -256,7 +256,7 @@ export default function HomePage() {
                 descargar y selecciona "Copiar enlace". ¡Listo en 2 segundos!
               </p>
             </article>
-            <article className="bg-gray-900 p-6 rounded-lg border border-gray-700 hover:border-[#FE2C55] transition-all">
+            <article className=" p-6 rounded-lg border border-gray-700 hover:border-[#FE2C55] transition-all">
               <div className="text-4xl font-bold text-[#FE2C55] mb-3">2</div>
               <h3 className="font-bold text-lg mb-2 text-white">
                 Pégalo Aquí Arriba
@@ -266,7 +266,7 @@ export default function HomePage() {
                 "Buscar". Nuestro sistema procesará el video al instante.
               </p>
             </article>
-            <article className="bg-gray-900 p-6 rounded-lg border border-gray-700 hover:border-[#FE2C55] transition-all">
+            <article className=" p-6 rounded-lg border border-gray-700 hover:border-[#FE2C55] transition-all">
               <div className="text-4xl font-bold text-[#FE2C55] mb-3">3</div>
               <h3 className="font-bold text-lg mb-2 text-white">
                 Descarga y Disfruta
@@ -286,7 +286,7 @@ export default function HomePage() {
 
         {/* Copyright Disclaimer */}
         <div className="max-w-3xl w-full mt-8">
-          <div className="bg-yellow-900/20 border border-yellow-700/50 rounded-lg p-6">
+          <div className=" border border-yellow-700/50 rounded-lg p-6">
             <h3 className="text-lg font-bold text-yellow-200 mb-3 flex items-center">
               <Shield className="w-5 h-5 mr-2" />
               Uso Responsable y Legal
@@ -320,7 +320,7 @@ export default function HomePage() {
           </p>
 
           <div className="grid md:grid-cols-2 gap-6 mt-8">
-            <div className="bg-gray-900 p-6 rounded-lg border border-gray-700">
+            <div className=" p-6 rounded-lg border border-gray-700">
               <CheckCircle className="w-8 h-8 text-[#FE2C55] mb-3" />
               <h3 className="text-xl font-bold text-white mb-2">
                 100% Sin Marca de Agua
@@ -332,7 +332,7 @@ export default function HomePage() {
               </p>
             </div>
 
-            <div className="bg-gray-900 p-6 rounded-lg border border-gray-700">
+            <div className=" p-6 rounded-lg border border-gray-700">
               <CheckCircle className="w-8 h-8 text-[#FE2C55] mb-3" />
               <h3 className="text-xl font-bold text-white mb-2">
                 Calidad HD Garantizada
@@ -344,7 +344,7 @@ export default function HomePage() {
               </p>
             </div>
 
-            <div className="bg-gray-900 p-6 rounded-lg border border-gray-700">
+            <div className=" p-6 rounded-lg border border-gray-700">
               <CheckCircle className="w-8 h-8 text-[#FE2C55] mb-3" />
               <h3 className="text-xl font-bold text-white mb-2">
                 Conversor MP3 Integrado
@@ -356,7 +356,7 @@ export default function HomePage() {
               </p>
             </div>
 
-            <div className="bg-gray-900 p-6 rounded-lg border border-gray-700">
+            <div className=" p-6 rounded-lg border border-gray-700">
               <CheckCircle className="w-8 h-8 text-[#FE2C55] mb-3" />
               <h3 className="text-xl font-bold text-white mb-2">
                 Descarga Carruseles de Fotos
@@ -366,7 +366,7 @@ export default function HomePage() {
               </p>
             </div>
 
-            <div className="bg-gray-900 p-6 rounded-lg border border-gray-700">
+            <div className=" p-6 rounded-lg border border-gray-700">
               <CheckCircle className="w-8 h-8 text-[#FE2C55] mb-3" />
               <h3 className="text-xl font-bold text-white mb-2">
                 Totalmente Gratis, Sin Límites
@@ -378,7 +378,7 @@ export default function HomePage() {
               </p>
             </div>
 
-            <div className="bg-gray-900 p-6 rounded-lg border border-gray-700">
+            <div className=" p-6 rounded-lg border border-gray-700">
               <CheckCircle className="w-8 h-8 text-[#FE2C55] mb-3" />
               <h3 className="text-xl font-bold text-white mb-2">
                 Compatible Con Todos Los Dispositivos
@@ -390,7 +390,7 @@ export default function HomePage() {
               </p>
             </div>
 
-            <div className="bg-gray-900 p-6 rounded-lg border border-gray-700">
+            <div className=" p-6 rounded-lg border border-gray-700">
               <CheckCircle className="w-8 h-8 text-[#FE2C55] mb-3" />
               <h3 className="text-xl font-bold text-white mb-2">
                 Privacidad y Seguridad
@@ -422,7 +422,7 @@ export default function HomePage() {
 
           <div className="space-y-8 mt-8">
             {/* ¿Por qué descargar? */}
-            <div className="bg-gray-900 p-6 md:p-8 rounded-2xl border border-gray-700">
+            <div className=" p-6 md:p-8 rounded-2xl border border-gray-700">
               <div className="flex flex-col md:flex-row items-start gap-6 text-left">
                 <div className="bg-[#FE2C55]/10 p-4 rounded-full flex-shrink-0">
                   <BookOpen className="w-8 h-8 text-[#FE2C55]" />
@@ -442,7 +442,7 @@ export default function HomePage() {
             </div>
 
             {/* Formatos */}
-            <div className="bg-gray-900 p-6 md:p-8 rounded-2xl border border-gray-700">
+            <div className=" p-6 md:p-8 rounded-2xl border border-gray-700">
               <div className="flex flex-col md:flex-row items-start gap-6 text-left">
                 <div className="bg-[#FE2C55]/10 p-4 rounded-full flex-shrink-0">
                   <Headphones className="w-8 h-8 text-[#FE2C55]" />
@@ -462,7 +462,7 @@ export default function HomePage() {
             </div>
 
             {/* Carruseles de Fotos */}
-            <div className="bg-gray-900 p-6 md:p-8 rounded-2xl border border-gray-700">
+            <div className=" p-6 md:p-8 rounded-2xl border border-gray-700">
               <div className="flex flex-col md:flex-row items-start gap-6 text-left">
                 <div className="bg-[#FE2C55]/10 p-4 rounded-full flex-shrink-0">
                   <BookOpen className="w-8 h-8 text-[#FE2C55]" />
@@ -482,7 +482,7 @@ export default function HomePage() {
             </div>
 
             {/* Quitar Marca de Agua */}
-            <div className="bg-gray-900 p-6 md:p-8 rounded-2xl border border-gray-700">
+            <div className=" p-6 md:p-8 rounded-2xl border border-gray-700">
               <div className="flex flex-col md:flex-row items-start gap-6 text-left">
                 <div className="bg-[#FE2C55]/10 p-4 rounded-full flex-shrink-0">
                   <CheckCircle className="w-8 h-8 text-[#FE2C55]" />
@@ -502,7 +502,7 @@ export default function HomePage() {
             </div>
 
             {/* Descargar Música */}
-            <div className="bg-gray-900 p-6 md:p-8 rounded-2xl border border-gray-700">
+            <div className=" p-6 md:p-8 rounded-2xl border border-gray-700">
               <div className="flex flex-col md:flex-row items-start gap-6 text-left">
                 <div className="bg-[#FE2C55]/10 p-4 rounded-full flex-shrink-0">
                   <Headphones className="w-8 h-8 text-[#FE2C55]" />
@@ -522,7 +522,7 @@ export default function HomePage() {
             </div>
 
             {/* LATAM / República Dominicana */}
-            <div className="bg-gray-900 p-6 md:p-8 rounded-2xl border border-gray-700">
+            <div className=" p-6 md:p-8 rounded-2xl border border-gray-700">
               <div className="flex flex-col md:flex-row items-start gap-6 text-left">
                 <div className="bg-[#FE2C55]/10 p-4 rounded-full flex-shrink-0">
                   <Globe className="w-8 h-8 text-[#FE2C55]" />
@@ -542,7 +542,7 @@ export default function HomePage() {
             </div>
 
             {/* Compatibilidad */}
-            <div className="bg-gray-900 p-6 md:p-8 rounded-2xl border border-gray-700">
+            <div className=" p-6 md:p-8 rounded-2xl border border-gray-700">
               <div className="flex flex-col md:flex-row items-start gap-6 text-left">
                 <div className="bg-[#FE2C55]/10 p-4 rounded-full flex-shrink-0">
                   <Smartphone className="w-8 h-8 text-[#FE2C55]" />
@@ -562,7 +562,7 @@ export default function HomePage() {
             </div>
 
             {/* Uso responsable */}
-            <div className="bg-gray-900 p-6 md:p-8 rounded-2xl border border-gray-700">
+            <div className=" p-6 md:p-8 rounded-2xl border border-gray-700">
               <div className="flex flex-col md:flex-row items-start gap-6 text-left">
                 <div className="bg-[#FE2C55]/10 p-4 rounded-full flex-shrink-0">
                   <Globe className="w-8 h-8 text-[#FE2C55]" />

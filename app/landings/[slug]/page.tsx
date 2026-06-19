@@ -89,7 +89,7 @@ export default function LandingPage({ params }: PageProps) {
             {page.sections.map((section, i) => (
               <div
                 key={i}
-                className="bg-gray-900 p-6 md:p-8 rounded-2xl border border-gray-700"
+                className=" p-6 md:p-8 rounded-2xl border border-gray-700"
               >
                 <div className="flex flex-col md:flex-row items-start gap-6 text-left">
                   <div className="bg-[#FE2C55]/10 p-4 rounded-full flex-shrink-0">
@@ -134,7 +134,7 @@ export default function LandingPage({ params }: PageProps) {
             {page.faqs.map((faq, i) => (
               <details
                 key={i}
-                className="bg-gray-900 border border-gray-700 rounded-lg overflow-hidden group"
+                className=" border border-gray-700 rounded-lg overflow-hidden group"
               >
                 <summary className="p-4 font-semibold text-white cursor-pointer hover:bg-gray-800 transition-colors list-none flex items-center justify-between">
                   <span>{faq.q}</span>
