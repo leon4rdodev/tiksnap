@@ -197,38 +197,39 @@ export default function Header() {
 
       {/* Mobile Menu */}
       <div
-        className={`md:hidden fixed top-0 left-0 right-0 bg-black border-b border-gray-800 z-40 flex flex-col pt-24 px-6 transition-all duration-300 ease-out ${
-          isMenuOpen ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0 pointer-events-none"
+        className={`md:hidden fixed top-0 left-0 right-0 bg-black border-b border-gray-800 z-40 flex flex-col pt-24 px-6 transition-opacity duration-300 ease-out ${
+          isMenuOpen ? "opacity-100" : "opacity-0 pointer-events-none"
         }`}
       >
         <div className="flex flex-col min-h-[calc(100dvh-6rem)] justify-between pb-8">
-          <ul className="flex flex-col space-y-0">
-            {navLinks.map((link) => (
-              <li key={link.href} className="border-b border-gray-800/60">
-                <Link
-                  href={link.href}
-                  onClick={handleLinkClick}
-                  className={`block text-center text-2xl font-bold tracking-tight py-5 transition-colors duration-200 ${
-                    link.isActive ? "text-[#FE2C55]" : "text-white hover:text-[#FE2C55]"
-                  }`}
-                >
-                  {link.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-          
-          <div className="mt-auto pt-10 flex flex-col items-center space-y-5">
-             <button
-                onClick={() => {
-                  handleInstallClick();
-                  handleLinkClick();
-                }}
-                className="w-full max-w-sm bg-[#FE2C55] hover:bg-[#ff1744] text-white px-6 py-4 rounded-full font-semibold text-lg flex items-center justify-center space-x-2 cursor-pointer"
+          <nav className="flex flex-col items-center space-y-1 pt-4">
+            {navLinks.map((link, i) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                onClick={handleLinkClick}
+                style={{ animationDelay: `${i * 80}ms` }}
+                className={`w-full text-center text-xl font-semibold py-4 rounded-xl transition-colors duration-200 ${
+                  isMenuOpen ? "animate-fade-in-up opacity-0" : ""
+                } ${
+                  link.isActive ? "text-[#FE2C55]" : "text-gray-300 hover:text-white hover:bg-white/5"
+                }`}
               >
-                <Download className="w-5 h-5" />
-                <span>Instalar App</span>
-              </button>
+                {link.label}
+              </Link>
+            ))}
+          </nav>
+          
+          <div className="flex flex-col items-center pt-10">
+            <button
+              onClick={() => {
+                handleInstallClick();
+                handleLinkClick();
+              }}
+              className="w-full max-w-sm bg-[#FE2C55] hover:bg-[#ff1744] text-white px-6 py-4 rounded-full font-semibold text-lg"
+            >
+              Instalar App
+            </button>
           </div>
         </div>
       </div>
