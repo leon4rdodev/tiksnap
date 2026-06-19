@@ -20,7 +20,7 @@ export default function PrivacyPage() {
           Última actualización: 2 de marzo de 2026
         </p>
 
-        <div className="border border-gray-700 rounded-xl p-6 md:p-8 space-y-8">
+        <div className="space-y-8">
           <section className="space-y-3">
             <p className="text-sm md:text-base text-gray-400 leading-relaxed">
               En TikSnap (accesible desde{" "}
@@ -433,7 +433,7 @@ export default function PrivacyPage() {
             </p>
           </section>
 
-          <section className="border border-gray-700 rounded-xl p-6">
+          <section>
             <h2 className="text-xl font-bold text-white mb-3">
               ¿Preguntas sobre Privacidad?
             </h2>
