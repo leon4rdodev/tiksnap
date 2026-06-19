@@ -189,8 +189,8 @@ export default function Header() {
         }`}
         onClick={(e) => { if (e.target === e.currentTarget) setIsMenuOpen(false); }}
       >
-        <div className="flex flex-col min-h-[calc(100dvh-6rem)] justify-between pb-8">
-          <nav className="flex flex-col items-center space-y-1 pt-4">
+        <div className="flex flex-col items-center justify-center flex-1 pb-8">
+          <nav className="flex flex-col items-center space-y-1 w-full max-w-sm">
             {navLinks.map((link, i) => (
               <Link
                 key={link.href}
@@ -208,17 +208,19 @@ export default function Header() {
             ))}
           </nav>
           
-          <div className="flex flex-col items-center pt-10">
-            <button
-              onClick={() => {
-                setIsMenuOpen(false);
-                setTimeout(() => handleInstallClick(), 300);
-              }}
-              className="bg-[#FE2C55] hover:bg-[#ff1744] text-white px-6 py-3 rounded-full font-semibold text-base"
-            >
-              Instalar App
-            </button>
-          </div>
+          <button
+            style={{ animationDelay: `${navLinks.length * 80}ms` }}
+            className={`mt-10 bg-[#FE2C55] hover:bg-[#ff1744] text-white px-6 py-3 rounded-full font-semibold text-base flex items-center space-x-2 ${
+              isMenuOpen ? "animate-fade-in-up opacity-0" : ""
+            }`}
+            onClick={() => {
+              setIsMenuOpen(false);
+              setTimeout(() => handleInstallClick(), 300);
+            }}
+          >
+            <Download className="w-5 h-5" />
+            <span>Instalar App</span>
+          </button>
         </div>
       </div>
     </>
