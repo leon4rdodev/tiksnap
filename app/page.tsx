@@ -206,7 +206,7 @@ export default function HomePage() {
       <div className="flex flex-col items-center justify-center px-4 md:px-12 py-4">
         
         {/* Sección de Blog Destacado Arriba */}
-        <section className="w-full max-w-6xl mx-auto my-12">
+        <section className="w-full max-w-6xl mx-auto mt-16">
           <div className="flex flex-col items-center mb-8">
             <h2 className="text-3xl font-bold text-white mb-2 text-center">
               Aprende a Dominar TikTok
@@ -236,7 +236,7 @@ export default function HomePage() {
         </section>
         {/* 2. Sección "Cómo Funciona" */}
         <section
-          className="max-w-3xl w-full text-center mt-0"
+          className="max-w-3xl w-full text-center mt-16"
           aria-labelledby="how-it-works-heading"
         >
           <h2 id="how-it-works-heading" className="text-3xl font-bold mb-2">
@@ -285,7 +285,7 @@ export default function HomePage() {
         </div>
 
         {/* Copyright Disclaimer */}
-        <div className="max-w-3xl w-full mt-8">
+        <div className="max-w-3xl w-full mt-16">
           <div className=" border border-yellow-700/50 rounded-lg p-6">
             <h3 className="text-lg font-bold text-yellow-200 mb-3 flex items-center">
               <Shield className="w-5 h-5 mr-2" />
@@ -319,7 +319,7 @@ export default function HomePage() {
             TikSnap es el mejor descargador de TikTok sin marca de agua: gratis, rápido, sin límites y compatible con todos los dispositivos.
           </p>
 
-          <div className="grid md:grid-cols-2 gap-6 mt-8">
+          <div className="grid md:grid-cols-2 gap-6">
             <div className=" p-6 rounded-lg border border-gray-700">
               <CheckCircle className="w-8 h-8 text-[#FE2C55] mb-3" />
               <h3 className="text-xl font-bold text-white mb-2">

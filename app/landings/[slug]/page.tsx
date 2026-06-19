@@ -84,8 +84,8 @@ export default function LandingPage({ params }: PageProps) {
       </div>
 
       <div className="flex flex-col items-center justify-center px-4 md:px-12 py-4">
-        <section className="max-w-3xl w-full text-left mt-16 space-y-8 text-gray-300">
-          <div className="space-y-8 mt-8">
+         <section className="max-w-3xl w-full text-left mt-16 space-y-8 text-gray-300">
+           <div className="space-y-8">
             {page.sections.map((section, i) => (
               <div
                 key={i}
