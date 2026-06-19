@@ -131,7 +131,7 @@ export default function Header() {
     <>
       <header 
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-out ${
-          isMenuOpen ? "bg-black border-b border-gray-800" : scrolled ? "backdrop-blur-md bg-black/70 shadow-lg border-b border-gray-800" : "bg-transparent border-transparent"
+          isMenuOpen || scrolled ? "backdrop-blur-md bg-black/70 border-b border-gray-800 shadow-lg" : "bg-transparent border-transparent"
         }`}
       >
         <nav className="py-4 px-4 md:px-12">
@@ -145,7 +145,7 @@ export default function Header() {
                   window.dispatchEvent(new CustomEvent("reset-downloader"));
                 }
               }}
-              className="text-2xl md:text-3xl font-bold tracking-tight hover:scale-105 transition-transform z-50"
+              className="text-2xl md:text-3xl font-bold tracking-tight transition-transform z-50"
             >
               Tik<span className="text-[#FE2C55]">Snap</span>
             </Link>
@@ -190,19 +190,12 @@ export default function Header() {
         </nav>
       </header>
 
-      {/* Mobile Menu Overlay backdrop */}
-      <div
-        className={`md:hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-30 transition-opacity duration-300 ${
-          isMenuOpen ? "opacity-100" : "opacity-0 pointer-events-none"
-        }`}
-        onClick={() => setIsMenuOpen(false)}
-      />
-
       {/* Mobile Menu */}
       <div
-        className={`md:hidden fixed top-0 left-0 right-0 bg-black border-b border-gray-800 z-40 flex flex-col pt-24 px-6 transition-opacity duration-300 ease-out ${
+        className={`md:hidden fixed top-0 left-0 right-0 bottom-0 backdrop-blur-md bg-black/70 z-40 flex flex-col pt-24 px-6 transition-opacity duration-300 ease-out ${
           isMenuOpen ? "opacity-100" : "opacity-0 pointer-events-none"
         }`}
+        onClick={(e) => { if (e.target === e.currentTarget) setIsMenuOpen(false); }}
       >
         <div className="flex flex-col min-h-[calc(100dvh-6rem)] justify-between pb-8">
           <nav className="flex flex-col items-center space-y-1 pt-4">
@@ -212,7 +205,7 @@ export default function Header() {
                 href={link.href}
                 onClick={handleLinkClick(link.href)}
                 style={{ animationDelay: `${i * 80}ms` }}
-                className={`w-full text-center text-xl font-semibold py-4 rounded-xl transition-colors duration-200 ${
+                className={`w-full text-center text-2xl font-semibold py-5 rounded-xl transition-colors duration-200 ${
                   isMenuOpen ? "animate-fade-in-up opacity-0" : ""
                 } ${
                   link.isActive ? "text-[#FE2C55]" : "text-gray-300 hover:text-white hover:bg-white/5"
@@ -229,7 +222,7 @@ export default function Header() {
                 setIsMenuOpen(false);
                 setTimeout(() => handleInstallClick(), 300);
               }}
-              className="w-full max-w-sm bg-[#FE2C55] hover:bg-[#ff1744] text-white px-6 py-4 rounded-full font-semibold text-lg"
+              className="w-full max-w-sm bg-[#FE2C55] hover:bg-[#ff1744] text-white px-8 py-5 rounded-full font-semibold text-xl"
             >
               Instalar App
             </button>
