@@ -176,7 +176,7 @@ export default function Header() {
             {/* Animated Mobile Menu Button */}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="md:hidden z-50 p-2 text-gray-300 hover:text-white transition-colors flex flex-col justify-center items-center w-10 h-10 space-y-1.5 focus:outline-none"
+              className="md:hidden z-50 py-2 text-gray-300 hover:text-white transition-colors flex flex-col justify-center items-center focus:outline-none"
               aria-label="Toggle menu"
             >
               <span className={`block w-6 h-[2px] bg-current transform transition-all duration-300 ease-out ${isMenuOpen ? "translate-y-[8px] rotate-45" : ""}`}></span>
