@@ -10,7 +10,7 @@ import {
   Download,
   AlertCircle,
   Loader2,
-  Search,
+  ArrowRight,
   ArrowLeft,
   Clipboard,
   Sparkles,
@@ -243,7 +243,7 @@ export default function DownloaderTool() {
               </>
             ) : (
               <>
-                <Search className="w-5 h-5 mr-2" /> Buscar
+                <ArrowRight className="w-5 h-5 mr-2" /> Descargar Video HD
               </>
             )}
           </Button>
