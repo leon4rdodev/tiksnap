@@ -184,7 +184,7 @@ export default function HomePage() {
         {/* Hero Section - Hub de Creadores */}
         <section className="w-full max-w-2xl text-center mb-6 pt-8 md:pt-20">
           <h1 className="text-3xl md:text-4xl font-bold mb-3 leading-tight">
-            Descargar Videos y Fotos de <span className="text-[#FE2C55]">TikTok</span> Sin Marca de Agua en HD
+            Descargar Videos y Fotos de <span className="text-[#FE2C55]">TikTok</span> Sin Marca de Agua <span className="block text-[#FE2C55]">en HD</span>
           </h1>
 
           <p className="text-sm md:text-base text-gray-400">
