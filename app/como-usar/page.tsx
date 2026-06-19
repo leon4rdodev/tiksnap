@@ -128,7 +128,7 @@ export default function HowToUsePage() {
         </div>
 
         {/* Método Rápido */}
-        <section className="mt-8 border border-gray-700 rounded-2xl p-6 md:p-8">
+        <section className="mt-8">
           <h2 className="text-xl md:text-2xl font-bold text-white flex items-center mb-4">
             <Zap className="w-6 h-6 text-[#FE2C55] mr-3" />
             Método Rápido (Todos los Dispositivos)
@@ -151,10 +151,10 @@ export default function HowToUsePage() {
           <div className="mt-6 text-center">
             <Link
               href="/"
-              className="inline-flex items-center bg-[#FE2C55] hover:bg-[#FE2C55]/90 text-white font-bold py-3 px-6 md:px-8 rounded-lg transition-all text-sm md:text-base"
+              className="inline-flex items-center space-x-2 bg-[#FE2C55] hover:bg-[#FE2C55]/90 text-white font-bold px-8 py-4 rounded-full transition-all duration-300 hover:scale-105 shadow-lg shadow-[#FE2C55]/25 cursor-pointer"
             >
-              Probar Ahora
-              <ArrowRight className="w-4 h-5 ml-2" />
+              <span>Probar Ahora</span>
+              <ArrowRight className="w-5 h-5" />
             </Link>
           </div>
         </section>
