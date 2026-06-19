@@ -26,7 +26,7 @@ export default function NotFound() {
         </div>
 
         {/* Actions */}
-        <div className="flex justify-center">
+        <div className="flex justify-center pb-16 md:pb-24">
           <Link
             href="/"
             className="inline-flex items-center space-x-2 bg-rose-600 hover:bg-rose-700 text-white font-bold px-8 py-4 rounded-full transition-all shadow-lg hover:shadow-xl"
