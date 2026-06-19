@@ -187,21 +187,29 @@ export default function Header() {
         </nav>
       </header>
 
-      {/* Mobile Menu Overlay */}
+      {/* Mobile Menu Overlay backdrop */}
       <div
-        className={`md:hidden fixed top-0 left-0 right-0 bg-black z-40 flex flex-col pt-24 px-6 overflow-hidden transition-all duration-500 ease-in-out ${
-          isMenuOpen ? "max-h-[100dvh] pb-8 opacity-100" : "max-h-0 pb-0 opacity-0 pointer-events-none"
+        className={`md:hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-30 transition-opacity duration-300 ${
+          isMenuOpen ? "opacity-100" : "opacity-0 pointer-events-none"
+        }`}
+        onClick={() => setIsMenuOpen(false)}
+      />
+
+      {/* Mobile Menu */}
+      <div
+        className={`md:hidden fixed top-0 left-0 right-0 bg-black border-b border-gray-800 z-40 flex flex-col pt-24 px-6 transition-all duration-300 ease-out ${
+          isMenuOpen ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0 pointer-events-none"
         }`}
       >
-        <div className="flex-1 flex flex-col min-h-[calc(100dvh-6rem)] justify-between pb-8">
+        <div className="flex flex-col min-h-[calc(100dvh-6rem)] justify-between pb-8">
           <ul className="flex flex-col space-y-0">
             {navLinks.map((link) => (
               <li key={link.href} className="border-b border-gray-800/60">
                 <Link
                   href={link.href}
                   onClick={handleLinkClick}
-                  className={`block text-center text-[clamp(2rem,8vw,3rem)] font-bold tracking-tight py-5 transition-all duration-200 ${
-                    link.isActive ? "text-[#FE2C55]" : "text-white hover:text-[#FE2C55] hover:scale-105"
+                  className={`block text-center text-2xl font-bold tracking-tight py-5 transition-colors duration-200 ${
+                    link.isActive ? "text-[#FE2C55]" : "text-white hover:text-[#FE2C55]"
                   }`}
                 >
                   {link.label}
