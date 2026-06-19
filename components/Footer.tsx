@@ -123,13 +123,13 @@ export default function Footer() {
             
             <div className="flex flex-col items-center md:items-end space-y-3">
               <div className="flex items-center space-x-4">
-                <a href="https://www.instagram.com/0xleon4rdo" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-[#FE2C55] transition-colors">
+                <a href="https://www.instagram.com/0xleon4rdo" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-[#FE2C55] transition-colors" aria-label="Instagram de TikSnap">
                   <Instagram className="w-5 h-5" />
                 </a>
-                <a href="https://x.com/leon4rdodev" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-[#FE2C55] transition-colors">
+                <a href="https://x.com/leon4rdodev" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-[#FE2C55] transition-colors" aria-label="Twitter de TikSnap">
                   <Twitter className="w-5 h-5" />
                 </a>
-                <a href="https://github.com/leon4rdodev" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-[#FE2C55] transition-colors">
+                <a href="https://github.com/leon4rdodev" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-[#FE2C55] transition-colors" aria-label="GitHub de TikSnap">
                   <Github className="w-5 h-5" />
                 </a>
               </div>
