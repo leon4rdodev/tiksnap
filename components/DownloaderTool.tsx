@@ -235,7 +235,7 @@ export default function DownloaderTool() {
           <Button
             onClick={handleSearch}
             disabled={!url.trim() || isLoading}
-            className="w-full py-6 text-base font-semibold bg-[#FE2C55] hover:bg-[#FE2C55]/90 disabled:bg-gray-700 disabled:text-gray-400 rounded-full transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-[#FE2C55]/25"
+            className="w-full py-6 text-base font-semibold bg-[#FE2C55] hover:bg-[#FE2C55]/90 disabled:bg-gray-700 disabled:text-gray-400 rounded-full transition-colors duration-300 shadow-lg shadow-[#FE2C55]/25"
           >
             {isLoading ? (
               <>
