@@ -17,6 +17,7 @@ export default function Header() {
   const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     const handleBeforeInstallPrompt = (e: Event) => {
@@ -24,9 +25,14 @@ export default function Header() {
       setDeferredPrompt(e);
     };
 
+    const handleScroll = () => setScrolled(window.scrollY > 10);
+
     window.addEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
     return () => {
       window.removeEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
@@ -123,7 +129,7 @@ export default function Header() {
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-br from-black via-gray-900 to-black border-b border-gray-800">
+      <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? "bg-black border-b border-gray-800" : "bg-transparent"}`}>
         <nav className="py-4 px-4 md:px-12">
           <div className="flex justify-between items-center max-w-6xl mx-auto">
             {/* Logo */}
@@ -182,7 +188,7 @@ export default function Header() {
 
       {/* Mobile Menu */}
       <div
-        className={`md:hidden fixed top-0 left-0 right-0 bottom-0 bg-gradient-to-br from-black via-gray-900 to-black z-40 flex flex-col pt-24 px-6 transition-opacity duration-300 ease-out ${
+        className={`md:hidden fixed top-0 left-0 right-0 bottom-0 bg-black z-40 flex flex-col pt-24 px-6 transition-opacity duration-300 ease-out ${
           isMenuOpen ? "opacity-100" : "opacity-0 pointer-events-none"
         }`}
         onClick={(e) => { if (e.target === e.currentTarget) setIsMenuOpen(false); }}
