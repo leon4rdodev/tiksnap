@@ -196,17 +196,17 @@ export default function HomePage() {
         <section
           id="descargador"
           aria-label="Descargador de TikTok"
-          className="w-full flex justify-center mb-4"
+          className="w-full flex justify-center"
         >
           <DownloaderTool />
         </section>
       </div>
 
       {/* Resto del contenido */}
-      <div className="flex flex-col items-center justify-center px-4 md:px-12 py-4">
+      <div className="flex flex-col items-center justify-center px-4 md:px-12">
         
         {/* Sección de Blog Destacado Arriba */}
-        <section className="w-full max-w-6xl mx-auto mt-16">
+        <section className="w-full max-w-6xl mx-auto mt-8">
           <div className="flex flex-col items-center mb-8">
             <h2 className="text-3xl font-bold text-white mb-2 text-center">
               Aprende a Dominar TikTok
@@ -236,7 +236,7 @@ export default function HomePage() {
         </section>
         {/* 2. Sección "Cómo Funciona" */}
         <section
-          className="max-w-3xl w-full text-center mt-16"
+          className="max-w-3xl w-full text-center mt-8"
           aria-labelledby="how-it-works-heading"
         >
           <h2 id="how-it-works-heading" className="text-3xl font-bold mb-2">
@@ -280,12 +280,12 @@ export default function HomePage() {
         </section>
 
         {/* Download Counter */}
-        <div className="max-w-3xl w-full mt-16">
+        <div className="max-w-3xl w-full mt-8">
           <DownloadCounter />
         </div>
 
         {/* Copyright Disclaimer */}
-        <div className="max-w-3xl w-full mt-16">
+        <div className="max-w-3xl w-full mt-8">
           <div className=" border border-yellow-700/50 rounded-lg p-6">
             <h3 className="text-lg font-bold text-yellow-200 mb-3 flex items-center">
               <Shield className="w-5 h-5 mr-2" />
@@ -306,7 +306,7 @@ export default function HomePage() {
         {/* 3. Sección de Características / Texto SEO */}
         <section
           id="features"
-          className="max-w-3xl w-full text-left mt-16 space-y-6 text-gray-300"
+          className="max-w-3xl w-full text-left mt-8 space-y-6 text-gray-300"
           aria-labelledby="features-heading"
         >
           <h2
@@ -407,7 +407,7 @@ export default function HomePage() {
         {/* Guía Completa - SEO Editorial Content */}
         <section
           id="guia-completa"
-          className="max-w-3xl w-full text-left mt-16 space-y-8 text-gray-300"
+          className="max-w-3xl w-full text-left mt-8 space-y-8 text-gray-300"
           aria-labelledby="guia-heading"
         >
           <h2
@@ -586,7 +586,7 @@ export default function HomePage() {
         {/* 4. Sección de Preguntas Frecuentes (FAQ) */}
         <section
           id="faq"
-          className="max-w-3xl w-full text-left mt-16"
+          className="max-w-3xl w-full text-left mt-8"
           aria-labelledby="faq-heading"
         >
           <h2

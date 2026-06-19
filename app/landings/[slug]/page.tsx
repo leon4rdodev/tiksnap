@@ -77,14 +77,14 @@ export default function LandingPage({ params }: PageProps) {
         <section
           id="descargador"
           aria-label="Descargador de TikTok"
-          className="w-full flex justify-center mb-4"
+          className="w-full flex justify-center"
         >
           <DownloaderTool />
         </section>
       </div>
 
-      <div className="flex flex-col items-center justify-center px-4 md:px-12 py-4">
-         <section className="max-w-3xl w-full text-left mt-16 space-y-8 text-gray-300">
+      <div className="flex flex-col items-center justify-center px-4 md:px-12">
+         <section className="max-w-3xl w-full text-left mt-8 space-y-8 text-gray-300">
            <div className="space-y-8">
             {page.sections.map((section, i) => (
               <div
@@ -121,7 +121,7 @@ export default function LandingPage({ params }: PageProps) {
 
         <section
           id="faq"
-          className="max-w-3xl w-full text-left mt-16"
+          className="max-w-3xl w-full text-left mt-8"
           aria-labelledby="faq-heading"
         >
           <h2
