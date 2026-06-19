@@ -64,8 +64,8 @@ export default function LandingPage({ params }: PageProps) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
-      <div className="flex flex-col items-center justify-center min-h-screen px-4 md:px-6">
-        <section className="w-full max-w-2xl text-center mb-6 px-4 pt-8 md:pt-16">
+      <div className="flex flex-col items-center justify-center min-h-screen px-4 md:px-12">
+        <section className="w-full max-w-2xl text-center mb-6 pt-8 md:pt-16">
           <h1 className="text-3xl md:text-4xl font-bold mb-3 leading-tight">
             {page.h1}
           </h1>
@@ -83,8 +83,8 @@ export default function LandingPage({ params }: PageProps) {
         </section>
       </div>
 
-      <div className="flex flex-col items-center justify-center px-4 md:px-6 py-4">
-        <section className="max-w-3xl w-full text-left mt-16 px-4 space-y-8 text-gray-300">
+      <div className="flex flex-col items-center justify-center px-4 md:px-12 py-4">
+        <section className="max-w-3xl w-full text-left mt-16 space-y-8 text-gray-300">
           <div className="space-y-8 mt-8">
             {page.sections.map((section, i) => (
               <div
@@ -121,7 +121,7 @@ export default function LandingPage({ params }: PageProps) {
 
         <section
           id="faq"
-          className="max-w-3xl w-full text-left mt-16 px-4"
+          className="max-w-3xl w-full text-left mt-16"
           aria-labelledby="faq-heading"
         >
           <h2

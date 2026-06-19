@@ -78,7 +78,7 @@ export default function HowToUsePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchemaPC) }}
       />
       
-      <div className="max-w-5xl mx-auto py-8 md:py-12 px-4 md:px-6 text-gray-300 space-y-12 md:space-y-16 overflow-x-hidden">
+      <div className="max-w-5xl mx-auto py-8 md:py-12 px-4 md:px-12 text-gray-300 space-y-12 md:space-y-16 overflow-x-hidden">
         {/* Hero Section */}
         <div className="text-center space-y-4">
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight">
