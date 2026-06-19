@@ -114,7 +114,7 @@ export default function PostPage({ params }: PageProps) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
-      <article className="max-w-3xl mx-auto py-12 px-6">
+      <article className="w-full max-w-3xl mx-auto pt-8 md:pt-16 pb-20 px-4 md:px-12">
         <div className="mb-8">
           <Link
             href="/blog"

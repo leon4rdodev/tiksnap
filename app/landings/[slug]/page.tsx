@@ -89,7 +89,7 @@ export default function LandingPage({ params }: PageProps) {
             {page.sections.map((section, i) => (
               <div
                 key={i}
-                className=" p-6 md:p-8 rounded-2xl border border-gray-700"
+                className=" p-6 md:p-8 rounded-xl border border-gray-700"
               >
                 <div className="flex flex-col md:flex-row items-start gap-6 text-left">
                   <div className="bg-[#FE2C55]/10 p-4 rounded-full flex-shrink-0">

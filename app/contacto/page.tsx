@@ -63,12 +63,13 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="max-w-5xl mx-auto px-4 md:px-12 text-gray-300 pt-3 md:pt-16 pb-20">
+    <div className="flex flex-col items-center px-4 md:px-12">
+      <section className="w-full max-w-5xl mx-auto text-gray-300 pt-8 md:pt-16 pb-20">
       <div className="text-center">
-        <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight">
+        <h1 className="text-3xl md:text-4xl font-bold text-white leading-tight">
           Contáctanos
         </h1>
-        <p className="text-base md:text-lg text-gray-400 max-w-2xl mx-auto mt-4">
+        <p className="text-sm md:text-base text-gray-400 max-w-2xl mx-auto mt-4">
           ¿Tienes preguntas, sugerencias o necesitas ayuda? Estamos aquí para ti
         </p>
       </div>
@@ -80,7 +81,7 @@ export default function ContactPage() {
             Información de Contacto
           </h2>
 
-          <div className="border border-gray-700 rounded-2xl p-6">
+          <div className="border border-gray-700 rounded-xl p-6 hover:border-[#FE2C55] transition-colors">
             <div className="flex items-start space-x-4">
               <div className="p-3 bg-gray-800/80 rounded-full">
                 <Mail className="w-5 h-5 text-[#FE2C55]" />
@@ -100,7 +101,7 @@ export default function ContactPage() {
             </div>
           </div>
 
-          <div className="border border-gray-700 rounded-2xl p-6">
+          <div className="border border-gray-700 rounded-xl p-6 hover:border-[#FE2C55] transition-colors">
             <div className="flex items-start space-x-4">
               <div className="p-3 bg-gray-800/80 rounded-full">
                 <MapPin className="w-5 h-5 text-[#FE2C55]" />
@@ -115,7 +116,7 @@ export default function ContactPage() {
             </div>
           </div>
 
-          <div className="border border-gray-700 rounded-2xl p-6">
+          <div className="border border-gray-700 rounded-xl p-6 hover:border-[#FE2C55] transition-colors">
             <h3 className="font-bold text-white mb-3">Preguntas Frecuentes</h3>
             <p className="text-gray-400 text-sm mb-3">
               Antes de contactarnos, te recomendamos revisar nuestra sección de
@@ -130,7 +131,7 @@ export default function ContactPage() {
             </a>
           </div>
 
-          <div className="border border-gray-700 rounded-2xl p-6">
+          <div className="border border-gray-700 rounded-xl p-6 hover:border-[#FE2C55] transition-colors">
             <h3 className="font-bold text-white mb-3">
               Reportar Problema de Derechos de Autor
             </h3>
@@ -153,7 +154,7 @@ export default function ContactPage() {
           </h2>
 
           {status === "success" && (
-            <div className="border border-green-700 p-4 rounded-2xl mb-6">
+            <div className="border border-green-700 p-4 rounded-xl mb-6">
               <p className="text-green-300">
                 Mensaje enviado exitosamente. Te responderemos pronto.
               </p>
@@ -161,7 +162,7 @@ export default function ContactPage() {
           )}
 
           {status === "error" && (
-            <div className="border border-red-700 p-4 rounded-2xl mb-6">
+            <div className="border border-red-700 p-4 rounded-xl mb-6">
               <p className="text-red-300">
                 {errorMessage || "Error al enviar el mensaje. Intenta nuevamente."}
               </p>
@@ -184,7 +185,7 @@ export default function ContactPage() {
                 onChange={handleChange}
                 required
                 disabled={status === "loading"}
-                className="w-full bg-gray-900 border-2 border-gray-700 rounded-full px-5 py-4 text-base text-white focus:border-[#FE2C55] focus:outline-none transition-colors disabled:opacity-50 disabled:cursor-not-allowed placeholder:text-gray-500"
+                className="w-full bg-gray-900 border border-gray-700 rounded-full px-5 py-4 text-base text-white focus:border-[#FE2C55] focus:outline-none transition-colors disabled:opacity-50 disabled:cursor-not-allowed placeholder:text-gray-500"
                 placeholder="Tu nombre"
               />
             </div>
@@ -204,7 +205,7 @@ export default function ContactPage() {
                 onChange={handleChange}
                 required
                 disabled={status === "loading"}
-                className="w-full bg-gray-900 border-2 border-gray-700 rounded-full px-5 py-4 text-base text-white focus:border-[#FE2C55] focus:outline-none transition-colors disabled:opacity-50 disabled:cursor-not-allowed placeholder:text-gray-500"
+                className="w-full bg-gray-900 border border-gray-700 rounded-full px-5 py-4 text-base text-white focus:border-[#FE2C55] focus:outline-none transition-colors disabled:opacity-50 disabled:cursor-not-allowed placeholder:text-gray-500"
                 placeholder="tu@email.com"
               />
             </div>
@@ -224,7 +225,7 @@ export default function ContactPage() {
                   onChange={handleChange}
                   required
                   disabled={status === "loading"}
-                  className="w-full bg-gray-900 border-2 border-gray-700 rounded-full pl-5 pr-14 py-4 text-base text-white focus:border-[#FE2C55] focus:outline-none transition-colors disabled:opacity-50 disabled:cursor-not-allowed appearance-none"
+                  className="w-full bg-gray-900 border border-gray-700 rounded-full pl-5 pr-14 py-4 text-base text-white focus:border-[#FE2C55] focus:outline-none transition-colors disabled:opacity-50 disabled:cursor-not-allowed appearance-none"
                 >
                   <option value="">Selecciona un asunto</option>
                   <option value="soporte">Soporte Técnico</option>
@@ -252,7 +253,7 @@ export default function ContactPage() {
                 required
                 disabled={status === "loading"}
                 rows={6}
-                className="w-full bg-gray-900 border-2 border-gray-700 rounded-2xl px-5 py-4 text-base text-white focus:border-[#FE2C55] focus:outline-none transition-colors resize-none disabled:opacity-50 disabled:cursor-not-allowed placeholder:text-gray-500"
+                className="w-full bg-gray-900 border border-gray-700 rounded-xl px-5 py-4 text-base text-white focus:border-[#FE2C55] focus:outline-none transition-colors resize-none disabled:opacity-50 disabled:cursor-not-allowed placeholder:text-gray-500"
                 placeholder="Escribe tu mensaje aquí..."
               />
             </div>
@@ -283,7 +284,8 @@ export default function ContactPage() {
             </p>
           </form>
         </div>
+        </div>
+      </section>
       </div>
-    </div>
-  );
+    );
 }

@@ -34,7 +34,7 @@ export default function DownloadCounter() {
   };
 
   return (
-    <div className="bg-gradient-to-r from-[#FE2C55]/10 to-purple-600/10 border border-[#FE2C55]/30 rounded-lg p-6 text-center">
+    <div className="border border-gray-700 rounded-xl p-6 text-center">
       <div className="flex items-center justify-center space-x-2 mb-2">
         <TrendingUp className="w-5 h-5 text-[#FE2C55]" />
         <span className="text-sm font-semibold text-gray-400 uppercase tracking-wide">

@@ -9,14 +9,15 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   return (
-    <div className="max-w-2xl mx-auto px-4 md:px-12 text-gray-300 pt-3 md:pt-16 pb-20">
-      <div className="text-center">
-        <h1 className="text-3xl md:text-4xl font-bold text-white leading-tight">
-          Acerca de TikSnap
-        </h1>
-      </div>
+    <div className="flex flex-col items-center px-4 md:px-12">
+      <section className="w-full max-w-2xl mx-auto pt-8 md:pt-16 pb-20">
+        <div className="text-center">
+          <h1 className="text-3xl md:text-4xl font-bold text-white leading-tight">
+            Acerca de TikSnap
+          </h1>
+        </div>
 
-      <div className="mt-8 border border-gray-700 rounded-2xl p-6 md:p-8 text-center">
+        <div className="mt-8 border border-gray-700 rounded-xl p-6 md:p-8 text-center hover:border-[#FE2C55] transition-colors">
         <div className="w-20 h-20 bg-gray-800 rounded-full mx-auto mb-4 border-2 border-[#FE2C55] overflow-hidden">
           <img
             src="https://ui-avatars.com/api/?name=Leonardo&background=FE2C55&color=fff&size=80"
@@ -63,6 +64,7 @@ export default function AboutPage() {
           </a>
         </div>
       </div>
+      </section>
     </div>
   );
 }

@@ -77,7 +77,7 @@ export default function NotFound() {
         </div>
 
         {/* Fun Fact */}
-        <div className="bg-gray-900 border border-gray-800 rounded-lg p-6">
+        <div className="border border-gray-700 rounded-xl p-6">
           <p className="text-xs text-gray-500 mb-2">💡 DATO CURIOSO</p>
           <p className="text-sm text-gray-300">
             Mientras estás aquí, ¿sabías que TikSnap te permite descargar videos

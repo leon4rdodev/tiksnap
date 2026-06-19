@@ -100,10 +100,11 @@ export default function HowToUsePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchema) }}
       />
 
-      <div className="max-w-5xl mx-auto px-4 md:px-12 text-gray-300">
+      <div className="flex flex-col items-center px-4 md:px-12">
+        <section className="w-full max-w-5xl mx-auto text-gray-300 pt-8 md:pt-16 pb-20">
         {/* Hero */}
-        <div className="text-center pt-3 md:pt-16">
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight">
+        <div className="text-center">
+          <h1 className="text-3xl md:text-4xl font-bold text-white leading-tight">
             Cómo Descargar Videos de TikTok
             <span className="block text-[#FE2C55] mt-2">Sin Marca de Agua</span>
           </h1>
@@ -118,7 +119,7 @@ export default function HowToUsePage() {
               { icon: Shield, value: "100%", label: "Seguro y privado" },
               { icon: Video, value: "HD", label: "Calidad máxima" },
             ].map((s) => (
-              <div key={s.label} className="p-3 md:p-4 rounded-xl border border-gray-700">
+              <div key={s.label} className="p-3 md:p-4 rounded-xl border border-gray-700 hover:border-[#FE2C55] transition-colors">
                 <s.icon className="w-5 h-5 text-[#FE2C55] mx-auto mb-2" />
                 <p className="text-xl md:text-2xl font-bold text-white">{s.value}</p>
                 <p className="text-xs text-gray-400">{s.label}</p>
@@ -140,7 +141,7 @@ export default function HowToUsePage() {
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {steps.map((s) => (
-              <div key={s.num} className="p-4 md:p-6 rounded-xl border border-gray-700">
+              <div key={s.num} className="p-4 md:p-6 rounded-xl border border-gray-700 hover:border-[#FE2C55] transition-colors">
                 <div className="text-3xl md:text-4xl font-bold text-[#FE2C55] mb-2 md:mb-3">{s.num}</div>
                 <h3 className="font-bold text-white mb-2 text-sm md:text-base">{s.title}</h3>
                 <p className="text-xs md:text-sm text-gray-400">{s.desc}</p>
@@ -166,7 +167,7 @@ export default function HowToUsePage() {
           </h2>
 
           {guides.map((g) => (
-            <div key={g.title} className="border border-gray-700 rounded-2xl p-6 md:p-8">
+            <div key={g.title} className="border border-gray-700 rounded-xl p-6 md:p-8 hover:border-[#FE2C55] transition-colors">
               <h3 className="text-lg md:text-xl font-semibold text-white flex items-center mb-6">
                 <g.icon className="w-6 h-6 text-[#FE2C55] mr-3 flex-shrink-0" />
                 {g.title}
@@ -200,7 +201,7 @@ export default function HowToUsePage() {
               { icon: Music, title: "Solo Audio (MP3)", desc: "Si solo necesitas la música, selecciona la opción MP3 para descargar únicamente el audio." },
               { icon: CheckCircle, title: "Fotos y Carruseles", desc: "También puedes descargar sliders de fotos de TikTok como imágenes individuales." },
             ].map((t) => (
-              <div key={t.title} className="p-5 rounded-xl border border-gray-700">
+              <div key={t.title} className="p-5 rounded-xl border border-gray-700 hover:border-[#FE2C55] transition-colors">
                 <t.icon className="w-6 h-6 text-[#FE2C55] mb-3" />
                 <h3 className="font-bold text-white mb-2">{t.title}</h3>
                 <p className="text-sm text-gray-400">{t.desc}</p>
@@ -213,6 +214,7 @@ export default function HowToUsePage() {
         <div className="my-20">
           <FinalCTA />
         </div>
+      </section>
       </div>
     </>
   );

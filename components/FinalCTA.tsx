@@ -6,7 +6,7 @@ export default function FinalCTA() {
 
   return (
     <div className="w-full max-w-6xl mx-auto">
-      <section className="relative overflow-hidden rounded-2xl border border-gray-700 p-8 md:p-12 text-center">
+      <section className="relative overflow-hidden rounded-xl border border-gray-700 p-8 md:p-12 text-center">
         <div className="relative z-10">
           <div className="inline-flex items-center space-x-2 border border-gray-700 rounded-full px-4 py-2 mb-6">
             <Sparkles className="w-4 h-4 text-[#FE2C55]" />
@@ -15,7 +15,7 @@ export default function FinalCTA() {
             </span>
           </div>
 
-          <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
             ¿Listo para Descargar?
           </h2>
           <p className="text-sm md:text-lg text-gray-400 mb-8 max-w-2xl mx-auto">
