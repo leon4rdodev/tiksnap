@@ -17,7 +17,6 @@ export default function Header() {
   const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
-  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     const handleBeforeInstallPrompt = (e: Event) => {
@@ -25,14 +24,9 @@ export default function Header() {
       setDeferredPrompt(e);
     };
 
-    const handleScroll = () => setScrolled(window.scrollY > 10);
-
     window.addEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll();
     return () => {
       window.removeEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
-      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
@@ -130,9 +124,7 @@ export default function Header() {
   return (
     <>
       <header 
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-out ${
-          scrolled ? "backdrop-blur-md bg-black/70 border-b border-gray-800 shadow-lg" : "bg-transparent border-transparent"
-        }`}
+        className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-black/70 border-b border-gray-800 transition-all duration-300 ease-out"
       >
         <nav className="py-4 px-4 md:px-12">
           <div className="flex justify-between items-center max-w-6xl mx-auto">
