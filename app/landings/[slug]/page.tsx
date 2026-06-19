@@ -65,7 +65,7 @@ export default function LandingPage({ params }: PageProps) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
       <div className="flex flex-col items-center px-4 md:px-12">
-        <section className="w-full max-w-2xl text-center mb-6 md:pt-16">
+        <section className="w-full max-w-2xl text-center mb-6 pt-3 md:pt-16">
           <h1 className="text-3xl md:text-4xl font-bold mb-3 leading-tight">
             {page.h1}
           </h1>
