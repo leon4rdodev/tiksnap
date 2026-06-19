@@ -166,7 +166,7 @@ export default function Header() {
               {/* CTA Button */}
               <button
                 onClick={handleInstallClick}
-                className="bg-[#FE2C55] hover:bg-[#ff1744] text-white px-4 py-2 rounded-full font-semibold text-sm transition-all hover:scale-105 shadow-lg shadow-[#FE2C55]/30 flex items-center space-x-2 cursor-pointer"
+                className="bg-[#FE2C55] hover:bg-[#ff1744] text-white px-4 py-2 rounded-full font-semibold text-sm flex items-center space-x-2 cursor-pointer"
               >
                 <Download className="w-4 h-4" />
                 <span>Instalar App</span>
@@ -216,7 +216,7 @@ export default function Header() {
                   handleInstallClick();
                   handleLinkClick();
                 }}
-                className="w-full max-w-sm bg-[#FE2C55] hover:bg-[#ff1744] text-white px-6 py-4 rounded-full font-semibold text-lg transition-all shadow-lg shadow-[#FE2C55]/30 flex items-center justify-center space-x-2 cursor-pointer"
+                className="w-full max-w-sm bg-[#FE2C55] hover:bg-[#ff1744] text-white px-6 py-4 rounded-full font-semibold text-lg flex items-center justify-center space-x-2 cursor-pointer"
               >
                 <Download className="w-5 h-5" />
                 <span>Instalar App</span>

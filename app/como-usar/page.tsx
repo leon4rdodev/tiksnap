@@ -151,7 +151,7 @@ export default function HowToUsePage() {
           <div className="mt-6 text-center">
             <Link
               href="/"
-              className="inline-flex items-center space-x-2 bg-[#FE2C55] hover:bg-[#FE2C55]/90 text-white font-bold px-8 py-4 rounded-full transition-all duration-300 hover:scale-105 shadow-lg shadow-[#FE2C55]/25 cursor-pointer"
+              className="inline-flex items-center space-x-2 bg-[#FE2C55] hover:bg-[#FE2C55]/90 text-white font-bold px-8 py-4 rounded-full cursor-pointer"
             >
               <span>Probar Ahora</span>
               <ArrowRight className="w-5 h-5" />

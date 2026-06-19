@@ -235,7 +235,7 @@ export default function DownloaderTool() {
           <Button
             onClick={handleSearch}
             disabled={!url.trim() || isLoading}
-            className="w-full py-6 text-base font-semibold bg-[#FE2C55] hover:bg-[#FE2C55]/90 disabled:bg-gray-700 disabled:text-gray-400 rounded-full transition-colors duration-300 shadow-lg shadow-[#FE2C55]/25"
+            className="w-full py-6 text-base font-semibold bg-[#FE2C55] hover:bg-[#FE2C55]/90 disabled:bg-gray-700 disabled:text-gray-400 rounded-full transition-colors duration-300"
           >
             {isLoading ? (
               <>
@@ -384,7 +384,7 @@ export default function DownloaderTool() {
                 <Button
                   onClick={() => handleDownload(videoInfo.images![currentImageIndex], "image", `TikSnap-${videoInfo.author.uniqueId}-img${currentImageIndex + 1}`)}
                   disabled={!!downloadingUrl}
-                  className="w-full py-6 text-base font-semibold bg-[#FE2C55] hover:bg-[#FF5C8A] disabled:bg-gray-700 disabled:text-gray-400 rounded-2xl transition-all duration-300 shadow-lg shadow-[#FE2C55]/20"
+                  className="w-full py-6 text-base font-semibold bg-[#FE2C55] hover:bg-[#FF5C8A] disabled:bg-gray-700 disabled:text-gray-400 rounded-2xl transition-all duration-300"
                 >
                   {downloadingUrl === videoInfo.images![currentImageIndex] && !downloadingAll ? (
                     <Loader2 className="w-5 h-5 mr-2 animate-spin" />
