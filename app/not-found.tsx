@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Home, Search, Shield } from "lucide-react";
+import { Home } from "lucide-react";
 
 export default function NotFound() {
   return (
@@ -26,41 +26,13 @@ export default function NotFound() {
         </div>
 
         {/* Actions */}
-        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+        <div className="flex justify-center">
           <Link
             href="/"
             className="inline-flex items-center space-x-2 bg-rose-600 hover:bg-rose-700 text-white font-bold px-8 py-4 rounded-full transition-all shadow-lg hover:shadow-xl"
           >
             <Home className="w-5 h-5" />
             <span>Ir al Inicio</span>
-          </Link>
-          <Link
-            href="/#descargador"
-            className="inline-flex items-center space-x-2 border border-gray-600 hover:border-gray-500 text-gray-200 hover:text-white font-semibold px-8 py-4 rounded-full transition-all"
-          >
-            <Search className="w-5 h-5" />
-            <span>Probar Descargador</span>
-          </Link>
-        </div>
-
-        {/* Fun Fact Disclaimer */}
-        <div className="border border-yellow-700/50 rounded-lg p-6 text-left">
-          <h3 className="text-lg font-bold text-yellow-200 mb-3 flex items-center">
-            <Shield className="w-5 h-5 mr-2" />
-            ¿Sabías que...?
-          </h3>
-          <p className="text-sm text-yellow-100/90 leading-relaxed">
-            TikSnap te permite descargar videos de TikTok en calidad HD{" "}
-            <strong>sin marca de agua</strong>, completamente gratis y sin
-            registro. También puedes bajar carruseles de fotos y extraer audio
-            en MP3.
-          </p>
-          <Link
-            href="/#descargador"
-            className="inline-flex items-center space-x-1.5 mt-4 text-rose-600 hover:text-rose-500 font-semibold text-sm transition-colors"
-          >
-            <span>Pruébalo ahora</span>
-            <Search className="w-4 h-4" />
           </Link>
         </div>
       </div>
