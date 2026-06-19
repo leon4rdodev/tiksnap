@@ -266,14 +266,16 @@ export default function DownloaderTool() {
                 Extrae el sonido original.
               </p>
             </div>
-            <div className="col-span-2 md:col-span-1 flex flex-col items-center space-y-1.5">
-              <div className="p-2.5 bg-gray-800 rounded-full">
-                <Zap className="w-4 h-4 text-[#FE2C55]" />
+            <div className="col-span-2 md:col-span-1 flex justify-center">
+              <div className="flex flex-col items-center space-y-1.5 max-w-[140px]">
+                <div className="p-2.5 bg-gray-800 rounded-full">
+                  <Zap className="w-4 h-4 text-[#FE2C55]" />
+                </div>
+                <p className="font-semibold text-[11px] leading-tight">Rápido y Fácil</p>
+                <p className="text-[10px] text-gray-400 leading-tight">
+                  Pega, busca y descarga.
+                </p>
               </div>
-              <p className="font-semibold text-[11px] leading-tight">Rápido y Fácil</p>
-              <p className="text-[10px] text-gray-400 leading-tight">
-                Pega, busca y descarga.
-              </p>
             </div>
           </div>
         </>
