@@ -9,11 +9,12 @@ import {
   Menu,
   X,
 } from "lucide-react";
-import { usePathname } from "next/navigation";
-import { useState, useEffect } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import { useState, useEffect, useCallback } from "react";
 
 export default function Header() {
   const pathname = usePathname();
+  const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
   const [scrolled, setScrolled] = useState(false);
@@ -119,10 +120,12 @@ export default function Header() {
     }
   };
 
-  // Función compartida para manejar click en links (móvil)
-  const handleLinkClick = () => {
+  // Función compartida para manejar click en links (móvil) con animación de salida
+  const handleLinkClick = useCallback((href: string) => (e: React.MouseEvent) => {
+    e.preventDefault();
     setIsMenuOpen(false);
-  };
+    setTimeout(() => router.push(href), 300);
+  }, [router]);
 
   return (
     <>
@@ -207,7 +210,7 @@ export default function Header() {
               <Link
                 key={link.href}
                 href={link.href}
-                onClick={handleLinkClick}
+                onClick={handleLinkClick(link.href)}
                 style={{ animationDelay: `${i * 80}ms` }}
                 className={`w-full text-center text-xl font-semibold py-4 rounded-xl transition-colors duration-200 ${
                   isMenuOpen ? "animate-fade-in-up opacity-0" : ""
@@ -223,8 +226,8 @@ export default function Header() {
           <div className="flex flex-col items-center pt-10">
             <button
               onClick={() => {
-                handleInstallClick();
-                handleLinkClick();
+                setIsMenuOpen(false);
+                setTimeout(() => handleInstallClick(), 300);
               }}
               className="w-full max-w-sm bg-[#FE2C55] hover:bg-[#ff1744] text-white px-6 py-4 rounded-full font-semibold text-lg"
             >
