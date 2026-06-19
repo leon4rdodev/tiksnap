@@ -209,7 +209,7 @@ export default function DownloaderTool() {
                   setError(null);
                 }}
                 onKeyDown={(e) => e.key === "Enter" && handleSearch()}
-                className="pl-12 pr-12 py-6 text-base bg-gray-900 border-2 border-gray-800 rounded-2xl focus-visible:border-[#FE2C55] focus-visible:ring-0 focus-visible:ring-offset-0 transition-colors duration-300 placeholder:text-gray-500 hover:border-gray-700"
+                className="pl-12 pr-12 py-6 text-base bg-gray-900 border-2 border-gray-800 rounded-full focus-visible:border-[#FE2C55] focus-visible:ring-0 focus-visible:ring-offset-0 transition-colors duration-300 placeholder:text-gray-500 hover:border-gray-700"
                 disabled={isLoading}
               />
               <Button
@@ -235,7 +235,7 @@ export default function DownloaderTool() {
           <Button
             onClick={handleSearch}
             disabled={!url.trim() || isLoading}
-            className="w-full py-6 text-base font-semibold bg-[#FE2C55] hover:bg-[#FF5C8A] disabled:bg-gray-700 disabled:text-gray-400 rounded-2xl transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98]"
+            className="w-full py-6 text-base font-semibold bg-[#FE2C55] hover:bg-[#FE2C55]/90 disabled:bg-gray-700 disabled:text-gray-400 rounded-full transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-[#FE2C55]/25"
           >
             {isLoading ? (
               <>
