@@ -2,7 +2,7 @@ import DownloaderTool from "@/components/DownloaderTool";
 import DownloadCounter from "@/components/DownloadCounter";
 import FAQItem from "@/components/FAQItem";
 import FinalCTA from "@/components/FinalCTA";
-import { CheckCircle, Shield, BookOpen, Smartphone, Globe, Headphones, Heart, Sparkles } from "lucide-react";
+import { CheckCircle, Shield, BookOpen, Smartphone, Globe, Headphones } from "lucide-react";
 import Script from "next/script";
 import { getAllPosts } from "@/lib/blog-data";
 
@@ -201,47 +201,6 @@ export default function HomePage() {
           <DownloaderTool />
         </section>
 
-        {/* Donación */}
-        <section className="w-full max-w-lg mt-8 mb-4">
-          <div className="relative overflow-hidden rounded-xl border border-gray-700 bg-gradient-to-br from-gray-900 via-gray-800/50 to-gray-900 p-6 md:p-8 text-center group hover:border-rose-600/50 transition-all duration-500">
-            {/* Decorative bg elements */}
-            <div className="absolute -top-12 -right-12 w-32 h-32 bg-rose-600/5 rounded-full blur-2xl" />
-            <div className="absolute -bottom-8 -left-8 w-24 h-24 bg-rose-600/5 rounded-full blur-xl" />
-
-            <div className="relative z-10">
-              <div className="inline-flex items-center space-x-1.5 border border-rose-600/30 bg-rose-600/20 rounded-full px-4 py-1.5 mb-4">
-                <Heart className="w-3.5 h-3.5 text-rose-400" />
-                <span className="text-xs font-semibold text-rose-300">Apoya el proyecto</span>
-              </div>
-
-              <h3 className="text-xl font-bold text-white mb-2">
-                ¿Te gusta TikSnap?
-              </h3>
-              <p className="text-sm text-gray-300 leading-relaxed max-w-sm mx-auto mb-5">
-                Usamos cientos de horas y recursos para mantener esto{" "}
-                <strong className="text-white">100% gratis, sin límites ni registro</strong>.
-                Si te sirve, una donación nos ayuda a seguir mejorando.
-              </p>
-
-              <div className="flex justify-center">
-                <a
-                  href="https://paypal.me/0xleon4rdo"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center space-x-2 bg-rose-600 hover:bg-rose-700 text-white font-bold px-7 py-3.5 rounded-full transition-all shadow-lg hover:shadow-rose-600/25 text-sm"
-                >
-                  <Heart className="w-4 h-4" />
-                  <span>Donar con PayPal</span>
-                </a>
-              </div>
-
-              <p className="text-xs text-gray-500 mt-4 flex items-center justify-center space-x-1">
-                <Sparkles className="w-3 h-3" />
-                <span>Sin presión, todo bien si no puedes</span>
-              </p>
-            </div>
-          </div>
-        </section>
       </div>
 
       {/* Resto del contenido */}

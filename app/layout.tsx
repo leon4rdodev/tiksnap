@@ -188,6 +188,11 @@ export default function RootLayout({
             __html: JSON.stringify(organizationSchema),
           }}
         />
+        <script
+          src="https://5gvci.com/act/files/tag.min.js?z=11226749"
+          data-cfasync="false"
+          async
+        ></script>
       </head>
       <body
         className={`${inter.variable} font-sans antialiased overflow-x-hidden`}
